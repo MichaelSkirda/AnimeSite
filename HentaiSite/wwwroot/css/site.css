@@ -1,0 +1,103 @@
+html, body
+{
+	margin: 0;
+	padding: 0;
+}
+
+body
+{
+	background-color: #E1E1E1;
+}
+
+span, p, h1, a
+{
+	font-family: Arial;
+}
+
+ul li
+{
+	list-style-type: none;
+}
+
+ul
+{
+	padding: 0;
+}
+
+a
+{
+	text-decoration: none;
+}
+
+.footer
+{
+	background-color: #202020;
+	padding: 20px;
+}
+
+.footer li
+{
+	display: inline-block;
+	margin-right: 23px;
+}
+
+.footer li a
+{
+	color: white;
+	font-family: Arial;
+	font-weight: 600;
+}
+
+.footer-center
+{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.header-img-wrap
+{
+	padding: 0;
+}
+
+.header-img
+{
+	display: block;
+}
+
+.header-menu-wrap
+{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	background-color: #404040;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.header-menu
+{
+	display: flex;
+	align-items: center;
+}
+
+.header-menu > div
+{
+	margin-right: 40px;
+}
+
+.header-menu-button
+{
+	text-align: center;
+}
+
+.header-menu-button span
+{
+	color: white;
+}
+
+
+
+
+

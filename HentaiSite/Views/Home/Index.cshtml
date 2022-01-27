@@ -1,0 +1,116 @@
+﻿@model HentaiSite.Models.ViewModels.IndexViewModel
+
+
+@{
+    ViewData["Title"] = "Home Page";
+    string imgName;
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/search.css">
+}
+
+@section Scripts
+{
+    <script src="~/js/search.js" asp-append-version="true"></script>
+}
+
+<div class="main-title">
+
+    <div class="tag-cloud-search">
+        <ul>
+
+            <li>Юри</li>
+            <li>Анал</li>
+            <li>Большие сиськи</li>
+            <li>Минет</li>
+            <li>Инцест</li>
+            <li>Групповой</li>
+            <li>Студентки</li>
+            <li>Мастурбация</li>
+            <li>Девственницы</li>
+            <li>Футунари</li>
+            <li>Кошкодевочки</li>
+
+        </ul>
+    </div>
+
+</div>
+
+<div class="content-sort-wrap">
+    <div>
+        <span>Сортировать по:</span>
+    </div>
+
+    <div class="content-sort">
+        <a href="?orderby=name-d@(Model.queryString)"><span>По имени</span></a>
+        <a href="?orderby=rating-d@(Model.queryString)"><span class="sort-active">По рейтингу</span></a>
+        <a href="?orderby=time-d@(Model.queryString)"><span>По дате</span></a>
+        <a href="?orderby=views-d@(Model.queryString)"><span>По просомтрам</span></a>
+</div>
+
+</div>
+
+<div class="content-list">
+
+
+    @foreach (Post post in Model.posts)
+    {
+        <div class="content-block">
+
+            <div class="content-block-overlay">
+                @if (post.Censured)
+                {
+                    <span>Censure</span>
+                }
+                else
+                {
+                    <span>No censure</span>
+                }
+            </div>
+
+            <a href="/post?id=@post.ID">
+                <img src="~/img/3-2-@(post.ImgName)" alt="">
+            </a>
+
+            <div class="post-info-search">
+                <span class="post-title-search">@post.Name</span>
+                <span class="post-year-search">@post.ReleaseYear</span>
+
+                @if (post.EndingYear != 0)
+                {
+                    <span> - </span>
+                    <span>@post.EndingYear</span>
+                }
+
+                <div class="post-tags-search">
+                    @if (post.Tags != null)
+                    {
+                        @foreach (Tag tag in post.Tags)
+                        {
+                            <a href="~/tag/@tag.ID" class="clickable-yellow">@tag.Name</a>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+
+
+</div>
+
+<ul class="pagination">
+    <li class="disabled"><a href="#"><</a></li>
+    <li class="disabled"><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">6</a></li>
+    <li><a href="#">...</a></li>
+    <li><a href="#">23</a></li>
+    <li><a href="#">24</a></li>
+    <li><a href="#">></a></li>
+</ul>

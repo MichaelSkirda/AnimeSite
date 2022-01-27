@@ -1,0 +1,281 @@
+.main-title
+{
+	display: flex;
+}
+
+.title-img-wrap
+{
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+.title-text h1
+{
+
+	font-size: 30px;
+}
+
+.title-subtext span
+{
+	font-size: 15px;
+}
+
+
+.title-names
+{
+	padding-bottom: 15px;
+	border-bottom: solid 1px gray;
+	margin-left: 15px;
+	width: 95%;
+}
+
+.title-other-info
+{
+	margin-left: 15px;
+	margin-top: 15px;
+}
+
+.title-info-line
+{
+	margin-top: 5px;
+	display: flex;
+}
+
+.title-info-line span
+{
+	margin-right: 5px;
+	font-size: 14px;
+	font-weight: 800;
+}
+
+.title-info-line a
+{
+	font-size: 14px;
+	font-weight: 400;
+	margin-right: 6px;
+}
+
+.title-info-line .clickable-yellow:last-child:after
+{
+	content: ''
+}
+
+
+.title-info-line .clickable-yellow:after
+{
+	content: ','
+}
+
+.screen-list
+{
+	margin-left: 2%;
+}
+
+.screen-list p
+{
+	font-weight: 800;
+	font-size: 18px;
+}
+
+.screens-wrap
+{
+	display: flex;
+	justify-content: left;
+	flex-wrap: wrap;
+}
+
+.screens-wrap img
+{
+	width: 23%;
+	margin-top: 15px;
+	margin-right: 2%;
+}
+
+.video-player
+{
+	margin-top: 65px;
+
+}
+
+
+.video-player img
+{
+	width: 80%;
+	display: block;
+	margin: 0 auto;
+}
+
+
+.title-desc-prefix
+{
+ font-weight: 600;
+}
+
+.title-desc
+{
+	font-size: 15px;
+}
+
+.title-desc-wrap
+{
+	width: 96%;
+}
+
+.title-stats
+{
+	margin-left: 15px;
+	display: flex;
+	flex-direction: column;
+}
+
+.title-stat-line
+{
+	margin-top: 7px;
+	display: flex;
+	align-items: center;
+}
+
+.title-stat-line span
+{
+	margin-top: 2px;
+	margin-left: 8px;
+	font-size: 16px;
+}
+
+.comment-block
+{
+	width: 94%;
+	margin: 15px auto 0 auto;
+	background-color: #E0E0E0;
+	padding-top: 15px;
+}
+
+
+
+.comment-block form
+{
+	width: 100%;
+	padding-bottom: 15px;
+}
+
+.comment-block form div
+{
+	display: flex;
+}
+
+
+.comment-text
+{
+	width: 96%;
+    min-height: 100px;
+    padding: 2% 0 2% 0;
+    border: 1px solid;
+    border-color: #aaa;
+    -webkit-transition: border .2s;
+    -o-transition: border .2s;
+    transition: border .2s;
+    color: #333;
+    background-color: #fff;
+    
+    margin: 0 auto 15px auto;
+	font-size: 16px;
+	font-family: Arial;
+
+}
+
+.comment-name
+{
+	height: 20px;
+	font-size: 17px;
+	margin-right: 15px;
+	padding: 7px 15px;
+    border: 1px solid;
+	border-color: #aaa;
+	margin-left: 2%;
+}
+
+
+.submit-comment
+{
+	height: 100%;
+	border: none;
+	color: white;
+	background-color: dimgray;
+	font-size: 17px;
+	padding: 0px 15px;
+	cursor: pointer;
+}
+
+.comment-text::before
+{
+	margin-left: 10px;
+	content: "Оставьте комментарий";
+	color: #555;
+}
+
+.comment-text:focus::before
+{
+	content: "";
+}
+
+.under-video-info
+{
+	width: 80%;
+	margin: 20px auto 0 auto;
+}
+
+.under-video-info a
+{
+	color: white;
+	font-size: 18px;
+	background-color: dimgray;
+	padding: 13px 26px;
+}
+
+.download-button
+{
+	margin-top: 40px;
+}
+
+.download-button span
+{
+	margin-left: 10px;
+}
+
+.similar-anime
+{
+	margin-top: 10px;
+	display: flex;
+	width: 95%;
+	margin-left: 2.4%;
+}
+
+.similar-anime-block
+{
+	width: 16%;
+	margin-left: .6%;
+}
+
+.similar-anime-block img
+{
+	width: 100%;
+}
+
+.similar-anime-title
+{
+	margin-left: 3%;
+	margin-top: 50px;
+}
+
+.similar-anime-name
+{
+	text-align: center;
+	padding: 4px 0;
+}
+
+
+
+
+
+
+

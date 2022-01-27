@@ -1,0 +1,198 @@
+@media all and (min-width: 544px)
+{
+	.wall
+	{
+		width: 60%;
+	}
+}
+
+@media all and (max-width: 544px)
+{
+	.wall
+	{
+		padding: 0;
+		margin: 0;
+		width: 100%;
+	}
+}
+
+.wall
+{
+	margin: 150px auto 0 auto;
+	background: #EFEFEF;
+}
+
+.load-more-btn
+{
+	
+}
+
+.load-more
+{
+	margin: 150px auto 50px auto;
+	text-align: center;
+	font-family: Arial;
+}
+
+.wall-form
+{
+	height: 200px;
+	display: flex;
+	justify-content: space-between;
+
+	padding-bottom: 50px;
+}
+
+.form-name
+{
+	margin-top: 10px;
+	padding: 5px;
+	margin-left: 15px;
+}
+
+.form-text
+{
+	width: 85%;
+}
+
+.form-btn
+{
+	width: 15%;
+	height: 34px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+@media all and (min-width: 796px)
+{
+	.wall-post-img
+	{
+		height: 200px;
+		max-width: 100%;
+
+		cursor: pointer;
+	}
+}
+
+@media all and (max-width: 796px) and (min-width: 544px)
+{
+	.wall-post-img
+	{
+		max-width: 48%;
+
+		cursor: pointer;
+	}
+}
+
+@media all and (max-width: 544px)
+{
+
+	.wall-post-img
+	{
+		max-width: 100%;
+
+		cursor: pointer;
+	}
+
+}
+
+.popup{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    overflow: hidden;
+    position: fixed;
+    display: none;
+    top: 0px;
+    left: 0px;
+
+    
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.post-reply:hover
+{
+	color: #ffa500;
+}
+
+.post-reply
+{
+	margin-right: 10px;
+	color: #ed9121;
+	font-weight: 600;
+}
+
+.post-id
+{
+	position: absolute;
+	top: -6px;
+	right: 16px;
+	font-size: 14px;
+}
+
+.popup-img
+{
+	display: block;
+	max-width: 76vw;
+	max-height: 80vh;
+}
+
+.popup-btns
+{
+	margin-top: 20px;
+}
+
+
+.post:nth-child(odd)
+{
+	background: #E0E0E0;
+}
+
+.post:nth-child(even)
+{
+	background: #EFEFEF;
+}
+
+
+.post
+{
+	position: relative;
+	padding: 4px 10px 30px 10px;
+}
+
+
+.input-textarea
+{
+	margin-left: 15px;
+	width: 90%;
+	height: 70%;
+	padding: 5px;
+	margin-top: 10px;
+	resize: none;
+}
+
+.submit-post
+{
+	height: 50px;
+	width: 75%;
+}
+
+
+.post-text
+{
+	word-break: break-all;
+	font-family: Arial;
+}
+
+.post-data
+{
+	position: absolute;
+	right: 10px;
+	bottom: -8px;
+
+	display: flex;
+}

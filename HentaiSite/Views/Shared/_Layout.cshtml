@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HentaiSite</title>
+
+    <link rel="stylesheet" href="~/css/site.css">
+    <link rel="stylesheet" href="~/css/style.css">
+
+    @await RenderSectionAsync("Styles", required: false)
+
+
+</head>
+<body>
+    <header>
+
+
+
+        <div>
+
+            <div class="header-search-wrap" id="header-search">
+                <div class="header-search">
+                    <form action="">
+                        <input type="text" class="header-search-text" placeholder="Введите текст...">
+                        <input type="submit" class="header-search-button">
+                    </form>
+                </div>
+            </div>
+
+            <div class="header-menu-wrap">
+
+                <div class="header-logo-wrap" style="height: 100px; width: 100px; background-color: green;">
+
+                </div>
+
+                <div class="header-menu">
+
+                    <div class="header-menu-button">
+                        <a href="@Url.Action("Index", "Home")"><span>Главная</span></a>
+                    </div>
+
+                    <div class="header-menu-button">
+                        <a href="~/top100"><span>Топ-100</span></a>
+                    </div>
+
+                    <div class="header-menu-button">
+                        <span>Случайный хентай</span>
+                    </div>
+
+                    <div class="header-menu-button">
+                        <span>Любимое админа</span>
+                    </div>
+
+                    <div class="header-menu-button" id="search-btn">
+                        <span>Искать</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </header>
+
+    <div class="site-content">
+
+        <div class="main-block">
+
+            @RenderBody()
+
+        </div>
+
+
+        <div class="sub-block-wrap">
+            <div class="sub-block">
+
+                <div class="main-menu">
+                    <ul>
+                        <li>Все жанры</li>
+                        <li>Анонимный чат</li>
+                        <li>Кошкодевочки</li>
+                        <li>Поиск по нескольким жанрам</li>
+                        <li>Пожертвовать</li>
+                    </ul>
+                </div>
+
+                <span class="nav-title">Самые популярные теги:</span>
+
+                <ul class="side-double-menu">
+                    <li>
+                        <a>Юри</a>
+                        <a>Анал</a>
+                        <a>Большие сиськи</a>
+                        <a>Минет</a>
+                        <a>Кошкодевочки</a>
+                    </li>
+                    <li>
+                        <a>Групповой</a>
+                        <a>Студентки</a>
+                        <a>Мастурбация</a>
+                        <a>Девственницы</a>
+                        <a>Футунари</a>
+                    </li>
+                </ul>
+
+                <span class="nav-title">Поиск по годам:</span>
+
+                <ul class="side-double-menu">
+                    <li>
+                        <a href="#">2022 год</a>
+                        <a href="#">2021 год</a>
+                        <a href="#">2020 год</a>
+                        <a href="#">2019 год</a>
+                    </li>
+                    <li>
+                        <a href="#">2018 год</a>
+                        <a href="#">2017 год</a>
+                        <a href="#">2016 год</a>
+                        <a href="#">Ранее...</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <footer class="footer">
+        <div class="footer-center">
+            <div class="footer-logo">
+                <img src="" style="background-color: pink; width: 150px; height: 80px;">
+            </div>
+
+            <div class="footer-menu">
+                <ul>
+                    <li><a href="#">Сaвязаться с нами</a></li>
+                    <li><a href="#">Карта сайта</a></li>
+                    <li><a href="#">Правообладателям</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/js/script.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
