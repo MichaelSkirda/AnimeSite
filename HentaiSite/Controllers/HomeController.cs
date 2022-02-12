@@ -20,6 +20,7 @@ namespace HentaiSite.Controllers
 
         public IActionResult Index(string orderby)
         {
+
             List<Post> posts = postService.GetPosts(orderby, PagePostsCount);
 
             postService.SetMetadataToPosts(posts);

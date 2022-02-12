@@ -31,7 +31,8 @@ namespace HentaiSite.Database
                 SeriesCount = 51,
                 Rating = 692,
                 ViewsCount = 11234,
-                OtherNames = new string[] { "Reznya Blyat", "Ubivat Ubivat Ubivat Ubivat Ubivat Ubivat Ubivat " }
+                OtherNames = new string[] { "Reznya Blyat", "Ubivat Ubivat Ubivat Ubivat Ubivat Ubivat Ubivat " },
+                Description = "Lorem ipsum dolor sit amet consectetur adipisicing elit.\nLorem ipsum dolor sit amet consectetur adipisicing elit."
             },
             new Post()
             {

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/oleg/Projects/HentaiSite/HentaiSite/HentaiSite.csproj": {}
+    "/Users/oleg/Desktop/HentaiSite/HentaiSite/HentaiSite.csproj": {}
   },
   "projects": {
-    "/Users/oleg/Projects/HentaiSite/HentaiSite/HentaiSite.csproj": {
+    "/Users/oleg/Desktop/HentaiSite/HentaiSite/HentaiSite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/oleg/Projects/HentaiSite/HentaiSite/HentaiSite.csproj",
+        "projectUniqueName": "/Users/oleg/Desktop/HentaiSite/HentaiSite/HentaiSite.csproj",
         "projectName": "HentaiSite",
-        "projectPath": "/Users/oleg/Projects/HentaiSite/HentaiSite/HentaiSite.csproj",
+        "projectPath": "/Users/oleg/Desktop/HentaiSite/HentaiSite/HentaiSite.csproj",
         "packagesPath": "/Users/oleg/.nuget/packages/",
-        "outputPath": "/Users/oleg/Projects/HentaiSite/HentaiSite/obj/",
+        "outputPath": "/Users/oleg/Desktop/HentaiSite/HentaiSite/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
