@@ -21,8 +21,9 @@ namespace HentaiSite.Models
 
         public bool Censured { get; set; }
 
+
         public string[] OtherNames { get; set; }
-        
+
         public AnimeStatus Status { get; set; }
 
         public int Duration { get; set; }

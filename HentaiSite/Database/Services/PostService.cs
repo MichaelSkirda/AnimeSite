@@ -16,9 +16,9 @@ namespace HentaiSite.Database.Services
 
         public void SetTagsToPosts(Post post)
         {
-            List<TagEntity> tagEntities = db.tagEntities.Where(p => p.PostID == post.ID).ToList();
 
-            List<Tag> tags = db.Tags.Join(tagEntities,
+
+            var tags = db.Tags.Join(db.TagEntities.Where(p => p.PostID == post.ID),
                 t => t.ID,
                 e => e.TagID,
                 (t, e) => new Tag
@@ -42,9 +42,8 @@ namespace HentaiSite.Database.Services
 
         public void SetStudiosToPosts(Post post)
         {
-            List<StudioEntity> studioEntities = db.StudioEntities.Where(s => s.PostID == post.ID).ToList();
 
-            List<Studio> studios = db.Studios.Join(studioEntities,
+            List<Studio> studios = db.Studios.Join(db.StudioEntities.Where(s => s.PostID == post.ID),
                 studio => studio.ID,
                 entity => entity.StudioID,
                 (studio, entity) => new Studio
@@ -68,9 +67,8 @@ namespace HentaiSite.Database.Services
 
         public void SetDirectorsToPosts(Post post)
         {
-            List<DirectorEntity> directorEntities = db.DirectorEntities.Where(d => d.PostID == post.ID).ToList();
 
-            List<Director> directors = db.Directors.Join(directorEntities,
+            List<Director> directors = db.Directors.Join(db.DirectorEntities.Where(d => d.PostID == post.ID),
                 director => director.ID,
                 entity => entity.DirectorID,
                 (director, entity) => new Director
@@ -124,7 +122,7 @@ namespace HentaiSite.Database.Services
         public Post GetRandomPost()
         {
             Random random = new Random();
-            Post post = db.Posts.First(p => p.ID == random.Next(1, db.Posts.Count + 1));
+            Post post = db.Posts.First(p => p.ID == random.Next(1, db.Posts.Count() + 1));
             return post;
         }
 

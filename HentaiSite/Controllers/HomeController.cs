@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using HentaiSite.Database.Services;
 using HentaiSite.Models;
@@ -59,7 +60,15 @@ namespace HentaiSite.Controllers
         [Route("Post")]
         public IActionResult Post(int id)
         {
-            Post post = postService.GetPostByID(id);
+            Post post;
+            try
+            {
+                post = postService.GetPostByID(id);
+            }
+            catch(InvalidOperationException)
+            {
+                return NotFound();
+            }
             postService.SetMetadataToPosts(post);
             return View(post);
         }

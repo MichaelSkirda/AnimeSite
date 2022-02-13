@@ -1,261 +1,273 @@
 ﻿using System;
 using System.Collections.Generic;
 using HentaiSite.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace HentaiSite.Database
 {
-    public class ApplicationContext
+    public class ApplicationContext : DbContext
     {
-        public List<Post> Posts = new List<Post>()
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<TagEntity> TagEntities { get; set; }
+
+        public DbSet<Studio> Studios { get; set; }
+        public DbSet<StudioEntity> StudioEntities { get; set; }
+
+        public DbSet<Director> Directors { get; set; }
+        public DbSet<DirectorEntity> DirectorEntities { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            new Post()
-            {
-                ID = 1,
-                Duration = 20,
-                Name = "Code Geass",
-                Format = "jpg",
-                ReleaseYear = 2006,
-                SeriesCount = 24,
-                Rating = 600,
-                ViewsCount = 13565,
-                Status = Enums.AnimeStatus.Released
-            },
-            new Post()
-            {
-                ID = 2,
-                Duration = 20,
-                Name = "Berserk",
-                Format = "jpg",
-                ReleaseYear = 1997,
-                Status = Enums.AnimeStatus.Released,
-                SeriesCount = 51,
-                Rating = 692,
-                ViewsCount = 11234,
-                OtherNames = new string[] { "Reznya Blyat", "Ubivat Ubivat Ubivat Ubivat Ubivat Ubivat Ubivat " },
-                Description = "Lorem ipsum dolor sit amet consectetur adipisicing elit.\nLorem ipsum dolor sit amet consectetur adipisicing elit."
-            },
-            new Post()
-            {
-                ID = 3,
-                Duration = 20,
-                Name = "Steins;Gate",
-                Format = "jpg",
-                ReleaseYear = 2016,
-                SeriesCount = 36,
-                Rating = 542,
-                ViewsCount = 24512,
-                Status = Enums.AnimeStatus.Released,
-                Censured = true
-            },
-            new Post()
-            {
-                ID = 4,
-                Duration = 20,
-                Name = "Vinland Saga",
-                Format = "jpeg",
-                ReleaseYear = 2018,
-                SeriesCount = 30,
-                Rating = 220,
-                ViewsCount = 8231,
-                Status = Enums.AnimeStatus.Released
-            },
-        };
+            modelBuilder.Entity<Post>()
+                        .Property(e => e.OtherNames)
+                        .HasConversion(
+                            v => string.Join(";#;", v),
+                            v => v.Split(";#;", StringSplitOptions.RemoveEmptyEntries));
+        }
 
-
-        public List<Tag> Tags = new List<Tag>()
+        public ApplicationContext(DbContextOptions<ApplicationContext> options)
+            : base(options)
         {
-            new Tag()
-            {
-                ID = 1,
-                Name = "Юри"
-            },
-            new Tag()
-            {
-                ID = 2,
-                Name = "Детектив"
-            },
-            new Tag()
-            {
-                ID = 3,
-                Name = "Экшен"
-            },
-            new Tag()
-            {
-                ID = 4,
-                Name = "Глубокий сюжет"
-            },
-            new Tag()
-            {
-                ID = 5,
-                Name = "Резня"
-            },
-        };
+           if(Database.EnsureCreated())
+           {
+                Posts.AddRange(new List<Post>()
+                {
+                    new Post()
+                    {
+                        Duration = 20,
+                        Name = "Code Geass",
+                        Format = "jpg",
+                        ReleaseYear = 2006,
+                        SeriesCount = 24,
+                        Rating = 600,
+                        ViewsCount = 13565,
+                        Status = Enums.AnimeStatus.Released
+                    },
+                    new Post()
+                    {
+                        Duration = 20,
+                        Name = "Berserk",
+                        Format = "jpg",
+                        ReleaseYear = 1997,
+                        Status = Enums.AnimeStatus.Released,
+                        SeriesCount = 51,
+                        Rating = 692,
+                        ViewsCount = 11234,
+                        OtherNames = new string[] { "Reznya Blyat", "Ubivat Ubivat Ubivat Ubivat Ubivat Ubivat Ubivat " },
+                        Description = "Lorem ipsum dolor sit amet consectetur adipisicing elit.\nLorem ipsum dolor sit amet consectetur adipisicing elit."
+                    },
+                    new Post()
+                    {
+                        Duration = 20,
+                        Name = "Steins;Gate",
+                        Format = "jpg",
+                        ReleaseYear = 2016,
+                        SeriesCount = 36,
+                        Rating = 542,
+                        ViewsCount = 24512,
+                        Status = Enums.AnimeStatus.Released,
+                        Censured = true
+                    },
+                    new Post()
+                    {
+                        Duration = 20,
+                        Name = "Vinland Saga",
+                        Format = "jpeg",
+                        ReleaseYear = 2018,
+                        SeriesCount = 30,
+                        Rating = 220,
+                        ViewsCount = 8231,
+                        Status = Enums.AnimeStatus.Released
+                    },
+                });
+
+                Tags.AddRange(new List<Tag>()
+                {
+                    new Tag()
+                    {
+                        Name = "Юри"
+                    },
+                    new Tag()
+                    {
+                        Name = "Детектив"
+                    },
+                    new Tag()
+                    {
+                        Name = "Экшен"
+                    },
+                    new Tag()
+                    {
+                        Name = "Глубокий сюжет"
+                    },
+                    new Tag()
+                    {
+                        Name = "Резня"
+                    },
+                });
+
+                TagEntities.AddRange(
+                    
+                    new List<TagEntity>()
+                    {
+                        new TagEntity()
+                        {
+                            PostID = 1,
+                            TagID = 5
+                        },
+                        new TagEntity()
+                        {
+                            PostID = 1,
+                            TagID = 4
+                        },
+                        new TagEntity()
+                        {
+                            PostID = 1,
+                            TagID = 3
+                        },
+                        new TagEntity()
+                        {
+                            PostID = 2,
+                            TagID = 4
+                        },
+                        new TagEntity()
+                        {
+                            PostID = 2,
+                            TagID = 5
+                        },
+                        new TagEntity()
+                        {
+                            PostID = 3,
+                            TagID = 4
+                        },
+                        new TagEntity()
+                        {
+                            PostID = 3,
+                            TagID = 1
+                        },
+                        new TagEntity()
+                        {
+                            PostID = 4,
+                            TagID = 5
+                        },
+                        new TagEntity()
+                        {
+                            PostID = 4,
+                            TagID = 4
+                        },
+                    });
+
+                Studios.AddRange(
+                    
+                    new List<Studio>()
+                    {
+                        new Studio()
+                        {
+                            Name = "YuriStudio",
+                            Description = "Best Yuri hentai video in 4KKK"
+                        },
+                        new Studio()
+                        {
+                            Name = "RezNYA",
+                            Description = "Most REZNYA BLYAT videos, very much BLOOD, KISHKI i UBIYSTVA"
+                        },
+                        new Studio()
+                        {
+                            Name = "Regular hentai",
+                            Description = "Nothing special"
+                        },
+                    });
 
 
-        public List<TagEntity> tagEntities = new List<TagEntity>()
-        {
-            new TagEntity()
-            {
-                ID = 1,
-                PostID = 1,
-                TagID = 5
-            },
-            new TagEntity()
-            {
-                ID = 2,
-                PostID = 1,
-                TagID = 4
-            },
-            new TagEntity()
-            {
-                ID = 3,
-                PostID = 1,
-                TagID = 3
-            },
-            new TagEntity()
-            {
-                ID = 4,
-                PostID = 2,
-                TagID = 4
-            },
-            new TagEntity()
-            {
-                ID = 5,
-                PostID = 2,
-                TagID = 5
-            },
-            new TagEntity()
-            {
-                ID = 6,
-                PostID = 3,
-                TagID = 4
-            },
-            new TagEntity()
-            {
-                ID = 7,
-                PostID = 3,
-                TagID = 1
-            },
-            new TagEntity()
-            {
-                ID = 8,
-                PostID = 4,
-                TagID = 5
-            },
-            new TagEntity()
-            {
-                ID = 9,
-                PostID = 4,
-                TagID = 4
-            },
-        };
+                StudioEntities.AddRange(
+
+                    new List<StudioEntity>()
+                    {
+                        new StudioEntity()
+                        {
+                            PostID = 1,
+                            StudioID = 1,
+                        },
+                        new StudioEntity()
+                        {
+                            PostID = 2,
+                            StudioID = 2,
+                        },
+                        new StudioEntity()
+                        {
+                            PostID = 3,
+                            StudioID = 3,
+                        },
+                        new StudioEntity()
+                        {
+                            PostID = 4,
+                            StudioID = 2,
+                        },
+                        new StudioEntity()
+                        {
+                            PostID = 4,
+                            StudioID = 2,
+                        },
+                    });
+
+                Directors.AddRange(
+                    
+                    new List<Director>()
+                    {
+                        new Director()
+                        {
+                            Name = "Hentai director 1",
+                            Description = "123"
+                        },
+                        new Director()
+                        {
+                            Name = "Hentai director 2",
+                            Description = "AAAAAAAAAAAH"
+                        },
+                        new Director()
+                        {
+                            Name = "Name Surname",
+                            Description = "Some description"
+                        },
+                    });
 
 
-        public List<Studio> Studios = new List<Studio>()
-        {
-            new Studio()
-            {
-                ID = 1,
-                Name = "YuriStudio",
-                Description = "Best Yuri hentai video in 4KKK"
-            },
-            new Studio()
-            {
-                ID = 2,
-                Name = "RezNYA",
-                Description = "Most REZNYA BLYAT videos, very much BLOOD, KISHKI i UBIYSTVA"
-            },
-            new Studio()
-            {
-                ID = 3,
-                Name = "Regular hentai",
-                Description = "Nothing special"
-            },
-        };
+                DirectorEntities.AddRange(
+                    
+                    new List<DirectorEntity>()
+                    {
+                        new DirectorEntity()
+                        {
+                            DirectorID = 1,
+                            PostID = 1,
+                        },
+                        new DirectorEntity()
+                        {
+                            DirectorID = 2,
+                            PostID = 2,
+                        },
+                        new DirectorEntity()
+                        {
+                            DirectorID = 3,
+                            PostID = 3,
+                        },
+                        new DirectorEntity()
+                        {
+                            DirectorID = 1,
+                            PostID = 4,
+                        },
+                    });
 
-        public List<StudioEntity> StudioEntities = new List<StudioEntity>()
-        {
-            new StudioEntity()
-            {
-                ID = 1,
-                PostID = 1,
-                StudioID = 1,
-            },
-            new StudioEntity()
-            {
-                ID = 2,
-                PostID = 2,
-                StudioID = 2,
-            },
-            new StudioEntity()
-            {
-                ID = 3,
-                PostID = 3,
-                StudioID = 3,
-            },
-            new StudioEntity()
-            {
-                ID = 4,
-                PostID = 4,
-                StudioID = 2,
-            },
-            new StudioEntity()
-            {
-                ID = 5,
-                PostID = 4,
-                StudioID = 2,
-            },
-        };
+                SaveChanges();
 
-        public List<Director> Directors = new List<Director>()
-        {
-            new Director()
-            {
-                ID = 1,
-                Name = "Hentai director 1",
-                Description = "123"
-            },
-            new Director()
-            {
-                ID = 2,
-                Name = "Hentai director 2",
-                Description = "AAAAAAAAAAAH"
-            },
-            new Director()
-            {
-                ID = 3,
-                Name = "Name Surname",
-                Description = "Some description"
-            },
-        };
+           }
+        }
 
-        public List<DirectorEntity> DirectorEntities = new List<DirectorEntity>()
-        {
-            new DirectorEntity()
-            {
-                ID = 1,
-                DirectorID = 1,
-                PostID = 1,
-            },
-            new DirectorEntity()
-            {
-                ID = 2,
-                DirectorID = 2,
-                PostID = 2,
-            },
-            new DirectorEntity()
-            {
-                ID = 3,
-                DirectorID = 3,
-                PostID = 3,
-            },
-            new DirectorEntity()
-            {
-                ID = 4,
-                DirectorID = 1,
-                PostID = 4,
-            },
-        };
+ 
+        
+
+
 
     }
 }

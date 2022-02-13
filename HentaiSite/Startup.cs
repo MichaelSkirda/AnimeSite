@@ -7,6 +7,8 @@ using HentaiSite.Database.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -14,16 +16,34 @@ namespace HentaiSite
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();  // добавляем сервисы MVC
-            ApplicationContext db = new ApplicationContext();
-            services.AddSingleton(new PostService(db));
+
+            string connection = Configuration.GetConnectionString("DefaultConnection");
+            // добавляем контекст ApplicationContext в качестве сервиса в приложение
+            services.AddDbContext<ApplicationContext>(options =>
+                options.UseSqlServer(connection));
+
+
+            services.AddControllersWithViews();
+
+            services.AddScoped(typeof(PostService));
         }
 
         public void Configure(IApplicationBuilder app)
         {
             app.UseRouting(); // используем систему маршрутизации
+
+            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {
