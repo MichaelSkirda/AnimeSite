@@ -17,9 +17,11 @@ namespace HentaiSite.Models
 
         public int Rating { get; set; }
 
-        public string Format { get; set; }
+        public string ImgFormat { get; set; }
 
         public bool Censured { get; set; }
+
+        public int ScreenCount { get; set; }
 
 
         public string[] OtherNames { get; set; }
@@ -30,9 +32,11 @@ namespace HentaiSite.Models
 
         public int ReleaseYear { get; set; }
 
-        public int EndingYear { get; set; }
+        public int? EndingYear { get; set; }
 
         public int SeriesCount { get; set; }
+
+        public bool IsVisible { get; set; }
 
 
         [NotMapped]
@@ -40,7 +44,7 @@ namespace HentaiSite.Models
         {
             get
             {
-                return ID + "." + Format;
+                return ID + "." + ImgFormat;
             }
             private set { }
         }

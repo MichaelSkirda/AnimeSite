@@ -3,7 +3,6 @@
 
 @{
     ViewData["Title"] = "Home Page";
-    string imgName;
 }
 
 @section Styles
@@ -25,7 +24,6 @@
             <li>Анал</li>
             <li>Большие сиськи</li>
             <li>Минет</li>
-            <li>Инцест</li>
             <li>Групповой</li>
             <li>Студентки</li>
             <li>Мастурбация</li>
@@ -44,10 +42,10 @@
     </div>
 
     <div class="content-sort">
-        <a href="?orderby=name-d@(Model.queryString)"><span>По имени</span></a>
-        <a href="?orderby=rating-d@(Model.queryString)"><span class="sort-active">По рейтингу</span></a>
-        <a href="?orderby=time-d@(Model.queryString)"><span>По дате</span></a>
-        <a href="?orderby=views-d@(Model.queryString)"><span>По просомтрам</span></a>
+        <a href="?orderby=name-d&@(Model.queryString)"><span>По имени</span></a>
+        <a href="?orderby=rating-d&@(Model.queryString)"><span class="sort-active">По рейтингу</span></a>
+        <a href="?orderby=time-d&@(Model.queryString)"><span>По дате</span></a>
+        <a href="?orderby=views-d&@(Model.queryString)"><span>По просомтрам</span></a>
 </div>
 
 </div>
@@ -71,17 +69,17 @@
             </div>
 
             <a href="/post?id=@post.ID">
-                <img src="~/img/3-2-@(post.ImgName)" alt="">
+                <img src="~/img/thumbnail/3-2-@(post.ImgName)" alt="">
             </a>
 
             <div class="post-info-search">
                 <span class="post-title-search">@post.Name</span>
-                <span class="post-year-search">@post.ReleaseYear</span>
+                <span class="post-year-search"><a href="?year=@(post.ReleaseYear)">@post.ReleaseYear</a></span>
 
-                @if (post.EndingYear != 0)
+                @if (post.EndingYear != null)
                 {
                     <span> - </span>
-                    <span>@post.EndingYear</span>
+                    <span><a href="?year=@(post.EndingYear)">@post.EndingYear</a></span>
                 }
 
                 <div class="post-tags-search">
@@ -89,7 +87,7 @@
                     {
                         @foreach (Tag tag in post.Tags)
                         {
-                            <a href="~/tag/@tag.ID" class="clickable-yellow">@tag.Name</a>
+                            <a href="~/?tag=@tag.ID" class="clickable-yellow">@tag.Name</a>
                         }
                     }
                 </div>
@@ -102,15 +100,54 @@
 </div>
 
 <ul class="pagination">
-    <li class="disabled"><a href="#"><</a></li>
-    <li class="disabled"><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li><a href="#">6</a></li>
-    <li><a href="#">...</a></li>
-    <li><a href="#">23</a></li>
-    <li><a href="#">24</a></li>
-    <li><a href="#">></a></li>
+
+    @if(Model.HasPreviousPage())
+    {
+        <li class=""><a href="?@(Model.queryStringWithoutPage)&page=@(Model.page - 1)">&lt;</a></li>
+    }
+    else
+    {
+        <li class="disabled"><a href="#">&lt;</a></li>
+    }
+
+    @if(Model.page > 4)
+    {
+        <li><a href="?@(Model.queryStringWithoutPage)&page=1">1</a></li>
+        <li class=""><a href="#">...</a></li>
+    }
+
+    @for(int i = @Model.page - 3; i < Model.page; i++)
+    {
+        if(i < 1)
+        {
+            i = 0;
+            continue;
+        }
+        <li><a href="?@(Model.queryStringWithoutPage)&page=@(i)">@(i)</a></li>
+    }
+
+    <li class="disabled">@(Model.page)</li>
+
+    @for(int i = 1; i < 4 && Model.page + i <= Model.totalPages; i++)
+    {
+        <li><a href="?@(Model.queryStringWithoutPage)&page=@(Model.page + i)">@(Model.page + i)</a></li>
+    }
+
+
+    @if(Model.page + 3 < Model.totalPages)
+    {
+        <li><a href="#">...</a></li>
+        <li><a href="?@(Model.queryStringWithoutPage)&page=@(Model.totalPages)">@(Model.totalPages)</a></li>
+    }
+
+
+     @if(Model.HasNextPage())
+    {
+        <li class=""><a href="?@(Model.queryStringWithoutPage)&page=@(Model.page + 1)">></a></li>
+    }
+    else
+    {
+        <li class="disabled"><a href="#">></a></li>
+    }
+
 </ul>

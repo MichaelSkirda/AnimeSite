@@ -2,16 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using HentaiSite.Models;
+using HentaiSite.Models.ViewModels;
+
 namespace HentaiSite.Database.Services
 {
     public class PostService
     {
 
         private readonly ApplicationContext db;
+        private readonly TagService tagService;
 
-        public PostService(ApplicationContext db)
+        private const int SimilarAnimeCount = 6;
+
+        public PostService(ApplicationContext db, TagService tagService)
         {
             this.db = db;
+            this.tagService = tagService;
+        }
+
+        public void CreatePost(Post post)
+        {
+            db.Posts.Add(post);
+            db.SaveChanges();
         }
 
         public void SetTagsToPosts(Post post)
@@ -54,6 +66,26 @@ namespace HentaiSite.Database.Services
                 }).ToList();
 
             post.Studios = studios;
+        }
+
+        /// <summary>
+        /// Return {count} anime with same tags
+        /// </summary>
+        /// <param name="post"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public List<Post> GetSimilarAnime(Post post, int count = SimilarAnimeCount)
+        {
+
+            // Step 1. Take Tag Entities WHERE Tag ID EQUALS one of post Tag ID 
+
+            List<TagEntity> postTagsEntities = db.TagEntities
+                .Where(t => t.PostID == post.ID).ToList();
+
+            //List<Post> similarPosts = db.TagEntities.Where(t => postTagsEntities.E)
+
+
+            throw new NotImplementedException();
         }
 
         public void SetStudiosToPosts(List<Post> posts)
@@ -132,43 +164,98 @@ namespace HentaiSite.Database.Services
             return post;
         }
 
-        public List<Post> GetPosts(string orderBy, int Count)
+        /// <summary>
+        /// Search posts by paremeters. Return IQueryable, not IEnumerable
+        /// </summary>
+        /// <param name="orderBy"></param>
+        /// <param name="year"></param>
+        /// <param name="tagID"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        public IQueryable<Post> GetPostsIQueryable(string orderBy, int? year = null, int? tagID = null)
         {
-            List<Post> posts;
-            switch(orderBy)
+            
+
+            IQueryable<Post> posts;
+
+            if (year != null)
             {
-                case "name": // Yeah, I'm know it's incorrect
-                    posts = db.Posts.OrderByDescending(p => p.Name).Take(Count).ToList();
+                posts = db.Posts.Where(p => p.ReleaseYear == year);
+            }
+            else
+            {
+                posts = db.Posts;
+            }
+
+            if (tagID != null)
+            {
+                try
+                {
+                    Tag tag = tagService.GetTagByID(tagID ?? throw new NullReferenceException());
+
+                    posts = db.TagEntities.Where(t => t.TagID == tag.ID).Join(posts,
+                        t => t.PostID,
+                        p => p.ID,
+                        (t, p) => p
+                        );
+                }
+                catch
+                {
+
+                }
+            }
+
+
+            switch (orderBy)
+            {
+                case "name":
+                    posts = posts.OrderByDescending(p => p.Name);
                     break;
                 case "name-d":
-                    posts = db.Posts.OrderBy(p => p.Name).Take(Count).ToList();
+                    posts = posts.OrderBy(p => p.Name);
                     break;
                 case "rating":
-                    posts = db.Posts.OrderBy(p => p.Rating).Take(Count).ToList();
+                    posts = posts.OrderBy(p => p.Rating);
                     break;
                 case "rating-d":
-                    posts = db.Posts.OrderByDescending(p => p.Rating).Take(Count).ToList();
+                    posts = posts.OrderByDescending(p => p.Rating);
                     break;
                 case "time":
-                    posts = db.Posts.OrderBy(p => p.ReleaseYear).Take(Count).ToList();
+                    posts = posts.OrderBy(p => p.ReleaseYear);
                     break;
                 case "time-d":
-                    posts = db.Posts.OrderByDescending(p => p.ReleaseYear).Take(Count).ToList();
+                    posts = posts.OrderByDescending(p => p.ReleaseYear);
                     break;
                 case "views":
-                    posts = db.Posts.OrderBy(p => p.ViewsCount).Take(Count).ToList();
+                    posts = posts.OrderBy(p => p.ViewsCount);
                     break;
                 case "views-d":
-                    posts = db.Posts.OrderByDescending(p => p.ViewsCount).Take(Count).ToList();
-
+                    posts = posts.OrderByDescending(p => p.ViewsCount);
                     break;
                 default:
-                    posts = db.Posts.Take(Count).ToList();
+                    posts = posts.OrderByDescending(p => p.Rating);
                     break;
             }
+
+            return posts;
+
+        }
+
+        public List<Post> GetPosts(string orderBy, int Count, int page, int? year = null, int? tagID = null)
+        {
+            if (page <= 0)
+            {
+                throw new InvalidOperationException("Page number is negotiv");
+            }
+
+            List<Post> posts = GetPostsIQueryable(orderBy, year, tagID).Skip((page - 1) * Count).ToList();
+
             return posts;
         }
 
+        
+
+        
 
 
     }

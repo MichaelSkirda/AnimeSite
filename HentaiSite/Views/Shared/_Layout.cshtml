@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model HentaiSite.Models.ViewModels.BasicViewModel;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -88,19 +90,23 @@
                 <span class="nav-title">Самые популярные теги:</span>
 
                 <ul class="side-double-menu">
-                    <li>
-                        <a>Юри</a>
-                        <a>Анал</a>
-                        <a>Большие сиськи</a>
-                        <a>Минет</a>
-                        <a>Кошкодевочки</a>
+                    
+                    <li>  
+
+                        @for(int i = 0; i < Model.mostPopularTags.Count / 2; i++)
+                        {
+                            <a href="~/?tag=@Model.mostPopularTags[i].ID">@Model.mostPopularTags[i].Name</a>
+                        }
+
                     </li>
+
+                    
+
                     <li>
-                        <a>Групповой</a>
-                        <a>Студентки</a>
-                        <a>Мастурбация</a>
-                        <a>Девственницы</a>
-                        <a>Футунари</a>
+                        @for(int i = Model.mostPopularTags.Count / 2; i < Model.mostPopularTags.Count; i++)
+                        {
+                            <a href="~/?tag=@Model.mostPopularTags[i].ID">@Model.mostPopularTags[i].Name</a>
+                        }
                     </li>
                 </ul>
 
@@ -108,16 +114,16 @@
 
                 <ul class="side-double-menu">
                     <li>
-                        <a href="#">2022 год</a>
-                        <a href="#">2021 год</a>
-                        <a href="#">2020 год</a>
-                        <a href="#">2019 год</a>
+                        <a href="~/?year=2022">2022 год</a>
+                        <a href="~/?year=2021">2021 год</a>
+                        <a href="~/?year=2020">2020 год</a>
+                        <a href="~/?year=2019">2019 год</a>
                     </li>
                     <li>
-                        <a href="#">2018 год</a>
-                        <a href="#">2017 год</a>
-                        <a href="#">2016 год</a>
-                        <a href="#">Ранее...</a>
+                        <a href="~/?year=2018">2018 год</a>
+                        <a href="~/?year=2017">2017 год</a>
+                        <a href="~/?year=2016">2016 год</a>
+                        <a href="~/years/">Ранее...</a>
                     </li>
                 </ul>
 

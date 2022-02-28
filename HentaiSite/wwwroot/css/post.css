@@ -21,6 +21,8 @@
 }
 
 
+
+
 .title-names
 {
 	padding-bottom: 15px;
@@ -86,6 +88,13 @@
 
 .screens-wrap img
 {
+	width: 100%;
+}
+
+.screen-wrap
+{
+	height: 200px;
+	overflow: hidden;
 	width: 23%;
 	margin-top: 15px;
 	margin-right: 2%;
@@ -98,7 +107,7 @@
 }
 
 
-.video-player img
+.video-player video
 {
 	width: 80%;
 	display: block;
@@ -273,7 +282,26 @@
 	padding: 4px 0;
 }
 
+.series-btns-wrap
+{
+	display: flex;
+	flex-wrap: wrap;
+}
 
+.series-btns-wrap div
+{
+	text-align: center;
+	min-width: 22px;
+	margin-left: 5px;
+	margin-top: 8px;
+	border: 0;
+	background-color: dimgray;
+	color: white;
+	font-family: Arial;
+	font-size: 18px;
+	padding: 5px 8px;
+	cursor: pointer;
+}
 
 
 

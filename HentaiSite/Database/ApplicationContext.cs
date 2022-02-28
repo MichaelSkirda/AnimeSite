@@ -17,6 +17,8 @@ namespace HentaiSite.Database
         public DbSet<Director> Directors { get; set; }
         public DbSet<DirectorEntity> DirectorEntities { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,7 +40,7 @@ namespace HentaiSite.Database
                     {
                         Duration = 20,
                         Name = "Code Geass",
-                        Format = "jpg",
+                        ImgFormat = "jpg",
                         ReleaseYear = 2006,
                         SeriesCount = 24,
                         Rating = 600,
@@ -49,7 +51,7 @@ namespace HentaiSite.Database
                     {
                         Duration = 20,
                         Name = "Berserk",
-                        Format = "jpg",
+                        ImgFormat = "jpg",
                         ReleaseYear = 1997,
                         Status = Enums.AnimeStatus.Released,
                         SeriesCount = 51,
@@ -62,7 +64,7 @@ namespace HentaiSite.Database
                     {
                         Duration = 20,
                         Name = "Steins;Gate",
-                        Format = "jpg",
+                        ImgFormat = "jpg",
                         ReleaseYear = 2016,
                         SeriesCount = 36,
                         Rating = 542,
@@ -74,7 +76,7 @@ namespace HentaiSite.Database
                     {
                         Duration = 20,
                         Name = "Vinland Saga",
-                        Format = "jpeg",
+                        ImgFormat = "jpeg",
                         ReleaseYear = 2018,
                         SeriesCount = 30,
                         Rating = 220,

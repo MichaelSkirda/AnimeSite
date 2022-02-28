@@ -51,14 +51,25 @@
 .pagination li
 {
 	margin-left: 4px;
+	padding: 5px 10px;
+	font-weight: 600;
+	font-size: 17px;
+	font-family: 'Arial';
 }
 
 .pagination a
 {
-	padding: 5px 10px;
 	color: #2F2F2F;
-	font-weight: 600;
-	font-size: 17px;
+}
+
+.pagination .disabled
+{
+	color: #837e7e;
+}
+
+.pagination li .disabled
+{
+
 }
 
 .pagination .disabled a
@@ -79,7 +90,7 @@
 	align-items: center;
 }
 
-.post-year-search
+.post-year-search a
 {
 	font-size: 13px;
 	color: #777;

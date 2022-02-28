@@ -1,4 +1,4 @@
-using System;
+    using System;
 using System.Collections.Generic;
 using HentaiSite.Database.Services;
 using HentaiSite.Models;
@@ -10,42 +10,38 @@ namespace HentaiSite.Controllers
     public class HomeController : Controller
     {
 
-        private readonly PostService postService;
+        private readonly ViewModelService viewModelService;
 
-        private readonly int PagePostsCount = 20;
+        private readonly int PagePostsCount = 4;
 
-        public HomeController(PostService postService)
+        public HomeController(ViewModelService viewModelService)
         {
-            this.postService = postService;
+            this.viewModelService = viewModelService;
         }
 
-        public IActionResult Index(string orderby)
+        public IActionResult Index(string orderby, int page = 1, int? year = null, int? tag = null)
         {
 
-            List<Post> posts = postService.GetPosts(orderby, PagePostsCount);
 
-            postService.SetMetadataToPosts(posts);
+            IndexViewModel viewModel = viewModelService.GetIndexViewModel(PagePostsCount, orderby, page, year, tag);
+
 
             var query = System.Web.HttpUtility.ParseQueryString(Request.QueryString.ToString());
 
             query.Remove("orderby");
 
             string queryString = query.ToString();
+            query.Remove("page");
+            string queryStringWithoutPage = query.ToString();
 
             if(queryString == null || queryString == "")
             {
                 queryString = "";
             }
-            else
-            {
-                queryString = "&" + queryString;
-            }
 
-            IndexViewModel viewModel = new IndexViewModel()
-            {
-                posts = posts,
-                queryString = queryString
-            };
+
+            viewModel.queryString = queryString;
+            viewModel.queryStringWithoutPage = queryStringWithoutPage;
 
             return View(viewModel);
         }
@@ -53,24 +49,36 @@ namespace HentaiSite.Controllers
         [Route("top100")]
         public IActionResult TopHundred()
         {
-            List<Post> posts = postService.GetTopHundredByRating();
-            return View(posts);
+            //List<Post> posts = postService.GetTopHundredByRating();
+            return View();
         }
 
         [Route("Post")]
         public IActionResult Post(int id)
         {
-            Post post;
+
             try
             {
-                post = postService.GetPostByID(id);
+                PostViewModel postViewModel = viewModelService.GetPostViewModel(id);
+                return View(postViewModel);
             }
-            catch(InvalidOperationException)
+            catch (InvalidOperationException)
             {
                 return NotFound();
             }
-            postService.SetMetadataToPosts(post);
-            return View(post);
+            
+        }
+
+        public IActionResult Post(PostViewModel postViewModel)
+        {
+            return View(postViewModel);
+        }
+
+        [Route("GetRandomPost")]
+        public IActionResult GetRandomPost()
+        {
+            PostViewModel postViewModel = viewModelService.GetPostViewModeRandom();
+            return RedirectToActionPermanent("Post", postViewModel);
         }
 
     }
