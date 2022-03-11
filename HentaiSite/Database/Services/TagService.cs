@@ -5,12 +5,12 @@ using HentaiSite.Models;
 
 namespace HentaiSite.Database.Services
 {
-    public class TagService
+    public class EntitiesService
     {
         private readonly ApplicationContext db;
         private readonly int MostPopularTagsCount = 10;
 
-        public TagService(ApplicationContext db)
+        public EntitiesService(ApplicationContext db)
         {
             this.db = db;
         }
@@ -39,11 +39,6 @@ namespace HentaiSite.Database.Services
             return tag;
         }
 
-        public Tag GetTagByID(int id)
-        {
-            Tag tag = db.Tags.First(t => t.ID == id);
-            return tag;
-        }
 
         public List<Tag> GetTagsByIDs(List<int> ids)
         {
@@ -75,6 +70,22 @@ namespace HentaiSite.Database.Services
 
             return MostPopularTags;
         }
+
+        public Studio GetStudioByID(int id)
+        {
+            return db.Studios.First(s => s.ID == id);
+        }
+
+        public Director GetDirectorByID(int id)
+        {
+            return db.Directors.First(d => d.ID == id);
+        }
+
+        public Tag GetTagByID(int id)
+        {
+            return db.Tags.First(t => t.ID == id);
+        }
+
 
     }
 }

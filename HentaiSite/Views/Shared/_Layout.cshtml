@@ -23,9 +23,9 @@
 
             <div class="header-search-wrap" id="header-search">
                 <div class="header-search">
-                    <form action="">
-                        <input type="text" class="header-search-text" placeholder="Введите текст...">
-                        <input type="submit" class="header-search-button">
+                    <form asp-action="Index" asp-controller="Home" method="get">
+                        <input type="text" id="text-search" class="header-search-text" name="s" placeholder="Введите текст...">
+                        <input type="submit" id="submit-search" class="header-search-button">
                     </form>
                 </div>
             </div>
@@ -47,11 +47,11 @@
                     </div>
 
                     <div class="header-menu-button">
-                        <span>Случайный хентай</span>
+                        <a href="~/randompost"><span>Случайный хентай</span></a>
                     </div>
 
                     <div class="header-menu-button">
-                        <span>Любимое админа</span>
+                        <a href="~/adminfavorite"><span>Любимое админа</span></a>
                     </div>
 
                     <div class="header-menu-button" id="search-btn">
@@ -95,7 +95,7 @@
 
                         @for(int i = 0; i < Model.mostPopularTags.Count / 2; i++)
                         {
-                            <a href="~/?tag=@Model.mostPopularTags[i].ID">@Model.mostPopularTags[i].Name</a>
+                            <a href="~/tag/@Model.mostPopularTags[i].ID">@Model.mostPopularTags[i].Name</a>
                         }
 
                     </li>
@@ -105,7 +105,7 @@
                     <li>
                         @for(int i = Model.mostPopularTags.Count / 2; i < Model.mostPopularTags.Count; i++)
                         {
-                            <a href="~/?tag=@Model.mostPopularTags[i].ID">@Model.mostPopularTags[i].Name</a>
+                            <a href="~/tag/@Model.mostPopularTags[i].ID">@Model.mostPopularTags[i].Name</a>
                         }
                     </li>
                 </ul>
@@ -114,18 +114,27 @@
 
                 <ul class="side-double-menu">
                     <li>
-                        <a href="~/?year=2022">2022 год</a>
-                        <a href="~/?year=2021">2021 год</a>
-                        <a href="~/?year=2020">2020 год</a>
-                        <a href="~/?year=2019">2019 год</a>
+                        <a href="~/year/2022">2022 год</a>
+                        <a href="~/year/2021">2021 год</a>
+                        <a href="~/year/2020">2020 год</a>
+                        <a href="~/year/2019">2019 год</a>
                     </li>
                     <li>
-                        <a href="~/?year=2018">2018 год</a>
-                        <a href="~/?year=2017">2017 год</a>
-                        <a href="~/?year=2016">2016 год</a>
-                        <a href="~/years/">Ранее...</a>
+                        <a href="~/year/2018">2018 год</a>
+                        <a href="~/year/2017">2017 год</a>
+                        <a href="~/year/2016">2016 год</a>
+                        <a href="years/">Ранее...</a>
                     </li>
                 </ul>
+
+                <span class="nav-title">Самое популярное сегодня:</span>
+
+                <div>
+                    <a>
+                        <img />
+                    </a>
+                </div>
+
 
             </div>
         </div>

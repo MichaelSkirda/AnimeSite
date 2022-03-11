@@ -5,8 +5,8 @@
 
 .title-img-wrap
 {
-	margin-top: 10px;
-	margin-left: 10px;
+	margin-top: 15px;
+	margin-left: 15px;
 }
 
 .title-text h1
@@ -41,14 +41,23 @@
 {
 	margin-top: 5px;
 	display: flex;
+	align-items: baseline;
 }
 
-.title-info-line span
+.title-info-text-l
 {
 	margin-right: 5px;
 	font-size: 14px;
 	font-weight: 800;
 }
+
+.title-info-text-r
+{
+	margin-right: px;
+	margin-left: 5px;
+	font-size: 14px;
+}
+
 
 .title-info-line a
 {
@@ -65,12 +74,13 @@
 
 .title-info-line .clickable-yellow:after
 {
-	content: ','
+	/* content: ',' */
 }
 
 .screen-list
 {
 	margin-left: 2%;
+	margin-top: 25px;
 }
 
 .screen-list p
@@ -102,16 +112,16 @@
 
 .video-player
 {
-	margin-top: 65px;
-
+	width: 90%;
+	margin: 25px auto 0 auto;
 }
 
 
 .video-player video
 {
-	width: 80%;
+	margin-top: 15px;
+	width: 100%;
 	display: block;
-	margin: 0 auto;
 }
 
 
@@ -123,11 +133,13 @@
 .title-desc
 {
 	font-size: 15px;
+	margin-top: 5px;
 }
 
 .title-desc-wrap
 {
 	width: 96%;
+	margin-top: 15px;
 }
 
 .title-stats
@@ -154,7 +166,7 @@
 .comment-block
 {
 	width: 94%;
-	margin: 15px auto 0 auto;
+	margin: 40px auto 40px auto;
 	background-color: #E0E0E0;
 	padding-top: 15px;
 }
@@ -288,6 +300,7 @@
 	flex-wrap: wrap;
 }
 
+
 .series-btns-wrap div
 {
 	text-align: center;
@@ -301,6 +314,11 @@
 	font-size: 18px;
 	padding: 5px 8px;
 	cursor: pointer;
+}
+
+.series-active
+{
+	background-color: #a1a1a1 !important;
 }
 
 

@@ -8,6 +8,7 @@ namespace HentaiSite.Models.ViewModels
         public List<Post> posts;
         public string queryString;
         public string queryStringWithoutPage;
+        public string orderBy;
         public int page;
         public int totalPages;
 

@@ -20,6 +20,11 @@
 	background-color: #FFFFFF;
 }
 
+#search-btn
+{
+	cursor: pointer;
+}
+
 .site-content
 {
 	width: 100%;
@@ -137,6 +142,7 @@
 	bottom: 0;
 	right: -2px;
 	padding: 13px 25px;
+	cursor: pointer;
 }
 
 .clickable-yellow

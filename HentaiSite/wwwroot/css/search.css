@@ -25,6 +25,12 @@
 	font-size: 15px;
 	font-family: Arial;
 	cursor: pointer;
+	color: #ffba00;
+}
+
+.sort-active
+{
+	font-weight: 600;
 }
 
 .content-block
@@ -150,11 +156,6 @@
 	background-color: #cd8cbf !important;
 }
 
-.sort-active
-{
-	font-weight: 600;
-}
-
 .search-text-title
 {
 	margin-left: 2%;
@@ -165,8 +166,44 @@
  color: #70757a;
 }
 
+.preview
+{
+	width: 96%;
+	margin: 15px auto 0 auto;
+}
 
+.preview-title
+{
+	display: flex;
+}
 
+.preview-text-wrap
+{
+	margin-left: 15px;
+}
 
+.preview-text-big
+{
+	margin: 5px 0 0 0;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.preview-text-small
+{
+	margin: 15px 0 0 0;
+	font-size: 18px;
+}
+
+.preview-thumbnail
+{
+	width: 15%;
+	overflow: hidden;
+}
+
+.preview-thumbnail img
+{
+	width: 100%;
+}
 
 

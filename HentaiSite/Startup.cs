@@ -37,7 +37,7 @@ namespace HentaiSite
             services.AddControllersWithViews();
 
             services.AddScoped(typeof(PostService)); // That's very weird
-            services.AddScoped(typeof(TagService));
+            services.AddScoped(typeof(EntitiesService));
             services.AddScoped(typeof(ViewModelService));
         }
 

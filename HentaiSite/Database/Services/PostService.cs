@@ -10,14 +10,14 @@ namespace HentaiSite.Database.Services
     {
 
         private readonly ApplicationContext db;
-        private readonly TagService tagService;
+        private readonly EntitiesService entitiesService;
 
         private const int SimilarAnimeCount = 6;
 
-        public PostService(ApplicationContext db, TagService tagService)
+        public PostService(ApplicationContext db, EntitiesService entitiesService)
         {
             this.db = db;
-            this.tagService = tagService;
+            this.entitiesService = entitiesService;
         }
 
         public void CreatePost(Post post)
@@ -96,6 +96,27 @@ namespace HentaiSite.Database.Services
             }
         }
 
+        public List<Post> GetPostsByStudio(int id, string orderby)
+        {
+            IQueryable<Post> posts = db.StudioEntities.Where(s => s.StudioID == id).Join(db.Posts,
+                e => e.PostID,
+                p => p.ID,
+                (e, p) => p
+                );
+
+            return OrderByPosts(orderby, posts).ToList();
+        }
+
+        public List<Post> GetPostsByDirector(int id, string orderby)
+        {
+            IQueryable<Post> posts = db.DirectorEntities.Where(s => s.DirectorID == id).Join(db.Posts,
+                e => e.PostID,
+                p => p.ID,
+                (e, p) => p
+                );
+
+            return OrderByPosts(orderby, posts).ToList();
+        }
 
         public void SetDirectorsToPosts(Post post)
         {
@@ -113,6 +134,25 @@ namespace HentaiSite.Database.Services
             post.Directors = directors;
         }
 
+        public List<Post> GetPostsByYear(int year, string orderby)
+        {
+            IQueryable<Post> posts = db.Posts
+                .Where(p => p.ReleaseYear == year);
+
+            return OrderByPosts(orderby, posts).ToList();
+        }
+
+        internal List<Post> GetPostsByTag(int id, string orderby)
+        {
+            IQueryable<Post> posts = db.Posts.Join(db.TagEntities.Where(t => t.TagID == id),
+                p => p.ID,
+                t => t.PostID,
+                (p, t) => p
+                );
+
+            return OrderByPosts(orderby, posts).ToList();
+        }
+
         public void SetDirectorsToPosts(List<Post> posts)
         {
             foreach(Post post in posts)
@@ -127,6 +167,15 @@ namespace HentaiSite.Database.Services
             SetTagsToPosts(post);
             SetStudiosToPosts(post);
             SetDirectorsToPosts(post);
+        }
+
+        internal List<Post> GetAdminFavoritePosts(string orderby)
+        {
+            IQueryable<Post> posts = db.Posts.Where(
+                p => p.IsAdminFavorite
+                );
+
+            return OrderByPosts(orderby, posts).ToList();
         }
 
         public void SetMetadataToPosts(List<Post> posts)
@@ -153,8 +202,7 @@ namespace HentaiSite.Database.Services
 
         public Post GetRandomPost()
         {
-            Random random = new Random();
-            Post post = db.Posts.First(p => p.ID == random.Next(1, db.Posts.Count() + 1));
+            Post post = db.Posts.OrderBy(p => Guid.NewGuid()).First();
             return post;
         }
 
@@ -172,7 +220,7 @@ namespace HentaiSite.Database.Services
         /// <param name="tagID"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public IQueryable<Post> GetPostsIQueryable(string orderBy, int? year = null, int? tagID = null)
+        public IQueryable<Post> GetPostsIQueryable(string orderBy, int? year = null, int? tagID = null, string s = "")
         {
             
 
@@ -191,7 +239,7 @@ namespace HentaiSite.Database.Services
             {
                 try
                 {
-                    Tag tag = tagService.GetTagByID(tagID ?? throw new NullReferenceException());
+                    Tag tag = entitiesService.GetTagByID(tagID ?? throw new NullReferenceException());
 
                     posts = db.TagEntities.Where(t => t.TagID == tag.ID).Join(posts,
                         t => t.PostID,
@@ -205,39 +253,41 @@ namespace HentaiSite.Database.Services
                 }
             }
 
+            if(s != null && s != "")
+            {
+                posts = posts.Where(p => p.Name.Contains(s) || p.OtherNamesString.Contains(s));
+            }
 
+            posts = OrderByPosts(orderBy, posts);
+            
+
+            return posts;
+
+        }
+
+        public IQueryable<Post> OrderByPosts(string orderBy, IQueryable<Post> posts)
+        {
             switch (orderBy)
             {
                 case "name":
-                    posts = posts.OrderByDescending(p => p.Name);
-                    break;
+                    return posts.OrderBy(p => p.Name);
                 case "name-d":
-                    posts = posts.OrderBy(p => p.Name);
-                    break;
+                    return posts.OrderByDescending(p => p.Name);
                 case "rating":
-                    posts = posts.OrderBy(p => p.Rating);
-                    break;
+                    return posts.OrderBy(p => p.Rating);
                 case "rating-d":
-                    posts = posts.OrderByDescending(p => p.Rating);
-                    break;
+                    return posts.OrderByDescending(p => p.Rating);
                 case "time":
-                    posts = posts.OrderBy(p => p.ReleaseYear);
-                    break;
+                    return posts.OrderBy(p => p.ReleaseYear);
                 case "time-d":
-                    posts = posts.OrderByDescending(p => p.ReleaseYear);
-                    break;
+                    return posts.OrderByDescending(p => p.ReleaseYear);
                 case "views":
-                    posts = posts.OrderBy(p => p.ViewsCount);
-                    break;
+                    return posts.OrderBy(p => p.ViewsCount);
                 case "views-d":
-                    posts = posts.OrderByDescending(p => p.ViewsCount);
-                    break;
+                    return posts.OrderByDescending(p => p.ViewsCount);
                 default:
-                    posts = posts.OrderByDescending(p => p.Rating);
-                    break;
+                    return posts.OrderByDescending(p => p.Rating);
             }
-
-            return posts;
 
         }
 

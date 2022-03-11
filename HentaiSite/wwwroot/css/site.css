@@ -29,6 +29,11 @@ a
 	text-decoration: none;
 }
 
+p
+{
+	margin: 0;
+}
+
 .footer
 {
 	background-color: #202020;

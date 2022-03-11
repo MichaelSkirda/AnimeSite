@@ -22,15 +22,16 @@ namespace HentaiSite.Models
         public bool Censured { get; set; }
 
         public int ScreenCount { get; set; }
+        public bool IsAdminFavorite { get; set; }
 
-
-        public string[] OtherNames { get; set; }
-
+        public string OtherNamesString { get; set; }
         public AnimeStatus Status { get; set; }
 
         public int Duration { get; set; }
 
         public int ReleaseYear { get; set; }
+
+        public int DownloadCount { get; set; }
 
         public int? EndingYear { get; set; }
 
@@ -57,6 +58,15 @@ namespace HentaiSite.Models
 
         [NotMapped]
         public List<Studio> Studios { get; set; }
+
+        [NotMapped]
+        public string[] OtherNames
+        {
+            get
+            {
+                return OtherNamesString.Split(";#;");
+            }
+        }
 
     }
 }

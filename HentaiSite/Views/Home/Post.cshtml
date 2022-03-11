@@ -62,38 +62,38 @@
         <div class="title-other-info">
 
             <div class="title-info-line">
-                <span class="info-main-line">Студия: </span>
+                <p class="title-info-text-l">Студия: </p>
                 @if (Model.post.Studios != null)
                 {
                     @foreach (Studio studio in Model.post.Studios)
                     {
-                        <a href="~/studio/@studio.ID" class="clickable-yellow">@studio.Name</a>
+                        <a href="~/studio/@studio.ID" class="clickable-yellow"><p class="title-info-text-r">@studio.Name</p></a>
                     }
                 }
             </div>
             <div class="title-info-line">
-                <span class="info-main-line">Сценарист: </span>
+                <p class="title-info-text-l">Сценарист: </p>
                 @if (Model.post.Directors != null)
                 {
                     @foreach (Director director in Model.post.Directors)
                     {
-                        <a href="~/director/@director.ID" class="clickable-yellow">@director.Name</a>
+                        <a href="~/director/@director.ID" class="clickable-yellow"><p class="title-info-text-r">@director.Name</p></a>
                     }
                 }
             </div>
             <div class="title-info-line">
-                <span class="info-main-line">Жанры: </span>
+                <p class="title-info-text-l">Жанры: </p>
 
                 @if (Model.post.Tags != null)
                 {
                     @for (int i = 0; i < Model.post.Tags.Count; i++)
                     {
-                        <a href="~/tag/@Model.post.Tags[i].ID" class="clickable-yellow">@Model.post.Tags[i].Name</a>
+                        <a href="~/tag/@Model.post.Tags[i].ID" class="clickable-yellow"><p class="title-info-text-r">@Model.post.Tags[i].Name</p></a>
                     }
                 }
 
             </div>
-            <div class="title-info-line"><span class="info-main-line">Кол-во серий: </span><a>@Model.post.SeriesCount</a></div>
+            <div class="title-info-line"><p class="title-info-text-l">Кол-во серий: </p><p class="title-info-text-r">@Model.post.SeriesCount</p></div>
 
             <div class="title-desc-wrap">
                 <p class="title-desc-prefix">Описание: </p>
@@ -118,8 +118,6 @@
 @if (Model.post.ScreenCount > 0)
 {
 
-    <div>
-
         <div class="screen-list">
             <p>Скринлист:</p>
 
@@ -135,21 +133,26 @@
             </div>
         </div>
 
-    </div>
-
 }
 
-<span>Серии:</span>
 
-<div class="series-btns-wrap">
-    @for(int i = 1; i <= Model.post.SeriesCount; i++)
-    {
-        <div onclick="changeSeries(this)" seriesValue="@(i)">@(i)</div>
-    }
-</div>
-<!-- VIDEO PLAYER -->
 
 <div class="video-player">
+
+    <span class="series-text">Серии:</span>
+
+    <div class="series-btns-wrap" id="series-btns">
+
+
+        <div onclick="changeSeries(this)" class="series-active" seriesValue="1">1</div>
+
+        @for(int i = 2; i <= Model.post.SeriesCount; i++)
+        {
+            <div onclick="changeSeries(this)" class seriesValue="@(i)">@(i)</div>
+        }
+    </div>
+    <!-- VIDEO PLAYER -->
+
     <video controls poster="~/vid/thumbnail/@(Model.post.ID)-1.jpg" id="video-player">
       <source id="video-src" src="~/vid/@(Model.post.ID)-1.mp4" type="video/mp4">
     Your browser does not support the video tag.
@@ -164,7 +167,7 @@
 
     <div class="download-button">
         <a href="#">Скачать</a>
-        <span>1.823 скачиваний</span>
+        <span>@(Model.post) скачиваний</span>
     </div>
 
 </div>

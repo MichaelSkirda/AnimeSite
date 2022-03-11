@@ -1,10 +1,16 @@
 var videoSource = document.getElementById("video-src");
 var video = document.getElementById("video-player");
+var seriesBtns = document.getElementById("series-btns").children;
+var seriesNumber = 1;
 
 function changeSeries(sender)
 {
 
-	let seriesNumber = sender.getAttribute("seriesvalue");
+	seriesBtns[seriesNumber - 1].className = "";
+
+	seriesNumber = sender.getAttribute("seriesvalue");
+
+	seriesBtns[seriesNumber - 1].className = "series-active";
 
 	video.setAttribute("poster", "/vid/thumbnail/" + postID + "-" + seriesNumber + ".jpg");
 

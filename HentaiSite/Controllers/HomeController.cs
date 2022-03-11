@@ -19,24 +19,44 @@ namespace HentaiSite.Controllers
             this.viewModelService = viewModelService;
         }
 
-        public IActionResult Index(string orderby, int page = 1, int? year = null, int? tag = null)
+        public IActionResult Index(string orderby, string s = "", int page = 1, int? year = null, int? tag = null)
         {
 
 
-            IndexViewModel viewModel = viewModelService.GetIndexViewModel(PagePostsCount, orderby, page, year, tag);
+            IndexViewModel viewModel = viewModelService.GetIndexViewModel(PagePostsCount, orderby, page, s, year, tag);
+            viewModel.orderBy = orderby;
 
-
+            // Get Query parameters
             var query = System.Web.HttpUtility.ParseQueryString(Request.QueryString.ToString());
 
-            query.Remove("orderby");
-
-            string queryString = query.ToString();
             query.Remove("page");
+            // Query string without orderby and page.
             string queryStringWithoutPage = query.ToString();
+
+            // Restore query with page
+            query = System.Web.HttpUtility.ParseQueryString(Request.QueryString.ToString());
+
+            query.Remove("orderby");
+            // Query without orderby. Нужен, чтобы во View добавить требуемую сортировку на каждую кнопку, сохраняя параметры
+            string queryString = query.ToString();
+            
 
             if(queryString == null || queryString == "")
             {
                 queryString = "";
+            }
+            else
+            {
+                queryString = "&" + queryString;
+            }
+
+            if (queryStringWithoutPage == null || queryStringWithoutPage == "")
+            {
+                queryStringWithoutPage = "";
+            }
+            else
+            {
+                queryStringWithoutPage = "&" + queryStringWithoutPage;
             }
 
 
@@ -47,13 +67,13 @@ namespace HentaiSite.Controllers
         }
 
         [Route("top100")]
-        public IActionResult TopHundred()
+        public IActionResult TopHundred(string topBy)
         {
-            //List<Post> posts = postService.GetTopHundredByRating();
-            return View();
+            SearchOnePageViewModel onePageViewModel = viewModelService.GetOnePageTopHundredViewModel(topBy);
+            return View("SearchOnePage", onePageViewModel);
         }
 
-        [Route("Post")]
+        [Route("Post/{id}")]
         public IActionResult Post(int id)
         {
 
@@ -69,16 +89,48 @@ namespace HentaiSite.Controllers
             
         }
 
-        public IActionResult Post(PostViewModel postViewModel)
+        [ResponseCache(NoStore = true, Duration = 0)]
+        [Route("RandomPost")]
+        public IActionResult RandomPost()
         {
-            return View(postViewModel);
+            Post post = viewModelService.GetRandomPostID();
+            return LocalRedirectPermanent($"~/Post/{post.ID}");
         }
 
-        [Route("GetRandomPost")]
-        public IActionResult GetRandomPost()
+
+        [Route("Studio/{id}")]
+        public IActionResult Studio(int id, string orderby)
         {
-            PostViewModel postViewModel = viewModelService.GetPostViewModeRandom();
-            return RedirectToActionPermanent("Post", postViewModel);
+            SearchOnePageViewModel searchOnePageViewModel = viewModelService.GetSearchOnePageStudioViewModel(id, orderby);
+            return View("SearchOnePage", searchOnePageViewModel);
+        }
+
+        [Route("Director/{id}")]
+        public IActionResult Director(int id, string orderby)
+        {
+            SearchOnePageViewModel searchOnePageViewModel = viewModelService.GetSearchOnePageDirectorViewModel(id, orderby);
+            return View("SearchOnePage", searchOnePageViewModel);
+        }
+
+        [Route("Tag/{id}")]
+        public IActionResult Tag(int id, string orderby)
+        {
+            SearchOnePageViewModel searchOnePageViewModel = viewModelService.GetSearchOnePageTagViewModel(id, orderby);
+            return View("SearchOnePage", searchOnePageViewModel);
+        }
+
+        [Route("Year/{year}")]
+        public IActionResult Year(int year, string orderby)
+        {
+            SearchOnePageViewModel searchOnePageViewModel = viewModelService.GetSearchOnePageYearViewModel(year, orderby);
+            return View("SearchOnePage", searchOnePageViewModel);
+        }
+
+        [Route("AdminFavorite")]
+        public IActionResult AdminFavorite(string orderby)
+        {
+            SearchOnePageViewModel searchOnePageViewModel = viewModelService.GetOnePageAdminFavorite(orderby);
+            return View("SearchOnePage", searchOnePageViewModel);
         }
 
     }

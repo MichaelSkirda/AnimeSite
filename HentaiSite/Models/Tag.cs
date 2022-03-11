@@ -1,11 +1,8 @@
 ﻿using System;
 namespace HentaiSite.Models
 {
-    public class Tag
+    public class Tag : SearchEntity
     {
         public int ID { get; set; }
-        public string Name { get; set; }
-
-        public string Description { get; set; }
     }
 }

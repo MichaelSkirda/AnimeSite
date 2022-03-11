@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using HentaiSite.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,17 +19,13 @@ namespace HentaiSite.Database
         public DbSet<DirectorEntity> DirectorEntities { get; set; }
 
         public DbSet<User> Users { get; set; }
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Post>()
-                        .Property(e => e.OtherNames)
-                        .HasConversion(
-                            v => string.Join(";#;", v),
-                            v => v.Split(";#;", StringSplitOptions.RemoveEmptyEntries));
+
         }
 
+
+        /* Reznya Blyat;#;Ubivat Ubivat Ubivat Ubivat Ubivat Ubivat Ubivat  */
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {
@@ -57,7 +54,7 @@ namespace HentaiSite.Database
                         SeriesCount = 51,
                         Rating = 692,
                         ViewsCount = 11234,
-                        OtherNames = new string[] { "Reznya Blyat", "Ubivat Ubivat Ubivat Ubivat Ubivat Ubivat Ubivat " },
+                        OtherNamesString = string.Join(";#;", new string[] { "Reznya Blyat", "Ubivat Ubivat Ubivat Ubivat Ubivat Ubivat Ubivat " }),
                         Description = "Lorem ipsum dolor sit amet consectetur adipisicing elit.\nLorem ipsum dolor sit amet consectetur adipisicing elit."
                     },
                     new Post()

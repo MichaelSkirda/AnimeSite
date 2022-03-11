@@ -4,14 +4,16 @@ using HentaiSite.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HentaiSite.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20220304122607_PreviewChanged")]
+    partial class PreviewChanged
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,9 +76,6 @@ namespace HentaiSite.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DownloadCount")
-                        .HasColumnType("int");
-
                     b.Property<int>("Duration")
                         .HasColumnType("int");
 
@@ -86,16 +85,13 @@ namespace HentaiSite.Migrations
                     b.Property<string>("ImgFormat")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsAdminFavorite")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsVisible")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OtherNamesString")
+                    b.Property<string>("OtherNames")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Rating")

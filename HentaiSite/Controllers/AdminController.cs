@@ -10,12 +10,12 @@ namespace HentaiSite.Controllers
     public class AdminController : Controller
     {
 
-        private readonly TagService tagService;
+        private readonly EntitiesService entitiesService;
         private readonly PostService postService;
 
-        public AdminController(TagService tagService, PostService postService)
+        public AdminController(EntitiesService entitiesService, PostService postService)
         {
-            this.tagService = tagService;
+            this.entitiesService = entitiesService;
             this.postService = postService;
         }
 
@@ -55,7 +55,7 @@ namespace HentaiSite.Controllers
                 // If tag already exist find them
                 try
                 {
-                     tag = tagService.GetTagByName(tagName);
+                     tag = entitiesService.GetTagByName(tagName);
                 }
                 catch(InvalidOperationException)
                 {
@@ -65,7 +65,7 @@ namespace HentaiSite.Controllers
                         Name = tagName,
                     };
 
-                    tagService.CreateTag(tag);
+                    entitiesService.CreateTag(tag);
                 }
 
                 realTags.Add(tag);
@@ -85,7 +85,7 @@ namespace HentaiSite.Controllers
                 tagEntities.Add(tagEntity);
             }
 
-            tagService.CreateTagEntity(tagEntities);
+            entitiesService.CreateTagEntity(tagEntities);
             
 
 
