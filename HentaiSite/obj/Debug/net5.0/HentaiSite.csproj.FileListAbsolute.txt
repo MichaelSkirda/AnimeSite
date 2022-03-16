@@ -156,3 +156,4 @@ C:\Users\Aleksandr\Desktop\HentaiSite\HentaiSite\bin\Debug\net5.0\Humanizer.dll
 C:\Users\Aleksandr\Desktop\HentaiSite\HentaiSite\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\Aleksandr\Desktop\HentaiSite\HentaiSite\obj\Debug\net5.0\Razor\Views\Admin\Index.cshtml.g.cs
 C:\Users\Aleksandr\Desktop\HentaiSite\HentaiSite\obj\Debug\net5.0\Razor\Views\Home\SearchOnePage.cshtml.g.cs
+C:\Users\Aleksandr\Desktop\HentaiSite\HentaiSite\obj\Debug\net5.0\Razor\Views\Home\AllTags.cshtml.g.cs

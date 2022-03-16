@@ -20,16 +20,17 @@
     <div class="tag-cloud-search">
         <ul>
 
-            <li>Юри</li>
-            <li>Анал</li>
-            <li>Большие сиськи</li>
-            <li>Минет</li>
-            <li>Групповой</li>
-            <li>Студентки</li>
-            <li>Мастурбация</li>
-            <li>Девственницы</li>
-            <li>Футунари</li>
-            <li>Кошкодевочки</li>
+            @foreach(Tag tag in Model.Tags)
+            {
+                if(Model.ActiveTags.Contains(tag.ID))
+                {
+                    <a href="?tag=@(Model.queryStringWithoutPage)"><li class="tag-active">@(tag.Name)</li></a>
+                }
+                else
+                {
+                    <a href="?tag=@(tag.ID)@(Model.queryStringWithoutPage)"><li>@(tag.Name)</li></a>
+                }
+            }
 
         </ul>
     </div>
@@ -99,14 +100,14 @@
 
 </div>
 
-<div class="content-list">
+<div class="content-list" id="posts-wrap">
 
 
     @foreach (Post post in Model.posts)
     {
-        <div class="content-block">
+        <div class="content-block-alt">
 
-            <div class="content-block-overlay">
+            <div class="content-block-overlay-alt">
                 @if (post.Censured)
                 {
                     <span>Censure</span>
@@ -118,12 +119,14 @@
             </div>
 
             <a href="/post/@(post.ID)">
-                <img src="~/img/thumbnail/3-2-@(post.ImgName)" alt="">
+                <div class="content-img-wrap-alt">
+                    <img src="~/img/thumbnail/3-2-@(post.ImgName)" alt="">
+                </div>
             </a>
 
-            <div class="post-info-search">
-                <span class="post-title-search">@post.Name</span>
-                <span class="post-year-search"><a href="/year/@(post.ReleaseYear)">@post.ReleaseYear</a></span>
+            <div class="post-info-search-alt">
+                <span class="post-title-search-alt">@post.Name</span>
+                <span class="post-year-search-alt"><a href="/year/@(post.ReleaseYear)">@post.ReleaseYear</a></span>
 
                 @if (post.EndingYear != null)
                 {
@@ -131,7 +134,7 @@
                     <span><a href="~/year/@(post.EndingYear)">@post.EndingYear</a></span>
                 }
 
-                <div class="post-tags-search">
+                <div class="post-tags-search-alt">
                     @if (post.Tags != null)
                     {
                         @foreach (Tag tag in post.Tags)

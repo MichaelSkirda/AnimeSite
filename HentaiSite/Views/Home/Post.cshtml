@@ -126,7 +126,9 @@
                 @for (int i = 0; i < Model.post.ScreenCount && i < 8; i++)
                 {
                     <div class="screen-wrap">
-                        <img src="~/img/screenlist/16-9-@(Model.post.ID)-@(i).png" alt="" style="background-color: dimgray;">
+                        <div class="screen-img-wrap">
+                            <img src="~/img/screenlist/16-9-@(Model.post.ID)-@(i).png" alt="" style="background-color: dimgray;">
+                        </div>
                     </div>
                 }
 
@@ -153,10 +155,12 @@
     </div>
     <!-- VIDEO PLAYER -->
 
-    <video controls poster="~/vid/thumbnail/@(Model.post.ID)-1.jpg" id="video-player">
-      <source id="video-src" src="~/vid/@(Model.post.ID)-1.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-    </video>
+    <div class="post-video-wrap">
+        <video controls poster="~/vid/thumbnail/@(Model.post.ID)-1.jpg" id="video-player">
+          <source id="video-src" src="~/vid/@(Model.post.ID)-1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+        </video>
+    </div>
 </div>
 
 
@@ -167,7 +171,7 @@
 
     <div class="download-button">
         <a href="#">Скачать</a>
-        <span>@(Model.post) скачиваний</span>
+        <span>@(Model.post.DownloadCount) скачиваний</span>
     </div>
 
 </div>
@@ -210,37 +214,27 @@
             </div>
         </div>
     </form>
+    @foreach(Comment comment in Model.Comments)
+    {
+        int i = 1;
+        <div class="post">
 
-    <div class="post">
+            <p class="post-name">- @(comment.AuthorName)</p>
 
-        <p class="post-name">- AdskyDro4la</p>
-
-        <p class="post-text">Henti4 top4k</p>
+            <p class="post-text">@(comment.Text)</p>
 
 
-        <div class="post-data">
-            <a href="#" class="post-reply"><p>Reply</p></a>
-            <p class="post-time">12 July 22:23 2021</p>
+            <div class="post-data">
+                <a href="#" class="post-reply"><p>Reply</p></a>
+                <p class="post-time">@(comment.Data.ToString("dd MMMM H:mm yyyy"))</p>
+            </div>
+
+            <p class="post-id">№ @(i++)</p>
+
         </div>
+        
+    }
 
-        <p class="post-id">№ 002</p>
-
-    </div>
-
-    <div class="post">
-
-        <p class="post-name">- HenBoss</p>
-
-        <p class="post-text">AAAAAAAAAAAAAAH</p>
-
-
-        <div class="post-data">
-            <a href="#" class="post-reply"><p>Reply</p></a>
-            <p class="post-time">10 July 13:50 2021</p>
-        </div>
-
-        <p class="post-id">№ 001</p>
-
-    </div>
+    
 
 </div>

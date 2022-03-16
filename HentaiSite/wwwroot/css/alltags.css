@@ -7,6 +7,19 @@
 	margin-left: 2%;
 }
 
+.content-img-wrap
+{
+	position: relative;
+	padding-top: 100%;
+	overflow: hidden;
+}
+
+.content-img-wrap img
+{
+	position: absolute;
+	top: 0;
+}
+
 .content-sort-wrap
 {
 	margin-top: 25px;
@@ -109,7 +122,6 @@
 	left: 0;
 	background-color: #444;
 	padding: 4px 6px;
-	z-index: 1;
 }
 
 .content-block-overlay span
@@ -208,17 +220,3 @@
 }
 
 
-
-
-.content-block-alt
-{
-	position: relative;
-	width: 23%;
-	margin-right: 2%;
-	margin-bottom: 20px;
-}
-
-.content-block-alt img
-{
-	width: 100%;
-}

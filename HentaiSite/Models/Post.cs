@@ -14,6 +14,8 @@ namespace HentaiSite.Models
         public string Description { get; set; }
 
         public int ViewsCount { get; set; }
+        public int ViewCountToday { get; set; }
+        public int ViewCountThisWeek { get; set; }
 
         public int Rating { get; set; }
 
@@ -64,7 +66,10 @@ namespace HentaiSite.Models
         {
             get
             {
-                return OtherNamesString.Split(";#;");
+                if (OtherNamesString != null)
+                    return OtherNamesString.Split(";#;");
+                else
+                    return null;
             }
         }
 

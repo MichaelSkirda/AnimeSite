@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using HentaiSite.Database.Services;
+using System.Collections.Generic;
 
 namespace HentaiSite.Models.ViewModels
 {
@@ -13,5 +14,9 @@ namespace HentaiSite.Models.ViewModels
         public string PreviewThumbnailPath;
 
         public string orderBy;
+
+        public SearchOnePageViewModel(PostService postService, EntitiesService entitiesService) : base(postService, entitiesService)
+        {
+        }
     }
 }

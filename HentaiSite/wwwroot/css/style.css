@@ -31,12 +31,27 @@
 	display: flex;
 	justify-content: space-between;
 	padding-bottom: 25px;
+	align-items: start;
 }
 
 .tag-cloud
 {
 	width: 94%;
 	margin: 0 auto 25px auto;
+}
+
+.content-img-wrap
+{
+	position: relative;
+	padding-top: 142%;
+	margin-bottom: 4px;
+	overflow: hidden;
+}
+
+.content-img-wrap img
+{
+	position: absolute;
+	top: 0;
 }
 
 .tag-cloud ul
@@ -67,6 +82,7 @@
 	font-size: 18px;
 	font-family: Arial;
 	margin-top: 20px;
+	color: black;
 }
 
 .main-menu ul
@@ -93,7 +109,7 @@
 	margin-top: 8px;
 	display: block;
 	color: #444;
-	font-size: 15px;
+	font-size: 16px;
 }
 
 .nav-title
@@ -101,6 +117,17 @@
 	font-size: 20px;
 	font-weight: 600;
 	margin-left: 8%;
+}
+
+.nav-img-block
+{
+	width: 86%;
+	margin: 15px auto 25px auto;
+}
+
+.nav-img-wrap img
+{
+	width: 100%;
 }
 
 .header-search-wrap

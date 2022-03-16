@@ -8,7 +8,7 @@ namespace HentaiSite.Database.Services
     public class EntitiesService
     {
         private readonly ApplicationContext db;
-        private readonly int MostPopularTagsCount = 10;
+        private const int MostPopularTagsCount = 10;
 
         public EntitiesService(ApplicationContext db)
         {
@@ -46,7 +46,7 @@ namespace HentaiSite.Database.Services
             return tags;
         }
 
-        public List<Tag> GetMostPopularTags()
+        public List<Tag> GetMostPopularTags(int count = MostPopularTagsCount)
         {
             // We need to return (X) Tags ordered by use count
             // We have Tag table which cotains Tag (Name) and (ID)
@@ -59,7 +59,7 @@ namespace HentaiSite.Database.Services
 
             List<int> tagIDs = db.TagEntities.GroupBy(t => t.TagID)
                 .OrderByDescending(g => g.Count())
-                .Take(MostPopularTagsCount)
+                .Take(count)
                 .Select(g => g.Key)
                 .ToList();
 

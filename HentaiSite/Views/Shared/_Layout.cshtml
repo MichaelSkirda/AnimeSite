@@ -79,11 +79,11 @@
 
                 <div class="main-menu">
                     <ul>
-                        <li>Все жанры</li>
-                        <li>Анонимный чат</li>
-                        <li>Кошкодевочки</li>
-                        <li>Поиск по нескольким жанрам</li>
-                        <li>Пожертвовать</li>
+                        <a href="~/alltags"><li>Все жанры</li></a>
+                        <a><li>Анонимный чат</li></a>
+                        <a><li>Кошкодевочки</li></a>
+                        <a><li>Поиск по нескольким жанрам</li></a>
+                        <a><li>Пожертвовать</li></a>
                     </ul>
                 </div>
 
@@ -129,9 +129,31 @@
 
                 <span class="nav-title">Самое популярное сегодня:</span>
 
-                <div>
-                    <a>
-                        <img />
+                <div class="nav-img-block">
+                    <a href="~/post/@(Model.mostPopularPostToday.ID)">
+                        <div class="nav-img-wrap">
+                            <img src="~/vid/thumbnail/@(Model.mostPopularPostToday.ID)-1.jpg"/>
+                        </div>
+                    </a>
+                </div>
+
+                <span class="nav-title">Самое популярное за неделю:</span>
+
+                <div class="nav-img-block">
+                    <a href="~/post/@(Model.mostPopularPostThisWeek.ID)">
+                        <div class="nav-img-wrap">
+                            <img src="~/vid/thumbnail/@(Model.mostPopularPostThisWeek.ID)-1.jpg"/>
+                        </div>
+                    </a>
+                </div>
+
+                <span class="nav-title">Самое популярное за все время:</span>
+
+                <div class="nav-img-block">
+                    <a href="~/post/@(Model.mostPopularPostEver.ID)">
+                        <div class="nav-img-wrap">
+                            <img src="~/vid/thumbnail/@(Model.mostPopularPostEver.ID)-1.jpg"/>
+                        </div>
                     </a>
                 </div>
 

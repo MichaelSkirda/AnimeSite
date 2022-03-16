@@ -1,12 +1,12 @@
 .main-title
 {
 	display: flex;
+	margin-left: 2%;
 }
 
 .title-img-wrap
 {
-	margin-top: 15px;
-	margin-left: 15px;
+	margin-top: 25px;
 }
 
 .title-text h1
@@ -20,7 +20,20 @@
 	font-size: 15px;
 }
 
+.post-video-wrap
+{
+	margin-top: 20px;
+	position: relative;
+	overflow: hidden;
+	padding-top: 56.25%;
+}
 
+.post-video-wrap video
+{
+	top: 0;
+	height: 100%;
+	position: absolute;
+}
 
 
 .title-names
@@ -103,11 +116,23 @@
 
 .screen-wrap
 {
-	height: 200px;
 	overflow: hidden;
 	width: 23%;
 	margin-top: 15px;
 	margin-right: 2%;
+}
+
+.screen-img-wrap
+{
+	position: relative;
+	padding-top: 56.25%;
+	overflow: hidden;
+}
+
+.screen-img-wrap img
+{
+	position: absolute;
+	top: 0;
 }
 
 .video-player
@@ -119,7 +144,6 @@
 
 .video-player video
 {
-	margin-top: 15px;
 	width: 100%;
 	display: block;
 }
@@ -144,7 +168,7 @@
 
 .title-stats
 {
-	margin-left: 15px;
+	margin-left: 3px;
 	display: flex;
 	flex-direction: column;
 }

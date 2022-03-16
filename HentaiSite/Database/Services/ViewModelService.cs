@@ -2,6 +2,8 @@
 using HentaiSite.Models;
 using System.Linq;
 using System;
+using System.Collections.Generic;
+using System.Net;
 
 namespace HentaiSite.Database.Services
 {
@@ -11,6 +13,8 @@ namespace HentaiSite.Database.Services
         private readonly EntitiesService entitiesService;
         private readonly PostService postService;
 
+        private readonly int IndexViewModelTagCount = 20;
+
         public ViewModelService(ApplicationContext db, EntitiesService entitiesService, PostService postService)
         {
             this.db = db;
@@ -18,16 +22,16 @@ namespace HentaiSite.Database.Services
             this.postService = postService;
         }
 
-        public IndexViewModel GetIndexViewModel(int PageItemCount, string orderBy = "default", int page = 1, string s = "", int? year = null, int? tagID = null)
+        public IndexViewModel GetIndexViewModel(int PageItemCount, string orderBy = "default", int page = 1, string s = "", int? year = null, List<int> tagIDs = null)
         {
-            IQueryable<Post> posts = postService.GetPostsIQueryable(orderBy, year, tagID, s: s);
+            IQueryable<Post> posts = postService.GetPostsIQueryable(orderBy, year, tagIDs, s: s);
             int totalPageCount = (int)Math.Ceiling((float)posts.Count() / PageItemCount);
-            IndexViewModel viewModel = new IndexViewModel()
+            IndexViewModel viewModel = new IndexViewModel(postService, entitiesService)
             {
                 posts = posts.Skip((page - 1) * PageItemCount).Take(PageItemCount).ToList(),
                 totalPages = totalPageCount,
                 page = page,
-                mostPopularTags = entitiesService.GetMostPopularTags()
+                Tags = entitiesService.GetMostPopularTags(IndexViewModelTagCount),
             };
 
             postService.SetMetadataToPosts(viewModel.posts);
@@ -37,11 +41,12 @@ namespace HentaiSite.Database.Services
 
         public PostViewModel GetPostViewModel(int postID)
         {
-            PostViewModel postViewModel = new PostViewModel()
+            PostViewModel postViewModel = new PostViewModel(postService, entitiesService)
             {
-                mostPopularTags = entitiesService.GetMostPopularTags(),
                 post = postService.GetPostByID(postID),
             };
+
+            postViewModel.Comments = postService.GetCommentsByPostID(postViewModel.post.ID);
 
             //postViewModel.SimilarAnime = postService.GetSimilarAnime(postViewModel.post);
 
@@ -66,6 +71,15 @@ namespace HentaiSite.Database.Services
             return onePageViewModel;
         }
 
+        public AllTagsViewModel GetAllTagsViewModel()
+        {
+            AllTagsViewModel allTagsViewModel = new AllTagsViewModel(postService, entitiesService)
+            {
+                Tags = db.Tags.OrderBy(t => t.Name).ToList()
+            };
+            return allTagsViewModel;
+        }
+
         public Post GetRandomPostID()
         {
             return postService.GetRandomPost();
@@ -73,14 +87,31 @@ namespace HentaiSite.Database.Services
 
         private SearchOnePageViewModel GetSearchOnePageViewModel()
         {
-            return new SearchOnePageViewModel() { mostPopularTags = entitiesService.GetMostPopularTags() };
+            return new SearchOnePageViewModel(postService, entitiesService);
+        }
+
+        public void AddView(IPAddress ipAddress, Post post)
+        {
+            // If this ipAddress already accounted at post
+
+            byte[] ipAddressBytes = ipAddress.GetAddressBytes();
+
+            UserView userView = db.UserViews.Where(v => v.PostID == post.ID && v.IPAddressBytes == ipAddressBytes).FirstOrDefault();
+
+            if (userView != null)
+                return;
+
+            db.UserViews.Add(new UserView() { IPAddressBytes = ipAddressBytes, PostID = post.ID });
+            post.ViewCountThisWeek++;
+            post.ViewCountToday++;
+            post.ViewsCount++;
+            db.SaveChanges();
         }
 
         public PostViewModel GetPostViewModeRandom()
         {
-            PostViewModel postViewModel = new PostViewModel()
+            PostViewModel postViewModel = new PostViewModel(postService, entitiesService)
             {
-                mostPopularTags = entitiesService.GetMostPopularTags(),
                 post = postService.GetRandomPost(),
             };
 
@@ -93,9 +124,8 @@ namespace HentaiSite.Database.Services
 
         private SearchOnePageViewModel GetSearchOnePageViewModel(SearchEntity searchEntity)
         {
-            SearchOnePageViewModel indexViewModel = new SearchOnePageViewModel()
+            SearchOnePageViewModel indexViewModel = new SearchOnePageViewModel(postService, entitiesService)
             {
-                mostPopularTags = entitiesService.GetMostPopularTags(),
                 HasPreview = searchEntity.HasPreview,
                 PreviewThumbnailPath = searchEntity.ThumbnailPath,
                 PreviewDescription = searchEntity.Description,
@@ -142,6 +172,36 @@ namespace HentaiSite.Database.Services
             return viewModel;
         }
 
+        public object GetPostsJSONByTagsIDs(List<int> tagIDs)
+        {
+            var tagGroups = db.TagEntities
+                .Where(t => tagIDs.Contains(t.TagID))
+                .GroupBy(t => t.PostID)
+                .Where(g => g.Count() >= tagIDs.Count());
+
+
+            var posts = postService.GetPostsByIDs(tagGroups.Select(g => g.Key).ToList());
+
+            postService.SetTagsToPosts(posts);
+
+            var result = posts.Select(p => new
+            {
+                id = p.ID,
+                name = p.Name,
+                releaseYear = p.ReleaseYear,
+                tags = p.Tags
+                        .Select(t => new {
+                            id = t.ID,
+                            name = t.Name,
+                        })
+            });
+
+
+            return result;
+        }
+
+        
+
         public SearchOnePageViewModel GetSearchOnePageTagViewModel(int id, string orderby)
         {
             Tag tag = entitiesService.GetTagByID(id);
@@ -174,10 +234,7 @@ namespace HentaiSite.Database.Services
 
         public BasicViewModel GetBasicViewModel()
         {
-            BasicViewModel basicViewModel = new BasicViewModel()
-            {
-                mostPopularTags = entitiesService.GetMostPopularTags(),
-            };
+            BasicViewModel basicViewModel = new BasicViewModel(postService, entitiesService);
 
             return basicViewModel;
         }

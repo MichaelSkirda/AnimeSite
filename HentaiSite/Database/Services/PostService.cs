@@ -20,6 +20,27 @@ namespace HentaiSite.Database.Services
             this.entitiesService = entitiesService;
         }
 
+        public Post GetMostPopularPostToday()
+        {
+            return db.Posts.OrderByDescending(p => p.ViewCountToday).FirstOrDefault();
+        }
+
+        public Post GetMostPopularPostEver()
+        {
+            return db.Posts.OrderByDescending(p => p.ViewsCount).FirstOrDefault();
+        }
+
+        public Post GetMostPopularPostThisWeek()
+        {
+            return db.Posts.OrderByDescending(p => p.ViewCountThisWeek).FirstOrDefault();
+        }
+
+        internal void CreateComment(Comment comment)
+        {
+            db.Comments.Add(comment);
+            db.SaveChanges();
+        }
+
         public void CreatePost(Post post)
         {
             db.Posts.Add(post);
@@ -66,6 +87,11 @@ namespace HentaiSite.Database.Services
                 }).ToList();
 
             post.Studios = studios;
+        }
+
+        internal List<Comment> GetCommentsByPostID(int id)
+        {
+            return db.Comments.Where(c => c.PostID == id).ToList();
         }
 
         /// <summary>
@@ -186,6 +212,15 @@ namespace HentaiSite.Database.Services
             }
         }
 
+        public List<Post> GetPostsByIDs(List<int> postIDs)
+        {
+            return db.Posts.Where(p => postIDs.Contains(p.ID)).ToList();
+        }
+
+        public IQueryable<Post> GetPostsByIDs(IQueryable<int> postIDs)
+        {
+            return db.Posts.Where(p => postIDs.Contains(p.ID));
+        }
 
         public List<Post> GetTopHundredByRating()
         {
@@ -220,40 +255,36 @@ namespace HentaiSite.Database.Services
         /// <param name="tagID"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public IQueryable<Post> GetPostsIQueryable(string orderBy, int? year = null, int? tagID = null, string s = "")
+        public IQueryable<Post> GetPostsIQueryable(string orderBy, int? year = null, List<int> tagIDs = null, string s = "")
         {
             
 
             IQueryable<Post> posts;
 
-            if (year != null)
+            if (tagIDs != null && tagIDs.Count() > 0)
             {
-                posts = db.Posts.Where(p => p.ReleaseYear == year);
+                try
+                {
+                    posts = GetPostsByTagsIDs(tagIDs);
+                }
+                catch
+                {
+                    posts = db.Posts;
+                }
             }
             else
             {
                 posts = db.Posts;
             }
 
-            if (tagID != null)
+            if (year != null)
             {
-                try
-                {
-                    Tag tag = entitiesService.GetTagByID(tagID ?? throw new NullReferenceException());
-
-                    posts = db.TagEntities.Where(t => t.TagID == tag.ID).Join(posts,
-                        t => t.PostID,
-                        p => p.ID,
-                        (t, p) => p
-                        );
-                }
-                catch
-                {
-
-                }
+                posts = db.Posts.Where(p => p.ReleaseYear == year);
             }
 
-            if(s != null && s != "")
+
+
+            if (s != null && s != "")
             {
                 posts = posts.Where(p => p.Name.Contains(s) || p.OtherNamesString.Contains(s));
             }
@@ -263,6 +294,20 @@ namespace HentaiSite.Database.Services
 
             return posts;
 
+        }
+
+        public IQueryable<Post> GetPostsByTagsIDs(List<int> tagIDs)
+        {
+            var tagGroups = db.TagEntities
+                .Where(t => tagIDs.Contains(t.TagID))
+                .GroupBy(t => t.PostID)
+                .Where(g => g.Count() >= tagIDs.Count());
+
+
+            var posts = GetPostsByIDs(tagGroups.Select(g => g.Key));
+
+
+            return posts;
         }
 
         public IQueryable<Post> OrderByPosts(string orderBy, IQueryable<Post> posts)
@@ -290,19 +335,6 @@ namespace HentaiSite.Database.Services
             }
 
         }
-
-        public List<Post> GetPosts(string orderBy, int Count, int page, int? year = null, int? tagID = null)
-        {
-            if (page <= 0)
-            {
-                throw new InvalidOperationException("Page number is negotiv");
-            }
-
-            List<Post> posts = GetPostsIQueryable(orderBy, year, tagID).Skip((page - 1) * Count).ToList();
-
-            return posts;
-        }
-
         
 
         
