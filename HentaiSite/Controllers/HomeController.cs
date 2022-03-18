@@ -67,6 +67,38 @@ namespace HentaiSite.Controllers
             return View(viewModel);
         }
 
+        [Route("years")]
+        public IActionResult Years()
+        {
+            YearsViewModel yearsViewModel = viewModelService.GetYearsViewModel();
+            return View(yearsViewModel);
+        }
+
+        [Route("contactus")]
+        public IActionResult ContactUs()
+        {
+            BasicViewModel basicViewModel = viewModelService.GetBasicViewModel();
+            return View(basicViewModel);
+        }
+
+
+        [Route("copyright")]
+        public IActionResult Copyright()
+        {
+            BasicViewModel basicViewModel = viewModelService.GetBasicViewModel();
+            return View(basicViewModel);
+        }
+
+        [Route("nocensure")]
+        public IActionResult NoCensure(string orderby, int page = 1, List<int> tag = null)
+        {
+            IndexViewModel noCunsureViewModel = viewModelService.GetNoCensureIndexViewModel(PagePostsCount, orderby, page, tag);
+            noCunsureViewModel.ActiveTags = tag;
+            noCunsureViewModel.orderBy = orderby;
+
+            return View("Index", noCunsureViewModel);
+        }
+
         [Route("alltags")]
         public IActionResult AllTags()
         {
@@ -76,10 +108,11 @@ namespace HentaiSite.Controllers
         }
 
         [Route("top100")]
-        public IActionResult TopHundred(string topBy)
+        public IActionResult TopHundred(string orderby)
         {
-            SearchOnePageViewModel onePageViewModel = viewModelService.GetOnePageTopHundredViewModel(topBy);
-            return View("SearchOnePage", onePageViewModel);
+            SearchOnePageViewModel onePageViewModel = viewModelService.GetOnePageTopHundredViewModel(orderby);
+            onePageViewModel.orderBy = orderby;
+            return View("tophundred", onePageViewModel);
         }
 
         [Route("Post/{id}")]

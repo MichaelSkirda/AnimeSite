@@ -31,14 +31,16 @@
 
                 <p class="preview-text-small">@(Model.posts.Count) видео</p>
 
-                <p>
+            </div>
+
+        </div>
+
+        <div class="preview-description">
+            <p>
 
                 @(Model.PreviewDescription)
 
-                </p>
-
-            </div>
-
+            </p>
         </div>
 
     </div>
@@ -50,56 +52,24 @@
     </div>
 
     <div class="content-sort">
-        @if(Model.orderBy == "name")
+
+
+        @if(Model.orderBy == "rating")
         {
-            <a href="?orderby=name-d"><span class="sort-active">По имени (А-Я)</span></a>
-        }
-        else if(Model.orderBy == "name-d")
-        {
-            <a href="?orderby=name"><span class="sort-active">По имени (Я-А)</span></a>
+            <a href="?orderby=normal"><span class="sort-active">По рейтингу</span></a>
         }
         else
         {
-            <a href="?orderby=name"><span>По имени (А-Я)</span></a>
+            <a href="?orderby=rating"><span class="">По рейтингу</span></a>
         }
 
-        @if(Model.orderBy == "rating-d")
+        @if(Model.orderBy == "views")
         {
-            <a href="?orderby=rating"><span class="sort-active">По рейтингу (популярное)</span></a>
-        }
-        else if(Model.orderBy == "rating")
-        {
-            <a href="?orderby=rating-d"><span class="sort-active">По рейтингу (не популярное)</span></a>
+            <a href="?orderby=normal"><span class="sort-active">По просомтрам</span></a>
         }
         else
         {
-            <a href="?orderby=rating-d"><span>По рейтингу (популярное)</span></a>
-        }
-
-        @if(Model.orderBy == "time-d")
-        {
-            <a href="?orderby=time"><span class="sort-active">По дате (новые)</span></a>
-        }
-        else if(Model.orderBy == "time")
-        {
-            <a href="?orderby=time-d"><span class="sort-active">По дате (старые)</span></a>
-        }
-        else
-        {
-            <a href="?orderby=time-d"><span>По дате (новые)</span></a>
-        }
-
-        @if(Model.orderBy == "views-d")
-        {
-            <a href="?orderby=views"><span class="sort-active">По просомтрам (больше)</span></a>
-        }
-        else if(Model.orderBy == "views")
-        {
-            <a href="?orderby=views-d"><span class="sort-active">По просомтрам (меньше)</span></a>
-        }
-        else
-        {
-            <a href="?orderby=views-d"><span>По просомтрам (больше)</span></a>
+            <a href="?orderby=views"><span class="">По просомтрам</span></a>
         }
     </div>
 

@@ -22,21 +22,58 @@ namespace HentaiSite.Database.Services
             this.postService = postService;
         }
 
-        public IndexViewModel GetIndexViewModel(int PageItemCount, string orderBy = "default", int page = 1, string s = "", int? year = null, List<int> tagIDs = null)
+        public IndexViewModel GetIndexViewModel(int pageItemCount, string orderBy = "default", int page = 1, string s = "", int? year = null, List<int> tagIDs = null)
         {
             IQueryable<Post> posts = postService.GetPostsIQueryable(orderBy, year, tagIDs, s: s);
-            int totalPageCount = (int)Math.Ceiling((float)posts.Count() / PageItemCount);
+            int totalPageCount = GetPageCount(posts.Count(), pageItemCount);
             IndexViewModel viewModel = new IndexViewModel(postService, entitiesService)
             {
-                posts = posts.Skip((page - 1) * PageItemCount).Take(PageItemCount).ToList(),
+                posts = posts.Skip((page - 1) * pageItemCount).Take(pageItemCount).ToList(),
                 totalPages = totalPageCount,
-                page = page,
+                currentPage = page,
                 Tags = entitiesService.GetMostPopularTags(IndexViewModelTagCount),
             };
 
             postService.SetMetadataToPosts(viewModel.posts);
 
             return viewModel;
+        }
+
+        public IndexViewModel GetNoCensureIndexViewModel(int pageItemCount, string orderby, int page = 1, List<int> tag = null)
+        {
+            // Get posts
+            IQueryable<Post> postsQuery = postService.GetPostsWithoutCensure(orderby, tag);
+
+            // Set metadata
+            int totalPageCount = GetPageCount(postsQuery.Count(), pageItemCount);
+            postsQuery = postService.GetPostsAtPage(page, pageItemCount, postsQuery);
+            List<Post> posts = postsQuery.ToList();
+            postService.SetMetadataToPosts(posts);
+
+            // Create viewModel
+            IndexViewModel indexNoCensureViewModel = new IndexViewModel(postService, entitiesService)
+            {
+                posts = posts,
+                totalPages = totalPageCount,
+                Tags = entitiesService.GetMostPopularTags(IndexViewModelTagCount)
+            };
+
+            return indexNoCensureViewModel;
+        }
+
+        internal YearsViewModel GetYearsViewModel()
+        {
+            YearsViewModel yearsViewModel = new YearsViewModel(postService, entitiesService)
+            {
+                FromYear = db.Posts.OrderBy(p => p.ReleaseYear).First().ReleaseYear,
+                ToYear = db.Posts.OrderByDescending(p => p.ReleaseYear).First().ReleaseYear,
+            };
+            return yearsViewModel;
+        }
+
+        private int GetPageCount(int postsCount, int pageItemCount)
+        {
+            return (int)Math.Ceiling((float)postsCount / pageItemCount);
         }
 
         public PostViewModel GetPostViewModel(int postID)
@@ -68,8 +105,12 @@ namespace HentaiSite.Database.Services
                 onePageViewModel.posts = postService.GetTopHundredByRating();
             }
 
+            postService.SetMetadataToPosts(onePageViewModel.posts);
+
             return onePageViewModel;
         }
+
+        
 
         public AllTagsViewModel GetAllTagsViewModel()
         {
@@ -102,8 +143,6 @@ namespace HentaiSite.Database.Services
                 return;
 
             db.UserViews.Add(new UserView() { IPAddressBytes = ipAddressBytes, PostID = post.ID });
-            post.ViewCountThisWeek++;
-            post.ViewCountToday++;
             post.ViewsCount++;
             db.SaveChanges();
         }

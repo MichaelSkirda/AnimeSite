@@ -1,4 +1,5 @@
-﻿@model HentaiSite.Models.ViewModels.IndexViewModel
+﻿@using System.Text.RegularExpressions
+@model HentaiSite.Models.ViewModels.IndexViewModel
 
 
 @{
@@ -15,6 +16,9 @@
     <script src="~/js/search.js" asp-append-version="true"></script>
 }
 
+
+@if(Model.Tags != null)
+{
 <div class="main-title">
 
     <div class="tag-cloud-search">
@@ -22,12 +26,22 @@
 
             @foreach(Tag tag in Model.Tags)
             {
-                if(Model.ActiveTags.Contains(tag.ID))
+                // If disable last tag
+                if(Model.ActiveTags.Contains(tag.ID) && Model.ActiveTags.Count() <= 1)
                 {
-                    <a href="?tag=@(Model.queryStringWithoutPage)"><li class="tag-active">@(tag.Name)</li></a>
+                    // Href without tags
+                    <a href="?@(Regex.Replace(Model.queryStringWithoutPage.Remove(0, 1), @$"tag={tag.ID}&?", "")    )"><li class="tag-active">@(tag.Name)</li></a>
+                }
+                else if(Model.ActiveTags.Contains(tag.ID))
+                {
+                    // If disable tag
+                    // Href without this tag
+                    <a href="?@(Regex.Replace(Model.queryStringWithoutPage.Remove(0, 1), @$"(&tag={tag.ID})|(tag={tag.ID}&)", ""))"><li class="tag-active">@(tag.Name)</li></a>
                 }
                 else
                 {
+                    // If active tag
+                    // href with add tag
                     <a href="?tag=@(tag.ID)@(Model.queryStringWithoutPage)"><li>@(tag.Name)</li></a>
                 }
             }
@@ -36,6 +50,7 @@
     </div>
 
 </div>
+}
 
 <div class="content-sort-wrap">
     <div>
@@ -105,9 +120,9 @@
 
     @foreach (Post post in Model.posts)
     {
-        <div class="content-block-alt">
+        <div class="content-block">
 
-            <div class="content-block-overlay-alt">
+            <div class="content-block-overlay">
                 @if (post.Censured)
                 {
                     <span>Censure</span>
@@ -119,14 +134,14 @@
             </div>
 
             <a href="/post/@(post.ID)">
-                <div class="content-img-wrap-alt">
+                <div class="content-img-wrap">
                     <img src="~/img/thumbnail/3-2-@(post.ImgName)" alt="">
                 </div>
             </a>
 
-            <div class="post-info-search-alt">
-                <span class="post-title-search-alt">@post.Name</span>
-                <span class="post-year-search-alt"><a href="/year/@(post.ReleaseYear)">@post.ReleaseYear</a></span>
+            <div class="post-info-search">
+                <span class="post-title-search">@post.Name</span>
+                <span class="post-year-search"><a href="/year/@(post.ReleaseYear)">@post.ReleaseYear</a></span>
 
                 @if (post.EndingYear != null)
                 {
@@ -134,7 +149,7 @@
                     <span><a href="~/year/@(post.EndingYear)">@post.EndingYear</a></span>
                 }
 
-                <div class="post-tags-search-alt">
+                <div class="post-tags-search">
                     @if (post.Tags != null)
                     {
                         @foreach (Tag tag in post.Tags)
@@ -155,20 +170,20 @@
 
     @if(Model.HasPreviousPage())
     {
-        <li class=""><a href="?page=@(Model.page - 1)@(Model.queryStringWithoutPage)">&lt;</a></li>
+        <li class=""><a href="?page=@(Model.currentPage - 1)@(Model.queryStringWithoutPage)">&lt;</a></li>
     }
     else
     {
         <li class="disabled"><a href="#">&lt;</a></li>
     }
 
-    @if(Model.page > 4)
+    @if(Model.currentPage > 4)
     {
         <li><a href="?page=1@(Model.queryStringWithoutPage)">1</a></li>
         <li class=""><a href="#">...</a></li>
     }
 
-    @for(int i = @Model.page - 3; i < Model.page; i++)
+    @for(int i = @Model.currentPage - 3; i < Model.currentPage; i++)
     {
         if(i < 1)
         {
@@ -178,15 +193,15 @@
         <li><a href="?page=@(i)@(Model.queryStringWithoutPage)">@(i)</a></li>
     }
 
-    <li class="disabled">@(Model.page)</li>
+    <li class="disabled">@(Model.currentPage)</li>
 
-    @for(int i = 1; i < 4 && Model.page + i <= Model.totalPages; i++)
+    @for(int i = 1; i < 4 && Model.currentPage + i <= Model.totalPages; i++)
     {
-        <li><a href="?page=@(Model.page + i)@(Model.queryStringWithoutPage)">@(Model.page + i)</a></li>
+        <li><a href="?page=@(Model.currentPage + i)@(Model.queryStringWithoutPage)">@(Model.currentPage + i)</a></li>
     }
 
 
-    @if(Model.page + 3 < Model.totalPages)
+    @if(Model.currentPage + 3 < Model.totalPages)
     {
         <li><a href="#">...</a></li>
         <li><a href="?page=@(Model.totalPages)@(Model.queryStringWithoutPage)">@(Model.totalPages)</a></li>
@@ -195,7 +210,7 @@
 
      @if(Model.HasNextPage())
     {
-        <li class=""><a href="page=@(Model.page + 1)@(Model.queryStringWithoutPage)">></a></li>
+        <li class=""><a href="page=@(Model.currentPage + 1)@(Model.queryStringWithoutPage)">></a></li>
     }
     else
     {

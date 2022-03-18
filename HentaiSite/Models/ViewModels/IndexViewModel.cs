@@ -12,7 +12,7 @@ namespace HentaiSite.Models.ViewModels
         public string queryString;
         public string queryStringWithoutPage;
         public string orderBy;
-        public int page;
+        public int currentPage;
         public int totalPages;
 
         public IndexViewModel(PostService postService, EntitiesService entitiesService) : base(postService, entitiesService)
@@ -21,12 +21,12 @@ namespace HentaiSite.Models.ViewModels
 
         public bool HasPreviousPage()
         {
-            return page > 1;
+            return currentPage > 1;
         }
 
         public bool HasNextPage()
         {
-            return page < totalPages;
+            return currentPage < totalPages;
         }
     }
 }

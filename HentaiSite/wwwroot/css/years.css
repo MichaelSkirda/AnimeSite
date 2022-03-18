@@ -1,0 +1,36 @@
+.content-list
+{
+	margin-top: 15px;
+	display: flex;
+	justify-content: left;
+	flex-wrap: wrap;
+	margin-left: 2%;
+}
+
+.content-img-wrap
+{
+	position: relative;
+	padding-top: 100%;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.content-img-wrap span
+{
+	font-size: 36px;
+	color: white;
+	font-family: Arial;
+}
+
+
+.content-block
+{
+	position: relative;
+	width: 23%;
+	margin-right: 2%;
+	margin-bottom: 20px;
+	background-color: black;
+}
+

@@ -72,6 +72,30 @@ namespace HentaiSite.Database.Services
             }
         }
 
+        internal IQueryable<Post> GetPostsAtPage(int page, int pageItemCount, IQueryable<Post> posts)
+        {
+            return posts.Skip((page - 1) * pageItemCount).Take(pageItemCount);
+        }
+
+        internal IQueryable<Post> GetPostsWithoutCensure(string orderby, List<int> tagIDs = null)
+        {
+            IQueryable<Post> posts;
+
+            // If we have tags
+            if (tagIDs != null && tagIDs.Count > 0)
+            {
+                posts = GetPostsByTagsIDs(tagIDs);
+            }
+            else
+            {
+                posts = db.Posts;
+            }
+
+            posts = posts.Where(p => !p.Censured);
+
+            return OrderByPosts(orderby, posts);
+            
+        }
 
         public void SetStudiosToPosts(Post post)
         {
@@ -210,6 +234,7 @@ namespace HentaiSite.Database.Services
             {
                 SetMetadataToPosts(post);
             }
+
         }
 
         public List<Post> GetPostsByIDs(List<int> postIDs)
