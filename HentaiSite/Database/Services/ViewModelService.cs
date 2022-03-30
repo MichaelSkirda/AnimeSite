@@ -4,6 +4,7 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using HentaiSite.Enums;
 
 namespace HentaiSite.Database.Services
 {
@@ -22,40 +23,67 @@ namespace HentaiSite.Database.Services
             this.postService = postService;
         }
 
-        public IndexViewModel GetIndexViewModel(int pageItemCount, string orderBy = "default", int page = 1, string s = "", int? year = null, List<int> tagIDs = null)
+        public IndexViewModel GetIndexViewModel(QueryData queryData)
         {
-            IQueryable<Post> posts = postService.GetPostsIQueryable(orderBy, year, tagIDs, s: s);
-            int totalPageCount = GetPageCount(posts.Count(), pageItemCount);
-            IndexViewModel viewModel = new IndexViewModel(postService, entitiesService)
-            {
-                posts = posts.Skip((page - 1) * pageItemCount).Take(pageItemCount).ToList(),
-                totalPages = totalPageCount,
-                currentPage = page,
-                Tags = entitiesService.GetMostPopularTags(IndexViewModelTagCount),
-            };
+            IQueryable<Post> posts = postService.GetPostsIQueryable(queryData.orderBy, queryData.ReleaseYear, queryData.TagIDs, s: queryData.s);
 
-            postService.SetMetadataToPosts(viewModel.posts);
+            IndexViewModel viewModel = GetIndexViewModel(posts, queryData);
+
 
             return viewModel;
         }
 
-        public IndexViewModel GetNoCensureIndexViewModel(int pageItemCount, string orderby, int page = 1, List<int> tag = null)
+        private IndexViewModel GetIndexViewModel(IQueryable<Post> postsQuery, QueryData queryData)
         {
-            // Get posts
-            IQueryable<Post> postsQuery = postService.GetPostsWithoutCensure(orderby, tag);
+            int totalPageCount = GetPageCount(postsQuery.Count(), queryData.PostsPerPage);
+            List<Post> posts = postService.PostsOnPage(queryData.Page, queryData.PostsPerPage, postsQuery);
+            List<Tag> tags = entitiesService.GetMostPopularTags(IndexViewModelTagCount);
 
-            // Set metadata
-            int totalPageCount = GetPageCount(postsQuery.Count(), pageItemCount);
-            postsQuery = postService.GetPostsAtPage(page, pageItemCount, postsQuery);
+            IndexViewModel viewModel = new IndexViewModel(postService, entitiesService)
+            {
+                posts = posts,
+                totalPages = totalPageCount,
+                currentPage = queryData.Page,
+                Tags = tags,
+                ActiveTags = queryData.TagIDs,
+                orderBy = queryData.orderByString
+            };
+
+            postService.SetMetadataToPosts(viewModel.posts);
+
+
+            return viewModel;
+        }
+
+        private int GetPageCount(int postsCount, int pageItemCount)
+        {
+            return (int)Math.Ceiling((float)postsCount / pageItemCount);
+        }
+
+        public IndexViewModel GetNoCensureIndexViewModel(QueryData queryData)
+        {
+            IQueryable<Post> postsQuery = postService.GetPostsWithoutCensure(queryData.orderBy, queryData.TagIDs);
+
+            IndexViewModel indexNoCensureViewModel = GetNoCensureIndexViewModel(postsQuery, queryData);
+
+            return indexNoCensureViewModel;
+        }
+
+        private IndexViewModel GetNoCensureIndexViewModel(IQueryable<Post> postsQuery, QueryData queryData)
+        {
+            int totalPageCount = GetPageCount(postsQuery.Count(), queryData.PostsPerPage);
+            postsQuery = postService.IQueryablePostsOnPage(queryData.Page, queryData.PostsPerPage, postsQuery);
             List<Post> posts = postsQuery.ToList();
             postService.SetMetadataToPosts(posts);
+            List<Tag> tags = entitiesService.GetMostPopularTags(IndexViewModelTagCount);
 
-            // Create viewModel
             IndexViewModel indexNoCensureViewModel = new IndexViewModel(postService, entitiesService)
             {
                 posts = posts,
                 totalPages = totalPageCount,
-                Tags = entitiesService.GetMostPopularTags(IndexViewModelTagCount)
+                Tags = tags,
+                orderBy = queryData.orderByString,
+                ActiveTags = queryData.TagIDs
             };
 
             return indexNoCensureViewModel;
@@ -71,10 +99,6 @@ namespace HentaiSite.Database.Services
             return yearsViewModel;
         }
 
-        private int GetPageCount(int postsCount, int pageItemCount)
-        {
-            return (int)Math.Ceiling((float)postsCount / pageItemCount);
-        }
 
         public PostViewModel GetPostViewModel(int postID)
         {
@@ -173,38 +197,41 @@ namespace HentaiSite.Database.Services
             return indexViewModel;
         }
 
-        public SearchOnePageViewModel GetSearchOnePageYearViewModel(int year, string orderby)
+        public SearchOnePageViewModel GetSearchOnePageYearViewModel(int year, string orderByString)
         {
             SearchOnePageViewModel viewModel = GetSearchOnePageViewModel();
-            viewModel.orderBy = orderby;
+            viewModel.orderBy = orderByString;
+            OrderBy orderBy = OrderByExntension.StringToOrderBy(orderByString);
 
-            viewModel.posts = postService.GetPostsByYear(year, orderby);
+            viewModel.posts = postService.GetPostsByYear(year, orderBy);
 
             postService.SetMetadataToPosts(viewModel.posts);
 
             return viewModel;
         }
 
-        public SearchOnePageViewModel GetSearchOnePageStudioViewModel(int id, string orderby)
+        public SearchOnePageViewModel GetSearchOnePageStudioViewModel(int id, string orderByString)
         {
             Studio studio = entitiesService.GetStudioByID(id);
 
             SearchOnePageViewModel viewModel = GetSearchOnePageViewModel(studio);
-            viewModel.orderBy = orderby;
+            viewModel.orderBy = orderByString;
+            OrderBy orderBy = OrderByExntension.StringToOrderBy(orderByString);
 
-            viewModel.posts = postService.GetPostsByStudio(id, orderby);
+            viewModel.posts = postService.GetPostsByStudio(id, orderBy);
 
             postService.SetMetadataToPosts(viewModel.posts);
 
             return viewModel;
         }
 
-        internal SearchOnePageViewModel GetOnePageAdminFavorite(string orderby)
+        internal SearchOnePageViewModel GetOnePageAdminFavorite(string orderByString)
         {
             SearchOnePageViewModel viewModel = GetSearchOnePageViewModel();
-            viewModel.orderBy = orderby;
+            viewModel.orderBy = orderByString;
+            OrderBy orderBy = OrderByExntension.StringToOrderBy(orderByString);
 
-            viewModel.posts = postService.GetAdminFavoritePosts(orderby);
+            viewModel.posts = postService.GetAdminFavoritePosts(orderBy);
 
             postService.SetMetadataToPosts(viewModel.posts);
 
@@ -241,14 +268,15 @@ namespace HentaiSite.Database.Services
 
         
 
-        public SearchOnePageViewModel GetSearchOnePageTagViewModel(int id, string orderby)
+        public SearchOnePageViewModel GetSearchOnePageTagViewModel(int id, string orderByString)
         {
             Tag tag = entitiesService.GetTagByID(id);
 
             SearchOnePageViewModel viewModel = GetSearchOnePageViewModel(tag);
-            viewModel.orderBy = orderby;
+            viewModel.orderBy = orderByString;
+            OrderBy orderBy = OrderByExntension.StringToOrderBy(orderByString);
 
-            viewModel.posts = postService.GetPostsByTag(id, orderby);
+            viewModel.posts = postService.GetPostsByTag(id, orderBy);
 
             postService.SetMetadataToPosts(viewModel.posts);
 
@@ -256,14 +284,15 @@ namespace HentaiSite.Database.Services
             return viewModel;
         }
 
-        public SearchOnePageViewModel GetSearchOnePageDirectorViewModel(int id, string orderby)
+        public SearchOnePageViewModel GetSearchOnePageDirectorViewModel(int id, string orderByString)
         {
             Director director = entitiesService.GetDirectorByID(id);
 
             SearchOnePageViewModel viewModel = GetSearchOnePageViewModel(director);
-            viewModel.orderBy = orderby;
+            viewModel.orderBy = orderByString;
+            OrderBy orderBy = OrderByExntension.StringToOrderBy(orderByString);
 
-            viewModel.posts = postService.GetPostsByDirector(id, orderby);
+            viewModel.posts = postService.GetPostsByDirector(id, orderBy);
 
             postService.SetMetadataToPosts(viewModel.posts);
 

@@ -19,52 +19,48 @@ namespace HentaiSite.Controllers
             this.viewModelService = viewModelService;
         }
 
-        public IActionResult Index(string orderby, string s = "", int page = 1, int? year = null, List<int> tag = null)
+        public IActionResult Index(string orderBy, string s = "", int page = 1, int? year = null, List<int> tag = null)
         {
-
-
-            IndexViewModel viewModel = viewModelService.GetIndexViewModel(PagePostsCount, orderby, page, s, year, tag);
-            viewModel.orderBy = orderby;
-            viewModel.ActiveTags = tag;
-
-            // Get Query parameters
-            var query = System.Web.HttpUtility.ParseQueryString(Request.QueryString.ToString());
-
-            query.Remove("page");
-            // Query string without orderby and page.
-            string queryStringWithoutPage = query.ToString();
-
-            // Restore query with page
-            query = System.Web.HttpUtility.ParseQueryString(Request.QueryString.ToString());
-
-            query.Remove("orderby");
-            // Query without orderby. Нужен, чтобы во View добавить требуемую сортировку на каждую кнопку, сохраняя параметры
-            string queryString = query.ToString();
-            
-
-            if(queryString == null || queryString == "")
+            QueryData queryData = new QueryData()
             {
-                queryString = "";
-            }
-            else
-            {
-                queryString = "&" + queryString;
-            }
+                PostsPerPage = PagePostsCount,
+                orderByString = orderBy,
+                Page = page,
+                s = s,
+                ReleaseYear = year,
+                TagIDs = tag
+            };
+            IndexViewModel viewModel = viewModelService.GetIndexViewModel(queryData);
 
-            if (queryStringWithoutPage == null || queryStringWithoutPage == "")
-            {
-                queryStringWithoutPage = "";
-            }
-            else
-            {
-                queryStringWithoutPage = "&" + queryStringWithoutPage;
-            }
-
-
-            viewModel.queryString = queryString;
-            viewModel.queryStringWithoutPage = queryStringWithoutPage;
+            viewModel.queryStringWithoutOrderBy = GetQueryFormatedStringWithoutOrderBy();
+            viewModel.queryStringWithoutPage = GetQueryFormatedStringWithoutPage();
 
             return View(viewModel);
+        }
+
+        private string GetQueryFormatedStringWithoutOrderBy()
+        {
+            var query = System.Web.HttpUtility.ParseQueryString(Request.QueryString.ToString());
+            query.Remove("orderby");
+            return FormatQueryString(query);
+        }
+
+        private string GetQueryFormatedStringWithoutPage()
+        {
+            var query = System.Web.HttpUtility.ParseQueryString(Request.QueryString.ToString());
+            query.Remove("page");
+            return FormatQueryString(query);
+        }
+
+
+        private string FormatQueryString(System.Collections.Specialized.NameValueCollection query)
+        {
+            string queryString = query.ToString();
+
+            if (queryString == null || queryString == "")
+                return "";
+            else
+                return "&" + queryString;
         }
 
         [Route("years")]
@@ -90,11 +86,18 @@ namespace HentaiSite.Controllers
         }
 
         [Route("nocensure")]
-        public IActionResult NoCensure(string orderby, int page = 1, List<int> tag = null)
+        public IActionResult NoCensure(string orderBy, int page = 1, List<int> tag = null)
         {
-            IndexViewModel noCunsureViewModel = viewModelService.GetNoCensureIndexViewModel(PagePostsCount, orderby, page, tag);
+            QueryData queryData = new QueryData()
+            {
+                PostsPerPage = PagePostsCount,
+                orderByString = orderBy,
+                Page = page,
+                TagIDs = tag
+            };
+            IndexViewModel noCunsureViewModel = viewModelService.GetNoCensureIndexViewModel(queryData);
             noCunsureViewModel.ActiveTags = tag;
-            noCunsureViewModel.orderBy = orderby;
+            noCunsureViewModel.orderBy = orderBy;
 
             return View("Index", noCunsureViewModel);
         }

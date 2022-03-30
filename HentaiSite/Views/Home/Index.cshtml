@@ -60,54 +60,54 @@
     <div class="content-sort">
         @if(Model.orderBy == "name")
         {
-            <a href="?orderby=name-d@(Model.queryString)"><span class="sort-active">По имени (А-Я)</span></a>
+            <a href="?orderby=name-d@(Model.queryStringWithoutOrderBy)"><span class="sort-active">По имени (А-Я)</span></a>
         }
         else if(Model.orderBy == "name-d")
         {
-            <a href="?orderby=name@(Model.queryString)"><span class="sort-active">По имени (Я-А)</span></a>
+            <a href="?orderby=name@(Model.queryStringWithoutOrderBy)"><span class="sort-active">По имени (Я-А)</span></a>
         }
         else
         {
-            <a href="?orderby=name@(Model.queryString)"><span>По имени (А-Я)</span></a>
+            <a href="?orderby=name@(Model.queryStringWithoutOrderBy)"><span>По имени (А-Я)</span></a>
         }
 
         @if(Model.orderBy == "rating-d")
         {
-            <a href="?orderby=rating@(Model.queryString)"><span class="sort-active">По рейтингу (популярное)</span></a>
+            <a href="?orderby=rating@(Model.queryStringWithoutOrderBy)"><span class="sort-active">По рейтингу (популярное)</span></a>
         }
         else if(Model.orderBy == "rating")
         {
-            <a href="?orderby=rating-d@(Model.queryString)"><span class="sort-active">По рейтингу (не популярное)</span></a>
+            <a href="?orderby=rating-d@(Model.queryStringWithoutOrderBy)"><span class="sort-active">По рейтингу (не популярное)</span></a>
         }
         else
         {
-            <a href="?orderby=rating-d@(Model.queryString)"><span>По рейтингу (популярное)</span></a>
+            <a href="?orderby=rating-d@(Model.queryStringWithoutOrderBy)"><span>По рейтингу (популярное)</span></a>
         }
 
         @if(Model.orderBy == "time-d")
         {
-            <a href="?orderby=time@(Model.queryString)"><span class="sort-active">По дате (новые)</span></a>
+            <a href="?orderby=time@(Model.queryStringWithoutOrderBy)"><span class="sort-active">По дате (новые)</span></a>
         }
         else if(Model.orderBy == "time")
         {
-            <a href="?orderby=time-d@(Model.queryString)"><span class="sort-active">По дате (старые)</span></a>
+            <a href="?orderby=time-d@(Model.queryStringWithoutOrderBy)"><span class="sort-active">По дате (старые)</span></a>
         }
         else
         {
-            <a href="?orderby=time-d@(Model.queryString)"><span>По дате (новые)</span></a>
+            <a href="?orderby=time-d@(Model.queryStringWithoutOrderBy)"><span>По дате (новые)</span></a>
         }
 
         @if(Model.orderBy == "views-d")
         {
-            <a href="?orderby=views@(Model.queryString)"><span class="sort-active">По просомтрам (больше)</span></a>
+            <a href="?orderby=views@(Model.queryStringWithoutOrderBy)"><span class="sort-active">По просомтрам (больше)</span></a>
         }
         else if(Model.orderBy == "views")
         {
-            <a href="?orderby=views-d@(Model.queryString)"><span class="sort-active">По просомтрам (меньше)</span></a>
+            <a href="?orderby=views-d@(Model.queryStringWithoutOrderBy)"><span class="sort-active">По просомтрам (меньше)</span></a>
         }
         else
         {
-            <a href="?orderby=views-d@(Model.queryString)"><span>По просомтрам (больше)</span></a>
+            <a href="?orderby=views-d@(Model.queryStringWithoutOrderBy)"><span>По просомтрам (больше)</span></a>
         }
         
         

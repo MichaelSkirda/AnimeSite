@@ -29,9 +29,9 @@ namespace HentaiSite.Controllers
                 return NotFound();
             }
 
-            Comment comment = new Comment() { PostID = postID, Text = commentText, AuthorName = commentAuthor, Data = System.DateTime.Now };
+            Comment comment = new Comment() { PostID = postID, Text = commentText, AuthorName = commentAuthor, Date = System.DateTime.Now };
 
-            postService.CreateComment(comment);
+            postService.AddComment(comment);
 
             return Ok();
         }

@@ -9,7 +9,7 @@ namespace HentaiSite.Models.ViewModels
         public List<Post> posts;
         public List<Tag> Tags;
         public List<int> ActiveTags;
-        public string queryString;
+        public string queryStringWithoutOrderBy;
         public string queryStringWithoutPage;
         public string orderBy;
         public int currentPage;

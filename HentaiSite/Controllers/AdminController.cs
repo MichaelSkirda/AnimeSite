@@ -37,7 +37,7 @@ namespace HentaiSite.Controllers
                 IsVisible = false,
             };
             // Save them
-            postService.CreatePost(post);
+            postService.AddPost(post);
 
 
             if (tags == null)

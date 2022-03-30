@@ -8,21 +8,28 @@ namespace HentaiSite.Database
 {
     public class ApplicationContext : DbContext
     {
-        public DbSet<Post> Posts { get; set; }
-        public DbSet<Tag> Tags { get; set; }
-        public DbSet<TagEntity> TagEntities { get; set; }
+        public virtual DbSet<Post> Posts { get; set; }
+        public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<TagEntity> TagEntities { get; set; }
 
-        public DbSet<Studio> Studios { get; set; }
-        public DbSet<StudioEntity> StudioEntities { get; set; }
+        public virtual DbSet<Studio> Studios { get; set; }
+        public virtual DbSet<StudioEntity> StudioEntities { get; set; }
 
-        public DbSet<Director> Directors { get; set; }
-        public DbSet<DirectorEntity> DirectorEntities { get; set; }
+        public virtual DbSet<Director> Directors { get; set; }
+        public virtual DbSet<DirectorEntity> DirectorEntities { get; set; }
 
-        public DbSet<UserView> UserViews { get; set; }
-        public DbSet<Comment> Comments { get; set; }
+        public virtual DbSet<UserView> UserViews { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
 
-        public DbSet<User> Users { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            
+        }
+
+        public ApplicationContext()
         {
 
         }
