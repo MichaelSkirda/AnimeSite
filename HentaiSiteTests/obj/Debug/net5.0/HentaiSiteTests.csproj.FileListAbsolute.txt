@@ -137,3 +137,10 @@
 /Users/oleg/Desktop/HentaiSite/HentaiSiteTests/obj/Debug/net5.0/ref/HentaiSiteTests.dll
 /Users/oleg/Desktop/HentaiSite/HentaiSiteTests/obj/Debug/net5.0/HentaiSiteTests.pdb
 /Users/oleg/Desktop/HentaiSite/HentaiSiteTests/obj/Debug/net5.0/HentaiSiteTests.genruntimeconfig.cache
+C:\Users\Aleksandr\Desktop\HentaiSite\HentaiSiteTests\obj\Debug\net5.0\HentaiSiteTests.csproj.AssemblyReference.cache
+C:\Users\Aleksandr\Desktop\HentaiSite\HentaiSiteTests\obj\Debug\net5.0\HentaiSiteTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Aleksandr\Desktop\HentaiSite\HentaiSiteTests\obj\Debug\net5.0\HentaiSiteTests.AssemblyInfoInputs.cache
+C:\Users\Aleksandr\Desktop\HentaiSite\HentaiSiteTests\obj\Debug\net5.0\HentaiSiteTests.AssemblyInfo.cs
+C:\Users\Aleksandr\Desktop\HentaiSite\HentaiSiteTests\obj\Debug\net5.0\HentaiSiteTests.csproj.CoreCompileInputs.cache
+C:\Users\Aleksandr\Desktop\HentaiSite\HentaiSiteTests\obj\Debug\net5.0\HentaiSiteTests.dll
+C:\Users\Aleksandr\Desktop\HentaiSite\HentaiSiteTests\obj\Debug\net5.0\HentaiSiteTests.pdb

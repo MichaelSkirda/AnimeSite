@@ -13,9 +13,9 @@ namespace HentaiSite.Enums
         ViewsDescending
     }
 
-    public static class OrderByExntension
+    public static class OrderByExtension
     {
-        public static OrderBy StringToOrderBy(string value)
+        public static OrderBy StringToOrderBy(string value, bool useOrderByNameAsDefault = true)
         {
             switch (value)
             {
@@ -36,7 +36,17 @@ namespace HentaiSite.Enums
                 case "views-d":
                     return OrderBy.ViewsDescending;
                 default:
-                    throw new ArgumentException($"{value} - ENUM doesn't exist");
+                    {
+                        if (useOrderByNameAsDefault)
+                        {
+                            return OrderBy.Name;
+                        }
+                        else
+                        {
+                            throw new ArgumentException($"{value} - ENUM doesn't exist");
+
+                        }
+                    }
             }
         }
     }

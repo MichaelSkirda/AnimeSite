@@ -70,7 +70,7 @@ namespace HentaiSite.Controllers
             return View(yearsViewModel);
         }
 
-        [Route("contactus")]
+        [Route("contact_us")]
         public IActionResult ContactUs()
         {
             BasicViewModel basicViewModel = viewModelService.GetBasicViewModel();
@@ -216,6 +216,13 @@ namespace HentaiSite.Controllers
 
             return Json(posts);
 
+        }
+
+        [Route("about_cookie")]
+        public IActionResult AboutCookie()
+        {
+            BasicViewModel basicViewModel = viewModelService.GetBasicViewModel();
+            return View(basicViewModel);
         }
 
     }

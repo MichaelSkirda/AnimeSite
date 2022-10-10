@@ -63,22 +63,35 @@
 
             <div class="title-info-line">
                 <p class="title-info-text-l">Студия: </p>
-                @if (Model.post.Studios != null)
+                @if (Model.post.Studios != null && Model.post.Studios.Count > 0)
                 {
-                    @foreach (Studio studio in Model.post.Studios)
+
+                    int studiosCount = Model.post.Studios.Count;
+
+                    for (int i = 0; i < studiosCount - 1; i++)
                     {
-                        <a href="~/studio/@studio.ID" class="clickable-yellow"><p class="title-info-text-r">@studio.Name</p></a>
+                        <a href="~/studio/@(Model.post.Studios[i].ID)" class="clickable-yellow"><p class="title-info-text-r">@(Model.post.Studios[i].Name),</p></a>
                     }
+
+                    <a href="~/studio/@(Model.post.Studios[studiosCount - 1].ID)" class="clickable-yellow"><p class="title-info-text-r">@(Model.post.Studios[studiosCount - 1].Name)</p></a>
+
                 }
             </div>
             <div class="title-info-line">
                 <p class="title-info-text-l">Сценарист: </p>
-                @if (Model.post.Directors != null)
+                @if (Model.post.Directors != null && Model.post.Directors.Count > 0)
                 {
-                    @foreach (Director director in Model.post.Directors)
+
+
+                    int directorsCount = Model.post.Directors.Count;
+
+                    for (int i = 0; i < directorsCount - 1; i++)
                     {
-                        <a href="~/director/@director.ID" class="clickable-yellow"><p class="title-info-text-r">@director.Name</p></a>
+                        <a href="~/director/@(Model.post.Directors[i].ID)" class="clickable-yellow"><p class="title-info-text-r">@(Model.post.Directors[i].Name)</p></a>
                     }
+
+                    <a href="~/director/@(Model.post.Directors[directorsCount - 1].ID)" class="clickable-yellow"><p class="title-info-text-r">@(Model.post.Directors[directorsCount - 1].Name)</p></a>
+                    
                 }
             </div>
             <div class="title-info-line">

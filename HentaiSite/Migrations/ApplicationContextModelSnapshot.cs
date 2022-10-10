@@ -29,7 +29,7 @@ namespace HentaiSite.Migrations
                     b.Property<string>("AuthorName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Data")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PostID")
@@ -259,9 +259,6 @@ namespace HentaiSite.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
 
                     b.Property<byte[]>("IPAddressBytes")
                         .IsRequired()

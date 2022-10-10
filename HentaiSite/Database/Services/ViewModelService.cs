@@ -163,11 +163,13 @@ namespace HentaiSite.Database.Services
 
             UserView userView = db.UserViews.Where(v => v.PostID == post.ID && v.IPAddressBytes == ipAddressBytes).FirstOrDefault();
 
-            if (userView != null)
+            if (userView != null && false) // TODO remove
                 return;
 
             db.UserViews.Add(new UserView() { IPAddressBytes = ipAddressBytes, PostID = post.ID });
             post.ViewsCount++;
+            post.ViewCountToday++;
+            post.ViewCountThisWeek++;
             db.SaveChanges();
         }
 
@@ -201,7 +203,7 @@ namespace HentaiSite.Database.Services
         {
             SearchOnePageViewModel viewModel = GetSearchOnePageViewModel();
             viewModel.orderBy = orderByString;
-            OrderBy orderBy = OrderByExntension.StringToOrderBy(orderByString);
+            OrderBy orderBy = OrderByExtension.StringToOrderBy(orderByString);
 
             viewModel.posts = postService.GetPostsByYear(year, orderBy);
 
@@ -216,7 +218,7 @@ namespace HentaiSite.Database.Services
 
             SearchOnePageViewModel viewModel = GetSearchOnePageViewModel(studio);
             viewModel.orderBy = orderByString;
-            OrderBy orderBy = OrderByExntension.StringToOrderBy(orderByString);
+            OrderBy orderBy = OrderByExtension.StringToOrderBy(orderByString);
 
             viewModel.posts = postService.GetPostsByStudio(id, orderBy);
 
@@ -229,7 +231,7 @@ namespace HentaiSite.Database.Services
         {
             SearchOnePageViewModel viewModel = GetSearchOnePageViewModel();
             viewModel.orderBy = orderByString;
-            OrderBy orderBy = OrderByExntension.StringToOrderBy(orderByString);
+            OrderBy orderBy = OrderByExtension.StringToOrderBy(orderByString);
 
             viewModel.posts = postService.GetAdminFavoritePosts(orderBy);
 
@@ -274,7 +276,7 @@ namespace HentaiSite.Database.Services
 
             SearchOnePageViewModel viewModel = GetSearchOnePageViewModel(tag);
             viewModel.orderBy = orderByString;
-            OrderBy orderBy = OrderByExntension.StringToOrderBy(orderByString);
+            OrderBy orderBy = OrderByExtension.StringToOrderBy(orderByString);
 
             viewModel.posts = postService.GetPostsByTag(id, orderBy);
 
@@ -290,7 +292,7 @@ namespace HentaiSite.Database.Services
 
             SearchOnePageViewModel viewModel = GetSearchOnePageViewModel(director);
             viewModel.orderBy = orderByString;
-            OrderBy orderBy = OrderByExntension.StringToOrderBy(orderByString);
+            OrderBy orderBy = OrderByExtension.StringToOrderBy(orderByString);
 
             viewModel.posts = postService.GetPostsByDirector(id, orderBy);
 

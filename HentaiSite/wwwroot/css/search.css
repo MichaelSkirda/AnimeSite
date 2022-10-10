@@ -31,6 +31,8 @@
 .sort-active
 {
 	font-weight: 600;
+	padding: 0 6px 3px 6px;
+	border-bottom: 2px solid #ffba00;
 }
 
 .content-block
@@ -216,6 +218,11 @@
 {
 	margin-left: 15px;
 	width: 100%;
+}
+
+.cookie-agreement p
+{
+	margin-top: 20px;
 }
 
 .preview-text-big

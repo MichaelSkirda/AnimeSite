@@ -10,11 +10,19 @@
     <link rel="stylesheet" href="~/css/site.css">
     <link rel="stylesheet" href="~/css/style.css">
 
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+
     @await RenderSectionAsync("Styles", required: false)
 
 
 </head>
 <body>
+
+    <div id="cookieConsent">
+        <div id="closeCookieConsent">x</div>
+        Наш сайт использует cookie файлы, чтобы пользователям было удобнее. Находясь на сайте вы соглашаетесь с использованием cookie файлов. <a href="~/about_cookie" target="_blank">Узнать подробнее</a>. <a class="cookieConsentOK">That's Fine</a>
+    </div>
+
     <header>
 
 
@@ -81,7 +89,7 @@
                     <ul>
                         <li><a href="~/alltags">Все жанры</a></li>
                         <li><a href="~/nocensure">Без цензуры</a></li>
-                        <li><a>Кошкодевочки</a></li>
+                        <li><a href="https://vk.com/nekohub">Кошкодевочки</a></li>
                         <li><a>Поиск по нескольким жанрам</a></li>
                         <li><a>Пожертвовать</a></li>
                     </ul>
@@ -123,7 +131,7 @@
                         <a href="~/year/2018">2018 год</a>
                         <a href="~/year/2017">2017 год</a>
                         <a href="~/year/2016">2016 год</a>
-                        <a href="years/">Ранее...</a>
+                        <a href="~/years">Ранее...</a>
                     </li>
                 </ul>
 
@@ -174,7 +182,7 @@
 
             <div class="footer-menu">
                 <ul>
-                    <li><a href="~/contactus">Сaвязаться с нами</a></li>
+                    <li><a href="~/contact_us">Сaвязаться с нами</a></li>
                     <li><a href="#">Карта сайта</a></li>
                     <li><a href="~/copyright">Правообладателям</a></li>
                 </ul>
@@ -183,6 +191,8 @@
     </footer>
 
     <script src="~/js/script.js" asp-append-version="true"></script>
+
+    <script type="text/javascript" src="~/js/cookie-popup.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 
 </body>

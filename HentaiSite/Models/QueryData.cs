@@ -57,7 +57,7 @@ namespace HentaiSite.Models
 
         public void SetOrderBy(string value)
         {
-            OrderBy orderBy = OrderByExntension.StringToOrderBy(value);
+            OrderBy orderBy = OrderByExtension.StringToOrderBy(value);
             SetOrderBy(orderBy);
         }
 

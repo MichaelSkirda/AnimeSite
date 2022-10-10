@@ -1,28 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/oleg/Desktop/HentaiSite/HentaiSite/HentaiSite.csproj": {}
+    "C:\\Users\\Aleksandr\\Desktop\\HentaiSite\\HentaiSite\\HentaiSite.csproj": {}
   },
   "projects": {
-    "/Users/oleg/Desktop/HentaiSite/HentaiSite/HentaiSite.csproj": {
+    "C:\\Users\\Aleksandr\\Desktop\\HentaiSite\\HentaiSite\\HentaiSite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/oleg/Desktop/HentaiSite/HentaiSite/HentaiSite.csproj",
+        "projectUniqueName": "C:\\Users\\Aleksandr\\Desktop\\HentaiSite\\HentaiSite\\HentaiSite.csproj",
         "projectName": "HentaiSite",
-        "projectPath": "/Users/oleg/Desktop/HentaiSite/HentaiSite/HentaiSite.csproj",
-        "packagesPath": "/Users/oleg/.nuget/packages/",
-        "outputPath": "/Users/oleg/Desktop/HentaiSite/HentaiSite/obj/",
+        "projectPath": "C:\\Users\\Aleksandr\\Desktop\\HentaiSite\\HentaiSite\\HentaiSite.csproj",
+        "packagesPath": "C:\\Users\\Aleksandr\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Aleksandr\\Desktop\\HentaiSite\\HentaiSite\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "/Users/oleg/.config/NuGet/NuGet.Config"
+          "C:\\Users\\Aleksandr\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -62,10 +61,17 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[5.0.17, 5.0.17]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -74,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.406/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

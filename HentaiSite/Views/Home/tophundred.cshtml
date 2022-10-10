@@ -54,18 +54,19 @@
     <div class="content-sort">
 
 
-        @if(Model.orderBy == "rating")
+        @if(Model.orderBy != "views")
         {
-            <a href="?orderby=normal"><span class="sort-active">По рейтингу</span></a>
+            <a href="?orderby=rating"><span class="sort-active">По рейтингу</span></a>
         }
         else
         {
             <a href="?orderby=rating"><span class="">По рейтингу</span></a>
         }
 
+
         @if(Model.orderBy == "views")
         {
-            <a href="?orderby=normal"><span class="sort-active">По просомтрам</span></a>
+            <a href="?orderby=views"><span class="sort-active">По просомтрам</span></a>
         }
         else
         {
