@@ -1,0 +1,199 @@
+﻿@model AnimeSite.Models.ViewModels.BasicViewModel;
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HentaiSite</title>
+
+    <link rel="stylesheet" href="~/css/site.css">
+    <link rel="stylesheet" href="~/css/style.css">
+
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+
+    @await RenderSectionAsync("Styles", required: false)
+
+
+</head>
+<body>
+
+    <div id="cookieConsent">
+        <div id="closeCookieConsent">x</div>
+        Наш сайт использует cookie файлы, чтобы пользователям было удобнее. Находясь на сайте вы соглашаетесь с использованием cookie файлов. <a href="~/about_cookie" target="_blank">Узнать подробнее</a>. <a class="cookieConsentOK">That's Fine</a>
+    </div>
+
+    <header>
+
+
+
+        <div>
+
+            <div class="header-search-wrap" id="header-search">
+                <div class="header-search">
+                    <form asp-action="Index" asp-controller="Home" method="get">
+                        <input type="text" id="text-search" class="header-search-text" name="s" placeholder="Введите текст...">
+                        <input type="submit" id="submit-search" class="header-search-button">
+                    </form>
+                </div>
+            </div>
+
+            <div class="header-menu-wrap">
+
+                <div class="header-logo-wrap" style="height: 100px; width: 100px; background-color: green;">
+
+                </div>
+
+                <div class="header-menu">
+
+                    <div class="header-menu-button">
+                        <a href="@Url.Action("Index", "Home")"><span>Главная</span></a>
+                    </div>
+
+                    <div class="header-menu-button">
+                        <a href="~/top100"><span>Топ-100</span></a>
+                    </div>
+
+                    <div class="header-menu-button">
+                        <a href="~/randompost"><span>Случайный хентай</span></a>
+                    </div>
+
+                    <div class="header-menu-button">
+                        <a href="~/adminfavorite"><span>Любимое админа</span></a>
+                    </div>
+
+                    <div class="header-menu-button" id="search-btn">
+                        <span>Искать</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </header>
+
+    <div class="site-content">
+
+        <div class="main-block">
+
+            @RenderBody()
+
+        </div>
+
+
+        <div class="sub-block-wrap">
+            <div class="sub-block">
+
+                <div class="main-menu">
+                    <ul>
+                        <li><a href="~/alltags">Все жанры</a></li>
+                        <li><a href="~/nocensure">Без цензуры</a></li>
+                        <li><a href="https://vk.com/nekohub">Кошкодевочки</a></li>
+                        <li><a>Поиск по нескольким жанрам</a></li>
+                        <li><a>Пожертвовать</a></li>
+                    </ul>
+                </div>
+
+                <span class="nav-title">Самые популярные теги:</span>
+
+                <ul class="side-double-menu">
+                    
+                    <li>  
+
+                        @for(int i = 0; i < Model.mostPopularTags.Count / 2; i++)
+                        {
+                            <a href="~/tag/@Model.mostPopularTags[i].ID">@Model.mostPopularTags[i].Name</a>
+                        }
+
+                    </li>
+
+                    
+
+                    <li>
+                        @for(int i = Model.mostPopularTags.Count / 2; i < Model.mostPopularTags.Count; i++)
+                        {
+                            <a href="~/tag/@Model.mostPopularTags[i].ID">@Model.mostPopularTags[i].Name</a>
+                        }
+                    </li>
+                </ul>
+
+                <span class="nav-title">Поиск по годам:</span>
+
+                <ul class="side-double-menu">
+                    <li>
+                        <a href="~/year/2022">2022 год</a>
+                        <a href="~/year/2021">2021 год</a>
+                        <a href="~/year/2020">2020 год</a>
+                        <a href="~/year/2019">2019 год</a>
+                    </li>
+                    <li>
+                        <a href="~/year/2018">2018 год</a>
+                        <a href="~/year/2017">2017 год</a>
+                        <a href="~/year/2016">2016 год</a>
+                        <a href="~/years">Ранее...</a>
+                    </li>
+                </ul>
+
+                <span class="nav-title">Самое популярное сегодня:</span>
+
+                <div class="nav-img-block">
+                    <a href="~/post/@(Model.mostPopularPostToday.ID)">
+                        <div class="nav-img-wrap">
+                            <img src="~/vid/thumbnail/@(Model.mostPopularPostToday.ID)-1.jpg"/>
+                        </div>
+                    </a>
+                </div>
+
+                <span class="nav-title">Самое популярное за неделю:</span>
+
+                <div class="nav-img-block">
+                    <a href="~/post/@(Model.mostPopularPostThisWeek.ID)">
+                        <div class="nav-img-wrap">
+                            <img src="~/vid/thumbnail/@(Model.mostPopularPostThisWeek.ID)-1.jpg"/>
+                        </div>
+                    </a>
+                </div>
+
+                <span class="nav-title">Самое популярное за все время:</span>
+
+                <div class="nav-img-block">
+                    <a href="~/post/@(Model.mostPopularPostEver.ID)">
+                        <div class="nav-img-wrap">
+                            <img src="~/vid/thumbnail/@(Model.mostPopularPostEver.ID)-1.jpg"/>
+                        </div>
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <footer class="footer">
+        <div class="footer-center">
+            <div class="footer-logo">
+                <img src="" style="background-color: pink; width: 150px; height: 80px;">
+            </div>
+
+            <div class="footer-menu">
+                <ul>
+                    <li><a href="~/contact_us">Сaвязаться с нами</a></li>
+                    <li><a href="#">Карта сайта</a></li>
+                    <li><a href="~/copyright">Правообладателям</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/js/script.js" asp-append-version="true"></script>
+
+    <script type="text/javascript" src="~/js/cookie-popup.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

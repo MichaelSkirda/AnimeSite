@@ -1,0 +1,351 @@
+.main-title
+{
+	display: flex;
+	margin-left: 2%;
+}
+
+.title-img-wrap
+{
+	margin-top: 25px;
+}
+
+.title-text h1
+{
+
+	font-size: 30px;
+}
+
+.title-subtext span
+{
+	font-size: 15px;
+}
+
+.post-video-wrap
+{
+	margin-top: 20px;
+	position: relative;
+	overflow: hidden;
+	padding-top: 56.25%;
+}
+
+.post-video-wrap video
+{
+	top: 0;
+	height: 100%;
+	position: absolute;
+}
+
+
+.title-names
+{
+	padding-bottom: 15px;
+	border-bottom: solid 1px gray;
+	margin-left: 15px;
+	width: 95%;
+}
+
+.title-other-info
+{
+	margin-left: 15px;
+	margin-top: 15px;
+}
+
+.title-info-line
+{
+	margin-top: 5px;
+	display: flex;
+	align-items: baseline;
+}
+
+.title-info-text-l
+{
+	margin-right: 5px;
+	font-size: 14px;
+	font-weight: 800;
+}
+
+.title-info-text-r
+{
+	margin-right: px;
+	margin-left: 5px;
+	font-size: 14px;
+}
+
+
+.title-info-line a
+{
+	font-size: 14px;
+	font-weight: 400;
+	margin-right: 6px;
+}
+
+.title-info-line .clickable-yellow:last-child:after
+{
+	content: ''
+}
+
+
+.title-info-line .clickable-yellow:after
+{
+	/* content: ',' */
+}
+
+.screen-list
+{
+	margin-left: 2%;
+	margin-top: 25px;
+}
+
+.screen-list p
+{
+	font-weight: 800;
+	font-size: 18px;
+}
+
+.screens-wrap
+{
+	display: flex;
+	justify-content: left;
+	flex-wrap: wrap;
+}
+
+.screens-wrap img
+{
+	width: 100%;
+}
+
+.screen-wrap
+{
+	overflow: hidden;
+	width: 23%;
+	margin-top: 15px;
+	margin-right: 2%;
+}
+
+.screen-img-wrap
+{
+	position: relative;
+	padding-top: 56.25%;
+	overflow: hidden;
+}
+
+.screen-img-wrap img
+{
+	position: absolute;
+	top: 0;
+}
+
+.video-player
+{
+	width: 90%;
+	margin: 25px auto 0 auto;
+}
+
+
+.video-player video
+{
+	width: 100%;
+	display: block;
+}
+
+
+.title-desc-prefix
+{
+ font-weight: 600;
+}
+
+.title-desc
+{
+	font-size: 15px;
+	margin-top: 5px;
+}
+
+.title-desc-wrap
+{
+	width: 96%;
+	margin-top: 15px;
+}
+
+.title-stats
+{
+	margin-left: 3px;
+	display: flex;
+	flex-direction: column;
+}
+
+.title-stat-line
+{
+	margin-top: 7px;
+	display: flex;
+	align-items: center;
+}
+
+.title-stat-line span
+{
+	margin-top: 2px;
+	margin-left: 8px;
+	font-size: 16px;
+}
+
+.comment-block
+{
+	width: 94%;
+	margin: 40px auto 40px auto;
+	background-color: #E0E0E0;
+	padding-top: 15px;
+}
+
+
+
+.comment-block form
+{
+	width: 100%;
+	padding-bottom: 15px;
+}
+
+.comment-block form div
+{
+	display: flex;
+}
+
+
+.comment-text
+{
+	width: 96%;
+    min-height: 100px;
+    padding: 2% 0 2% 0;
+    border: 1px solid;
+    border-color: #aaa;
+    -webkit-transition: border .2s;
+    -o-transition: border .2s;
+    transition: border .2s;
+    color: #333;
+    background-color: #fff;
+    padding-left: 15px;
+    margin: 0 auto 15px auto;
+	font-size: 16px;
+	font-family: Arial;
+	display: block;
+}
+
+.comment-name
+{
+	height: 20px;
+	font-size: 17px;
+	margin-right: 15px;
+	padding: 7px 15px;
+    border: 1px solid;
+	border-color: #aaa;
+	margin-left: 2%;
+}
+
+
+.submit-comment
+{
+	height: 100%;
+	border: none;
+	color: white;
+	background-color: dimgray;
+	font-size: 17px;
+	padding: 0px 15px;
+	cursor: pointer;
+}
+
+.comment-text:empty::before
+{
+	margin-left: 10px;
+	content: "Оставьте комментарий";
+	color: #555;
+}
+
+.comment-text:focus::before
+{
+	content: "";
+}
+
+.under-video-info
+{
+	width: 80%;
+	margin: 20px auto 0 auto;
+}
+
+.under-video-info a
+{
+	color: white;
+	font-size: 18px;
+	background-color: dimgray;
+	padding: 13px 26px;
+}
+
+.download-button
+{
+	margin-top: 40px;
+}
+
+.download-button span
+{
+	margin-left: 10px;
+}
+
+.similar-anime
+{
+	margin-top: 10px;
+	display: flex;
+	width: 95%;
+	margin-left: 2.4%;
+}
+
+.similar-anime-block
+{
+	width: 16%;
+	margin-left: .6%;
+}
+
+.similar-anime-block img
+{
+	width: 100%;
+}
+
+.similar-anime-title
+{
+	margin-left: 3%;
+	margin-top: 50px;
+}
+
+.similar-anime-name
+{
+	text-align: center;
+	padding: 4px 0;
+}
+
+.series-btns-wrap
+{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+
+.series-btns-wrap div
+{
+	text-align: center;
+	min-width: 22px;
+	margin-left: 5px;
+	margin-top: 8px;
+	border: 0;
+	background-color: dimgray;
+	color: white;
+	font-family: Arial;
+	font-size: 18px;
+	padding: 5px 8px;
+	cursor: pointer;
+}
+
+.series-active
+{
+	background-color: #a1a1a1 !important;
+}
+
+
+
+
+

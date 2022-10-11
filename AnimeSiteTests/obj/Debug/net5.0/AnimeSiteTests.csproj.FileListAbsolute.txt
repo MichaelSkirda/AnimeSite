@@ -1,0 +1,5 @@
+C:\Users\Aleksandr\Desktop\AnimeSite\HentaiSiteTests\obj\Debug\net5.0\AnimeSiteTests.csproj.AssemblyReference.cache
+C:\Users\Aleksandr\Desktop\AnimeSite\HentaiSiteTests\obj\Debug\net5.0\AnimeSiteTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Aleksandr\Desktop\AnimeSite\HentaiSiteTests\obj\Debug\net5.0\AnimeSiteTests.AssemblyInfoInputs.cache
+C:\Users\Aleksandr\Desktop\AnimeSite\HentaiSiteTests\obj\Debug\net5.0\AnimeSiteTests.AssemblyInfo.cs
+C:\Users\Aleksandr\Desktop\AnimeSite\HentaiSiteTests\obj\Debug\net5.0\AnimeSiteTests.csproj.CoreCompileInputs.cache

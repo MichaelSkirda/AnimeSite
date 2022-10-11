@@ -1,0 +1,42 @@
+﻿@model AnimeSite.Models.ViewModels.AllTagsViewModel
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/alltags.css">
+}
+
+
+<div class="content-list" id="posts-wrap">
+
+
+    @foreach (Tag tag in Model.Tags)
+    {
+        <div class="content-block">
+            
+            <a href="~/tag/@(tag.ID)">
+                <div class="content-img-wrap">
+                @if(tag.HasPreview)
+                {
+                    <img src="~/img/@(tag.ThumbnailPath)" alt="">
+                }
+                else
+                {
+                    <img src="~/img/tag_thumbnail/1.jpg" alt="">
+                }
+                </div>
+            </a>
+
+            <div class="post-info-search">
+                <span class="post-title-search">@tag.Name</span>
+            </div>
+        </div>
+    }
+
+
+
+</div>

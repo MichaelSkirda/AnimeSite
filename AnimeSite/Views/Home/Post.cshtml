@@ -1,0 +1,257 @@
+﻿@model AnimeSite.Models.ViewModels.PostViewModel
+
+@section Styles
+{
+    <link rel="stylesheet" href="~/css/main-form.css">
+    <link rel="stylesheet" href="~/css/post.css">
+}
+
+@section Scripts
+{
+    <script>var postID = @(Model.post.ID)</script>
+    <script src="~/js/post.js"></script>
+    <script src="~/js/comment.js"></script>
+}
+
+<div class="main-title">
+
+    <div>
+        <div class="title-img-wrap">
+            <img src="~/img/thumbnail/3-2-@(Model.post.ImgName)" alt="" style="height: 360px; width: 280px;">
+        </div>
+
+        <div class="title-stats">
+            <div class="title-stat-line">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z" /></svg>
+                <span>@Model.post.ViewsCount Views</span>
+            </div>
+
+            <div class="title-stat-line">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path d="M6 14h6v-6c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6zm16 0c0 5.523-4.478 10-10 10s-10-4.477-10-10 4.478-10 10-10 10 4.477 10 10zm-2 0c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8 8-3.589 8-8zm-6-11.819v-2.181h-4v2.181c1.408-.238 2.562-.243 4 0zm6.679 3.554l1.321-1.321-1.414-1.414-1.407 1.407c.536.402 1.038.844 1.5 1.328z" /></svg>
+                <span>episode @Model.post.Duration</span>
+            </div>
+
+            <div class="title-stat-line">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" /></svg>
+                <span>rating @Model.post.Rating</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="title-info">
+
+        <div class="title-names">
+            <div class="title-text">
+                <h1>@Model.post.Name</h1>
+            </div>
+
+            @if (Model.post.OtherNames != null)
+            {
+                @foreach (string otherName in Model.post.OtherNames)
+                {
+                    <div class="title-subtext">
+                        <span>@otherName</span>
+                    </div>
+                }
+            }
+
+
+
+        </div>
+
+        <div class="title-other-info">
+
+            <div class="title-info-line">
+                <p class="title-info-text-l">Студия: </p>
+                @if (Model.post.Studios != null && Model.post.Studios.Count > 0)
+                {
+
+                    int studiosCount = Model.post.Studios.Count;
+
+                    for (int i = 0; i < studiosCount - 1; i++)
+                    {
+                        <a href="~/studio/@(Model.post.Studios[i].ID)" class="clickable-yellow"><p class="title-info-text-r">@(Model.post.Studios[i].Name),</p></a>
+                    }
+
+                    <a href="~/studio/@(Model.post.Studios[studiosCount - 1].ID)" class="clickable-yellow"><p class="title-info-text-r">@(Model.post.Studios[studiosCount - 1].Name)</p></a>
+
+                }
+            </div>
+            <div class="title-info-line">
+                <p class="title-info-text-l">Сценарист: </p>
+                @if (Model.post.Directors != null && Model.post.Directors.Count > 0)
+                {
+
+
+                    int directorsCount = Model.post.Directors.Count;
+
+                    for (int i = 0; i < directorsCount - 1; i++)
+                    {
+                        <a href="~/director/@(Model.post.Directors[i].ID)" class="clickable-yellow"><p class="title-info-text-r">@(Model.post.Directors[i].Name)</p></a>
+                    }
+
+                    <a href="~/director/@(Model.post.Directors[directorsCount - 1].ID)" class="clickable-yellow"><p class="title-info-text-r">@(Model.post.Directors[directorsCount - 1].Name)</p></a>
+                    
+                }
+            </div>
+            <div class="title-info-line">
+                <p class="title-info-text-l">Жанры: </p>
+
+                @if (Model.post.Tags != null)
+                {
+                    @for (int i = 0; i < Model.post.Tags.Count; i++)
+                    {
+                        <a href="~/tag/@Model.post.Tags[i].ID" class="clickable-yellow"><p class="title-info-text-r">@Model.post.Tags[i].Name</p></a>
+                    }
+                }
+
+            </div>
+            <div class="title-info-line"><p class="title-info-text-l">Кол-во серий: </p><p class="title-info-text-r">@Model.post.SeriesCount</p></div>
+
+            <div class="title-desc-wrap">
+                <p class="title-desc-prefix">Описание: </p>
+
+                <p class="title-desc">@Model.post.Description</p>
+
+                    <!-- <p class="title-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea vero libero laborum porro totam blanditiis veniam maiores repellendus architecto voluptas accusamus similique itaque velit distinctio at doloremque quisquam harum, praesentium qui debitis, aspernatur. Maiores architecto quam ea iste inventore. Tempore cumque velit, quidem omnis, iusto pariatur culpa repellendus illo quisquam blanditiis. Odit suscipit beatae eaque modi libero fugit, vel vitae eveniet ex, dolores hic nemo dolorum blanditiis rerum facere! Mollitia dolores amet sint nostrum sequi aspernatur totam minus dignissimos est aliquam asperiores necessitatibus, at! Modi ab, saepe delectus, temporibus soluta sequi? Aut officia consequuntur laudantium, autem culpa dolor, nostrum? Eaque!</p>
+
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab illum eos aspernatur explicabo qui facere assumenda nobis hic iste error accusamus architecto pariatur nisi voluptate quod impedit, at excepturi corrupti maiores sed totam necessitatibus veritatis nam voluptatem ad. Dolorum, odit.</p>
+    -->
+</div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+@if (Model.post.ScreenCount > 0)
+{
+
+        <div class="screen-list">
+            <p>Скринлист:</p>
+
+            <div class="screens-wrap">
+
+                @for (int i = 0; i < Model.post.ScreenCount && i < 8; i++)
+                {
+                    <div class="screen-wrap">
+                        <div class="screen-img-wrap">
+                            <img src="~/img/screenlist/16-9-@(Model.post.ID)-@(i).png" alt="" style="background-color: dimgray;">
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+
+}
+
+
+
+<div class="video-player">
+
+    <span class="series-text">Серии:</span>
+
+    <div class="series-btns-wrap" id="series-btns">
+
+
+        <div onclick="changeSeries(this)" class="series-active" seriesValue="1">1</div>
+
+        @for(int i = 2; i <= Model.post.SeriesCount; i++)
+        {
+            <div onclick="changeSeries(this)" class seriesValue="@(i)">@(i)</div>
+        }
+    </div>
+    <!-- VIDEO PLAYER -->
+
+    <div class="post-video-wrap">
+        <video controls poster="~/vid/thumbnail/@(Model.post.ID)-1.jpg" id="video-player">
+          <source id="video-src" src="~/vid/@(Model.post.ID)-1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+
+
+
+<div class="under-video-info">
+
+    <p>Всем персонажам есть 21 год.</p>
+
+    <div class="download-button">
+        <a id="downloadButton" href="~/Download?postID=@(Model.post.ID)&seriesNumber=1">Скачать</a>
+        <span>@(Model.post.DownloadCount) скачиваний</span>
+    </div>
+
+</div>
+
+@if (Model.SimilarAnime != null)
+{
+
+    <div class="similar-anime-title">
+        <span>Similar anime:</span>
+    </div>
+    <div class="similar-anime">
+
+
+        @foreach (Post post in Model.SimilarAnime)
+        {
+            <div class="similar-anime-block">
+                <a href="./post.html">
+                    <img src="~/img/thumbnail/3-2-@(post.ImgName)" alt="">
+                </a>
+                <div class="similar-anime-name">
+                    <span>@post.Name</span>
+                </div>
+            </div>
+        }
+
+
+    </div>
+}
+
+<div class="comment-block" id="comment-block">
+    <form asp-action="CreateComment" asp-controller="Action" enctype="multipart/form-data" class="comment-form">
+
+        <textarea name="commentText" class="comment-text" cols="40" rows="5" id="commentTextArea"></textarea>
+
+        <div>
+            <input type="text" name="commentAuthor" class="comment-name" placeholder="Ваше имя..." id="commentAuthorName" />
+            <div class="form-btn">
+                <input type="button" id="commentSubmitButton" class="submit-comment" value="Отправить" name="">
+            </div>
+        </div>
+
+        <input name="postID" value="@(Model.post.ID)" type="hidden" />
+    </form>
+    <div id="commentPosts">
+    
+    @foreach(Comment comment in Model.Comments)
+    {
+
+        <div class="post">
+
+            <p class="post-name">- @(comment.AuthorName)</p>
+
+            <p class="post-text">@(comment.Text)</p>
+
+
+            <div class="post-data">
+                <a href="#" class="post-reply"><p>Reply</p></a>
+                <p class="post-time">@(comment.Date.ToString("dd MMMM H:mm yyyy"))</p>
+            </div>
+
+
+        </div>
+        
+    }
+
+    </div>
+    
+
+</div>
