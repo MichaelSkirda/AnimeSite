@@ -23,12 +23,12 @@
         <div class="title-stats">
             <div class="title-stat-line">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z" /></svg>
-                <span>@Model.post.ViewsCount Views</span>
+                <span>@Model.post.ViewsCount просмотров</span>
             </div>
 
             <div class="title-stat-line">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path d="M6 14h6v-6c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6zm16 0c0 5.523-4.478 10-10 10s-10-4.477-10-10 4.478-10 10-10 10 4.477 10 10zm-2 0c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8 8-3.589 8-8zm-6-11.819v-2.181h-4v2.181c1.408-.238 2.562-.243 4 0zm6.679 3.554l1.321-1.321-1.414-1.414-1.407 1.407c.536.402 1.038.844 1.5 1.328z" /></svg>
-                <span>episode @Model.post.Duration</span>
+                <span>@Model.post.Duration мин.</span>
             </div>
 
             <div class="title-stat-line">
@@ -216,6 +216,12 @@
 }
 
 <div class="comment-block" id="comment-block">
+
+    <div id="commentErrorMessage" style="display: none;">
+        <p>
+            Вы можете оставлять 1 комментарий раз в 5 минут.
+        </p>
+    </div>
     <form asp-action="CreateComment" asp-controller="Action" enctype="multipart/form-data" class="comment-form">
 
         <textarea name="commentText" class="comment-text" cols="40" rows="5" id="commentTextArea"></textarea>
@@ -230,6 +236,7 @@
         <input name="postID" value="@(Model.post.ID)" type="hidden" />
     </form>
     <div id="commentPosts">
+    
     
     @foreach(Comment comment in Model.Comments)
     {

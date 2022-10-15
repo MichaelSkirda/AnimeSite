@@ -152,3 +152,4 @@ C:\Users\Aleksandr\Desktop\AnimeSite\AnimeSite\obj\Debug\net5.0\refint\AnimeSite
 C:\Users\Aleksandr\Desktop\AnimeSite\AnimeSite\obj\Debug\net5.0\AnimeSite.pdb
 C:\Users\Aleksandr\Desktop\AnimeSite\AnimeSite\obj\Debug\net5.0\AnimeSite.genruntimeconfig.cache
 C:\Users\Aleksandr\Desktop\AnimeSite\AnimeSite\obj\Debug\net5.0\ref\AnimeSite.dll
+C:\Users\Aleksandr\Desktop\AnimeSite\AnimeSite\obj\Debug\net5.0\Razor\Views\Home\Donate.cshtml.g.cs

@@ -2,7 +2,9 @@ var textArea = document.getElementById("commentTextArea");
 var authorName = document.getElementById("commentAuthorName");
 var submitButton = document.getElementById("commentSubmitButton");
 var commentBlock = document.getElementById("comment-block");
-var commentPosts =document.getElementById("commentPosts");
+var commentPosts = document.getElementById("commentPosts");
+var commentErrorMessage = document.getElementById("commentErrorMessage");
+
 
 
 submitButton.onclick = function()
@@ -29,7 +31,7 @@ submitButton.onclick = function()
 
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) { 
-		    
+		    commentErrorMessage.style = "display: block;"
 		} 
 	});
 }

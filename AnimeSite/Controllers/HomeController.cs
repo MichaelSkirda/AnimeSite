@@ -79,6 +79,12 @@ namespace AnimeSite.Controllers
             return View(basicViewModel);
         }
 
+        [Route("donate")]
+        public IActionResult Donate()
+        {
+            BasicViewModel basicViewModel = viewModelService.GetBasicViewModel();
+            return View(basicViewModel);
+        }
 
         [Route("copyright")]
         public IActionResult Copyright()
