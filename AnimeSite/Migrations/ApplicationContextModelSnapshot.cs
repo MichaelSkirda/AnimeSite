@@ -156,6 +156,29 @@ namespace AnimeSite.Migrations
                     b.ToTable("Posts");
                 });
 
+            modelBuilder.Entity("AnimeSite.Models.PostRate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<byte[]>("IPAddressBytes")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("varbinary(16)");
+
+                    b.Property<bool>("IsPositive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PostRates");
+                });
+
             modelBuilder.Entity("AnimeSite.Models.Studio", b =>
                 {
                     b.Property<int>("ID")

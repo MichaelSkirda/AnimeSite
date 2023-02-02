@@ -1,0 +1,26 @@
+.admin-wrap
+{
+	display: flex;
+	flex-direction: column;
+	margin-left: 35px;
+}
+
+.admin-input-wrap
+{
+	margin-top: 45px;
+}
+
+.admin-input-wrap:first-child
+{
+	margin-top: 60px;
+}
+
+.admin-form
+{
+	margin-left: 10px;
+}
+
+.admin-form > div
+{
+	margin-top: 15px;
+}

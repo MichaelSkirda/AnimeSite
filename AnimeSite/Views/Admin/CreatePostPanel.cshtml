@@ -1,0 +1,76 @@
+﻿@section Styles
+{
+    <link rel="stylesheet" href="~/css/admin.css" />
+}
+
+<form asp-controller="admin" asp-action="CreatePost" enctype="multipart/form-data" class="admin-form">
+
+    <div>
+        <span>Превью: </span>
+        <input type="file" name="previewImage" />
+    </div>
+
+    <div>
+        <span>Название: </span>
+        <input type="text" name="post.Name" />
+    </div>
+
+    <div>
+        <span>Жанры (разделить знаком ;): </span>
+        <input type="text" name="fTags" />
+    </div>
+
+    <div>
+        <span>Студии (разделить знаком ;): </span>
+        <input type="text" name="fStudios" />
+    </div>
+
+    <div>
+        <span>Режжисер (разделить знаком ;): </span>
+        <input type="text" name="fDirectors" />
+    </div>
+
+    <div>
+        <span>Описание: </span>
+        <textarea name="post.Description"></textarea>
+    </div>
+
+    <div>
+        <span>Количество серий: </span>
+        <input type="number" name="post.SeriesCount" />
+    </div>
+
+    <div>
+        <span>Длина серий: </span>
+        <input type="number" name="post.Duration" />
+    </div>
+
+    <div>
+        <span>Год выпуска - окончания: </span>
+        <input type="number" name="post.ReleaseYear" />
+        <span>-</span>
+        <input type="number" name="post.EndingYear" />
+    </div>
+
+    <div>
+        <span for="cars">Статус аниме:</span>
+        <select name="Post.Status">
+            <option value="Ongoing">Идет</option>
+            <option value="Released">Вышел</option>
+            <option value="Announced">Анонс</option>
+        </select>
+    </div>
+
+
+
+    <div>
+        <span>Пароль: </span>
+        <input type="text" name="password" />
+    </div>
+    
+    <div>
+        <input type="submit" />
+    </div>
+
+
+</form>

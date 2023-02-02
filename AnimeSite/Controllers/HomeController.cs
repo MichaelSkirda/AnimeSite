@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AnimeSite.Database.Services;
 using AnimeSite.Models;
 using AnimeSite.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AnimeSite.Controllers
@@ -146,6 +147,8 @@ namespace AnimeSite.Controllers
 
         }
 
+
+
         [ResponseCache(NoStore = true, Duration = 0)]
         [Route("RandomPost")]
         public IActionResult RandomPost()
@@ -203,6 +206,7 @@ namespace AnimeSite.Controllers
             try
             {
                 SearchOnePageViewModel searchOnePageViewModel = viewModelService.GetSearchOnePageYearViewModel(year, orderby);
+                searchOnePageViewModel.Title = $"Смотреть аниме {year} года - anifox.ru";
                 return View("SearchOnePage", searchOnePageViewModel);
             }
             catch (InvalidOperationException)

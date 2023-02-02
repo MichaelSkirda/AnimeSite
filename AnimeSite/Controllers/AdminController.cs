@@ -4,6 +4,11 @@ using AnimeSite.Models;
 using AnimeSite.Database.Services;
 using System;
 using System.Collections.Generic;
+using AnimeSite.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace AnimeSite.Controllers
 {
@@ -12,84 +17,57 @@ namespace AnimeSite.Controllers
 
         private readonly EntitiesService entitiesService;
         private readonly PostService postService;
+        private readonly ViewModelService viewModelService;
+        private readonly IWebHostEnvironment appEnvironment;
 
-        public AdminController(EntitiesService entitiesService, PostService postService)
+        public AdminController(EntitiesService entitiesService, PostService postService,
+            ViewModelService viewModelService, IWebHostEnvironment appEnvironment)
         {
             this.entitiesService = entitiesService;
             this.postService = postService;
+            this.viewModelService = viewModelService;
+            this.appEnvironment = appEnvironment;
         }
 
         public IActionResult Index()
         {
-            return View();
+            BasicViewModel basicViewModel = viewModelService.GetBasicViewModel();
+            return View(basicViewModel);
         }
 
-        public IActionResult CreatePost(string name, string description, int seriesCount, int releaseYear, int? endingYear, int duration, string tags)
+        public IActionResult CreatePostPanel()
         {
-            // Create post
-            Post post = new Post()
-            {
-                Name = name,
-                Description = description,
-                SeriesCount = seriesCount,
-                EndingYear = endingYear,
-                Duration = duration,
-                IsVisible = false,
-            };
-            // Save them
+            BasicViewModel basicViewModel = viewModelService.GetBasicViewModel();
+            return View(basicViewModel);
+        }
+
+        public IActionResult CreatePost(Post post, IFormFile previewImage,
+            string fTags, string fStudios, string fDirectors, string password)
+        {
+            if (password != "Dn129DHJ39D*#qz")
+                return NotFound();
+
+            post.ImgFormat = Path.GetExtension(previewImage.FileName);
+
             postService.AddPost(post);
+            postService.AddTagsToPost(post, fTags);
+            postService.AddStudiosToPost(post, fStudios);
+            postService.AddDirectorsToPost(post, fDirectors);
 
+            SavePreview(previewImage, post.ID);
 
-            if (tags == null)
+            return RedirectToActionPermanent("Post", "Home", new { id = post.ID });
+        }
+
+        private void SavePreview(IFormFile previewImage, int postId)
+        {
+            string path = $"/img/thumbnail/3-2-{postId}{Path.GetExtension(previewImage.FileName)}";
+
+            using (var fileStream = new FileStream(appEnvironment.WebRootPath + path, FileMode.Create))
             {
-                tags = "";
-            }
-
-            List<Tag> realTags = new List<Tag>();
-            List<TagEntity> tagEntities = new List<TagEntity>();
-
-            // For each tag to add
-            foreach (string tagName in tags.Split(';'))
-            {
-                Tag tag;
-                // If tag already exist find them
-                try
-                {
-                     tag = entitiesService.GetTagByName(tagName);
-                }
-                catch(InvalidOperationException)
-                {
-                    // If tag doen't exist create them
-                    tag = new Tag()
-                    {
-                        Name = tagName,
-                    };
-
-                    entitiesService.CreateTag(tag);
-                }
-
-                realTags.Add(tag);
+                previewImage.CopyTo(fileStream);
 
             }
-
-
-            foreach(Tag tag in realTags)
-            {
-                // Create tag entity and save
-                TagEntity tagEntity = new TagEntity()
-                {
-                    PostID = post.ID,
-                    TagID = tag.ID
-                };
-
-                tagEntities.Add(tagEntity);
-            }
-
-            entitiesService.CreateTagEntity(tagEntities);
-            
-
-
-            return RedirectToActionPermanent("Index");
         }
 
     }

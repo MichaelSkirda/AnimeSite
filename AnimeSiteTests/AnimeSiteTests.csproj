@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -13,12 +13,11 @@
     <PackageReference Include="Moq" Version="4.17.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.15" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\HentaiSite\AnimeSite.csproj" />
-  </ItemGroup>
   <ItemGroup>
     <None Remove="Moq" />
     <None Remove="Microsoft.EntityFrameworkCore" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AnimeSite\AnimeSite.csproj" />
   </ItemGroup>
 </Project>

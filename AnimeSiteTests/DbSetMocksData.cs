@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HentaiSite.Models;
-using HentaiSite.Enums;
+using AnimeSite.Models;
+using AnimeSite.Enums;
 
-namespace HentaiSiteTests
+namespace AnimeSiteTests
 {
     public class DbSetMocksData
     {
@@ -100,19 +100,19 @@ namespace HentaiSiteTests
                         new Studio()
                         {
                             ID = 1,
-                            Name = "YuriStudio",
-                            Description = "Best Yuri hentai video in 4KKK"
+                            Name = "Studio 1",
+                            Description = "Some description"
                         },
                         new Studio()
                         {
                             ID = 2,
-                            Name = "RezNYA",
-                            Description = "Most REZNYA BLYAT videos, very much BLOOD, KISHKI i UBIYSTVA"
+                            Name = "Studio 2",
+                            Description = "Text text text"
                         },
                         new Studio()
                         {
                             ID = 3,
-                            Name = "Regular hentai",
+                            Name = "Studio 3",
                             Description = "Nothing special"
                         },
                     };
@@ -168,7 +168,7 @@ namespace HentaiSiteTests
                     new Tag()
                     {
                         ID = 1,
-                        Name = "Юри"
+                        Name = "Сэйнэн"
                     },
                     new Tag()
                     {
@@ -183,12 +183,12 @@ namespace HentaiSiteTests
                     new Tag()
                     {
                         ID = 4,
-                        Name = "Глубокий сюжет"
+                        Name = "Психология"
                     },
                     new Tag()
                     {
                         ID = 5,
-                        Name = "Резня"
+                        Name = "Повседневность"
                     },
                 };
 
@@ -268,14 +268,14 @@ namespace HentaiSiteTests
                         new Director()
                         {
                             ID = 1,
-                            Name = "Hentai director 1",
+                            Name = "director 1",
                             Description = "123"
                         },
                         new Director()
                         {
                             ID = 2,
-                            Name = "Hentai director 2",
-                            Description = "AAAAAAAAAAAH"
+                            Name = "director 2",
+                            Description = "AAAAAAAAAAA"
                         },
                         new Director()
                         {
@@ -342,7 +342,7 @@ namespace HentaiSiteTests
                 new Comment()
                 {
                     ID = 1,
-                    AuthorName = "Van",
+                    AuthorName = "John Smith",
                     Date = new DateTime(2021, 6, 2),
                     PostID = 1,
                     Text = "Hello, it's my comment"
@@ -358,7 +358,7 @@ namespace HentaiSiteTests
                 new Comment()
                 {
                     ID = 3,
-                    AuthorName = "Van",
+                    AuthorName = "John Smith",
                     Date = new DateTime(2020, 4, 20),
                     PostID = 2,
                     Text = "Comment to post with id 2"

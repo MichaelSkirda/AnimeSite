@@ -48,6 +48,7 @@ namespace AnimeSite
             app.UseRouting(); // используем систему маршрутизации
 
             app.UseStaticFiles();
+            app.UseForwardedHeaders();
 
             app.UseEndpoints(endpoints =>
             {

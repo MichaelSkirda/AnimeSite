@@ -14,6 +14,7 @@ namespace AnimeSite.Models.ViewModels
         public string PreviewThumbnailPath;
 
         public string orderBy;
+        public string Title;
 
         public SearchOnePageViewModel(PostService postService, EntitiesService entitiesService) : base(postService, entitiesService)
         {

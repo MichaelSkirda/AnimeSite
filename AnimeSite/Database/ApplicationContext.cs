@@ -9,6 +9,8 @@ namespace AnimeSite.Database
     public class ApplicationContext : DbContext
     {
         public virtual DbSet<Post> Posts { get; set; }
+        public virtual DbSet<PostRate> PostRates { get; set; }
+
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<TagEntity> TagEntities { get; set; }
 
@@ -49,7 +51,7 @@ namespace AnimeSite.Database
                     {
                         Duration = 20,
                         Name = "Code Geass",
-                        ImgFormat = "jpg",
+                        ImgFormat = ".jpg",
                         ReleaseYear = 2006,
                         SeriesCount = 24,
                         Rating = 600,
@@ -60,20 +62,20 @@ namespace AnimeSite.Database
                     {
                         Duration = 20,
                         Name = "Berserk",
-                        ImgFormat = "jpg",
+                        ImgFormat = ".jpg",
                         ReleaseYear = 1997,
                         Status = Enums.AnimeStatus.Released,
                         SeriesCount = 51,
                         Rating = 692,
                         ViewsCount = 11234,
-                        OtherNamesString = string.Join(";#;", new string[] { "Reznya Blyat", "Ubivat Ubivat Ubivat Ubivat Ubivat Ubivat Ubivat " }),
+                        OtherNamesString = string.Join(";#;", new string[] { "Guts the Berserk" }),
                         Description = "Lorem ipsum dolor sit amet consectetur adipisicing elit.\nLorem ipsum dolor sit amet consectetur adipisicing elit."
                     },
                     new Post()
                     {
                         Duration = 20,
                         Name = "Steins;Gate",
-                        ImgFormat = "jpg",
+                        ImgFormat = ".jpg",
                         ReleaseYear = 2016,
                         SeriesCount = 36,
                         Rating = 542,
@@ -85,7 +87,7 @@ namespace AnimeSite.Database
                     {
                         Duration = 20,
                         Name = "Vinland Saga",
-                        ImgFormat = "jpeg",
+                        ImgFormat = ".jpeg",
                         ReleaseYear = 2018,
                         SeriesCount = 30,
                         Rating = 220,
@@ -98,7 +100,11 @@ namespace AnimeSite.Database
                 {
                     new Tag()
                     {
-                        Name = "Юри"
+                        Name = "Приключения"
+                    },
+                    new Tag()
+                    {
+                        Name = "Драма"
                     },
                     new Tag()
                     {
@@ -106,15 +112,11 @@ namespace AnimeSite.Database
                     },
                     new Tag()
                     {
+                        Name = "Сэйнен"
+                    },
+                    new Tag()
+                    {
                         Name = "Экшен"
-                    },
-                    new Tag()
-                    {
-                        Name = "Глубокий сюжет"
-                    },
-                    new Tag()
-                    {
-                        Name = "Резня"
                     },
                 });
 
@@ -175,17 +177,17 @@ namespace AnimeSite.Database
                     {
                         new Studio()
                         {
-                            Name = "YuriStudio",
-                            Description = "Best Yuri hentai video in 4KKK"
+                            Name = "Studio 1",
+                            Description = "Studio 1 desc"
                         },
                         new Studio()
                         {
-                            Name = "RezNYA",
-                            Description = "Most REZNYA BLYAT videos, very much BLOOD, KISHKI i UBIYSTVA"
+                            Name = "18+ studio",
+                            Description = "Bloody studio"
                         },
                         new Studio()
                         {
-                            Name = "Regular hentai",
+                            Name = "Regular studio",
                             Description = "Nothing special"
                         },
                     });
@@ -228,13 +230,13 @@ namespace AnimeSite.Database
                     {
                         new Director()
                         {
-                            Name = "Hentai director 1",
+                            Name = "director 1",
                             Description = "123"
                         },
                         new Director()
                         {
-                            Name = "Hentai director 2",
-                            Description = "AAAAAAAAAAAH"
+                            Name = "Dir Director 2",
+                            Description = "AAAA ABC"
                         },
                         new Director()
                         {

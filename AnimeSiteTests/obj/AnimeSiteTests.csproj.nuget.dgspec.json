@@ -1,35 +1,35 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\HentaiSiteTests\\AnimeSiteTests.csproj": {}
+    "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\AnimeSiteTests\\AnimeSiteTests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\HentaiSiteTests\\AnimeSiteTests.csproj": {
+    "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\AnimeSiteTests\\AnimeSiteTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\HentaiSiteTests\\AnimeSiteTests.csproj",
+        "projectUniqueName": "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\AnimeSiteTests\\AnimeSiteTests.csproj",
         "projectName": "AnimeSiteTests",
-        "projectPath": "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\HentaiSiteTests\\AnimeSiteTests.csproj",
+        "projectPath": "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\AnimeSiteTests\\AnimeSiteTests.csproj",
         "packagesPath": "C:\\Users\\Aleksandr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\HentaiSiteTests\\obj\\",
+        "outputPath": "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\AnimeSiteTests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Aleksandr\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\HentaiSite\\AnimeSite.csproj": {
-                "projectPath": "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\HentaiSite\\AnimeSite.csproj"
+              "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\AnimeSite\\AnimeSite.csproj": {
+                "projectPath": "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\AnimeSite\\AnimeSite.csproj"
               }
             }
           }
@@ -41,8 +41,8 @@
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -85,29 +85,29 @@
         }
       }
     },
-    "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\HentaiSite\\AnimeSite.csproj": {
+    "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\AnimeSite\\AnimeSite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\HentaiSite\\AnimeSite.csproj",
+        "projectUniqueName": "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\AnimeSite\\AnimeSite.csproj",
         "projectName": "AnimeSite",
-        "projectPath": "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\HentaiSite\\AnimeSite.csproj",
+        "projectPath": "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\AnimeSite\\AnimeSite.csproj",
         "packagesPath": "C:\\Users\\Aleksandr\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\HentaiSite\\obj\\",
+        "outputPath": "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\AnimeSite\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Aleksandr\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -118,8 +118,8 @@
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -134,6 +134,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.14, )"
+            },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.17.0, )"
             }
           },
           "imports": [
@@ -147,12 +151,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[5.0.17, 5.0.17]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"

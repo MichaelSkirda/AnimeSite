@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 
-namespace HentaiSiteTests
+namespace AnimeSiteTests
 {
     class DbSetMockBuilder<T> where T : class
     {

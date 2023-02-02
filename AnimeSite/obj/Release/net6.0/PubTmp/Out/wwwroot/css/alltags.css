@@ -1,0 +1,222 @@
+.content-list
+{
+	margin-top: 15px;
+	display: flex;
+	justify-content: left;
+	flex-wrap: wrap;
+	margin-left: 2%;
+}
+
+.content-img-wrap
+{
+	position: relative;
+	padding-top: 100%;
+	overflow: hidden;
+}
+
+.content-img-wrap img
+{
+	position: absolute;
+	top: 0;
+}
+
+.content-sort-wrap
+{
+	margin-top: 25px;
+	margin-left: 2%;
+}
+
+.content-sort
+{
+	margin-top: 10px;
+	display: flex;
+}
+
+.content-sort span
+{
+	margin-right: 15px;
+	font-size: 15px;
+	font-family: Arial;
+	cursor: pointer;
+	color: #ffba00;
+}
+
+.sort-active
+{
+	font-weight: 600;
+}
+
+.content-block
+{
+	position: relative;
+	width: 23%;
+	margin-right: 2%;
+	margin-bottom: 20px;
+}
+
+.content-block img
+{
+	width: 100%;
+}
+
+
+.pagination
+{
+	margin-top: 75px;
+	display: flex;
+	justify-content: center;
+}
+
+.pagination li
+{
+	margin-left: 4px;
+	padding: 5px 10px;
+	font-weight: 600;
+	font-size: 17px;
+	font-family: 'Arial';
+}
+
+.pagination a
+{
+	color: #2F2F2F;
+}
+
+.pagination .disabled
+{
+	color: #837e7e;
+}
+
+.pagination li .disabled
+{
+
+}
+
+.pagination .disabled a
+{
+	color: #777
+}
+
+.post-title-search
+{
+	font-size: 14px;
+	color: #333;
+}
+
+.post-info-search
+{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.post-year-search a
+{
+	font-size: 13px;
+	color: #777;
+}
+
+.content-block-overlay
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #444;
+	padding: 4px 6px;
+}
+
+.content-block-overlay span
+{
+	color: white;
+	font-size: 14px;
+}
+
+
+.main-title
+{
+	width: 90%;
+	margin: 0 auto;
+}
+
+.tag-cloud-search
+{
+	width: 94%;
+	margin: 0 auto;
+}
+
+.tag-cloud-search ul
+{
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0;
+}
+
+.tag-cloud-search li
+{
+	background-color: #403a3a;
+	color: white;
+	font-family: Arial;
+	border-radius: 20px;
+	padding: 8px 20px;
+	margin-bottom: 7px;
+	margin-right: 5px;
+	font-size: 16px;
+	cursor: pointer;
+	transition: .4s ease background-color;
+}
+
+.tag-active
+{
+	background-color: #cd8cbf !important;
+}
+
+.search-text-title
+{
+	margin-left: 2%;
+}
+
+.search-text-title p
+{
+ color: #70757a;
+}
+
+.preview
+{
+	width: 96%;
+	margin: 15px auto 0 auto;
+}
+
+.preview-title
+{
+	display: flex;
+}
+
+.preview-text-wrap
+{
+	margin-left: 15px;
+}
+
+.preview-text-big
+{
+	margin: 5px 0 0 0;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.preview-text-small
+{
+	margin: 15px 0 0 0;
+	font-size: 18px;
+}
+
+.preview-thumbnail
+{
+	width: 15%;
+	overflow: hidden;
+}
+
+.preview-thumbnail img
+{
+	width: 100%;
+}
+
+

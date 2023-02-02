@@ -2,10 +2,6 @@
 @model AnimeSite.Models.ViewModels.IndexViewModel
 
 
-@{
-    ViewData["Title"] = "Home Page";
-}
-
 @section Styles
 {
     <link rel="stylesheet" href="~/css/search.css">
@@ -14,6 +10,11 @@
 @section Scripts
 {
     <script src="~/js/search.js" asp-append-version="true"></script>
+}
+
+@section Title
+{
+    <title>Смотреть аниме без рекламы - anifox.ru</title>
 }
 
 
@@ -122,17 +123,6 @@
     {
         <div class="content-block">
 
-            <div class="content-block-overlay">
-                @if (post.Censured)
-                {
-                    <span>Censure</span>
-                }
-                else
-                {
-                    <span>No censure</span>
-                }
-            </div>
-
             <a href="/post/@(post.ID)">
                 <div class="content-img-wrap">
                     <img src="~/img/thumbnail/3-2-@(post.ImgName)" alt="">
@@ -141,14 +131,15 @@
 
             <div class="post-info-search">
                 <span class="post-title-search">@post.Name</span>
-                <span class="post-year-search"><a href="/year/@(post.ReleaseYear)">@post.ReleaseYear</a></span>
+                <div class="post-preview-years">
+                    <span class="post-year-search"><a href="/year/@(post.ReleaseYear)">@post.ReleaseYear</a></span>
 
-                @if (post.EndingYear != null)
-                {
-                    <span> - </span>
-                    <span><a href="~/year/@(post.EndingYear)">@post.EndingYear</a></span>
-                }
-
+                    @if (post.EndingYear != null)
+                    {
+                        <span> - </span>
+                        <span class="post-year-search"><a href="~/year/@(post.EndingYear)">@post.EndingYear</a></span>
+                    }
+                </div>
                 <div class="post-tags-search">
                     @if (post.Tags != null)
                     {

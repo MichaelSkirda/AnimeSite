@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LoINyKUMmMVVfksWwRgIa6ccJNtJe13GKqwgFHaZQX2h/SM+8jD9F0WjjpGHKNAEz/jXcHBq4DEA1ODKo2zBLA==",
+  "dgSpecHash": "xtF5fu2GNKZjxxJIQhrRAhTZ5ljmgDsJJWzmdif4MbdtmGH8lmlzD/M8sax0iCFx/8CjGWpvFc+KmsoSB8cAMg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\HentaiSiteTests\\AnimeSiteTests.csproj",
+  "projectFilePath": "C:\\Users\\Aleksandr\\Desktop\\AnimeSite\\AnimeSiteTests\\AnimeSiteTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aleksandr\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\Aleksandr\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",
@@ -35,6 +35,7 @@
     "C:\\Users\\Aleksandr\\.nuget\\packages\\microsoft.netcore.targets\\1.1.3\\microsoft.netcore.targets.1.1.3.nupkg.sha512",
     "C:\\Users\\Aleksandr\\.nuget\\packages\\microsoft.testplatform.objectmodel\\16.5.0\\microsoft.testplatform.objectmodel.16.5.0.nupkg.sha512",
     "C:\\Users\\Aleksandr\\.nuget\\packages\\microsoft.testplatform.testhost\\16.5.0\\microsoft.testplatform.testhost.16.5.0.nupkg.sha512",
+    "C:\\Users\\Aleksandr\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.0\\microsoft.visualstudio.azure.containers.tools.targets.1.17.0.nupkg.sha512",
     "C:\\Users\\Aleksandr\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\Aleksandr\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\Aleksandr\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",

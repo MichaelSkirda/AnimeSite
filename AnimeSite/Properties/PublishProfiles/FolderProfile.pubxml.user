@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Aleksandr\Desktop\Программирование и другое\AnimeSite-main\AnimeSite\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2023-01-21T15:37:31.7750327Z;True|2023-01-03T03:16:50.0786424+03:00;True|2023-01-03T03:13:48.9065715+03:00;True|2023-01-03T03:00:31.6019305+03:00;True|2023-01-01T02:41:13.7035055+03:00;True|2023-01-01T02:34:14.8963942+03:00;True|2023-01-01T02:19:19.8160661+03:00;True|2023-01-01T01:29:09.0784241+03:00;True|2022-12-31T18:38:30.4759365+03:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

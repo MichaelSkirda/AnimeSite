@@ -47,7 +47,7 @@ namespace AnimeSite.Models
         {
             get
             {
-                return ID + "." + ImgFormat;
+                return ID + ImgFormat;
             }
             private set { }
         }

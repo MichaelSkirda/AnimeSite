@@ -21,6 +21,31 @@ namespace AnimeSite.Controllers
             this.commentService = commentService;
         }
 
+        public int Rate(int postID, bool isPositiveRate)
+        {
+            IPAddress ip = HttpContext.Connection.RemoteIpAddress;
+            if (ip == null)
+                return -404;
+
+            PostRate rate = postService.GetPostRate(postID, ip);
+
+            if (rate == null)
+            {
+                rate = new PostRate() { PostId = postID, IsPositive = isPositiveRate, IPAddressBytes = ip.GetAddressBytes() };
+                postService.AddPostRate(rate);
+            }
+            else
+            {
+                rate.IsPositive = isPositiveRate;
+                postService.SaveChanges();
+            }
+
+            postService.UpdatePostRating(postID);
+
+            Post post = postService.GetPostByID(postID);
+            return post.Rating;
+        }
+
         // TODO remove comments before prod
         //[ValidateAntiForgeryToken]
         public IActionResult CreateComment(int postID, string commentText, string commentAuthor)

@@ -11,13 +11,27 @@
     <script>var postID = @(Model.post.ID)</script>
     <script src="~/js/post.js"></script>
     <script src="~/js/comment.js"></script>
+    <script src="~/js/rating.js"></script>
+}
+
+@section Title
+{
+    <title>@(Model.post.Name) смотреть без рекламы - anifox.ru</title>
+}
+
+@if(Model.post.Description != null && Model.post.Description != "")
+{
+    @section Description
+    {
+        <meta name="description" content="@(Model.post.Description)" />
+    }
 }
 
 <div class="main-title">
 
-    <div>
+    <div class="title-preview">
         <div class="title-img-wrap">
-            <img src="~/img/thumbnail/3-2-@(Model.post.ImgName)" alt="" style="height: 360px; width: 280px;">
+            <img src="~/img/thumbnail/3-2-@(Model.post.ImgName)" alt="">
         </div>
 
         <div class="title-stats">
@@ -33,7 +47,11 @@
 
             <div class="title-stat-line">
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z" /></svg>
-                <span>rating @Model.post.Rating</span>
+                <span id="postRating">rating @Model.post.Rating</span>
+                    <form class="rating-form">
+                        <button type="button" id="plusButton">+</button>
+                        <button type="button" id="minusButton">-</button>
+                    </form>
             </div>
         </div>
     </div>

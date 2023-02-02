@@ -3,9 +3,57 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C4ZY6JS59W"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-C4ZY6JS59W');
+    </script>
+
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+            m[i].l = 1 * new Date();
+            for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(91913434, "init", {
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+            webvisor: true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/91913434" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HentaiSite</title>
+
+    @await RenderSectionAsync("Title", required: false)
+
+    @if(!IsSectionDefined("Title"))
+    {
+        <title>Anifox.ru - смотреть аниме без рекламы</title>
+    }
+
+    @await RenderSectionAsync("Description", required: false)
+
+    @if(!IsSectionDefined("Description"))
+    {
+        <meta name="description" content="Anifox.ru - это сайт, где вы можете посмотерть аниме без рекламы! Мы стараемся ежедневно добавлять новые аниме на сайт, заходи и смотри." />
+    }
+
+    <link rel="shortcut icon" type="image/ico" href="~/favicon.ico" />
+    <link rel="icon" type="image/ico" href="~/favicon.ico" />
+    <link rel="apple-touch-icon" type="image/ico" href="~/favicon.ico" />
 
     <link rel="stylesheet" href="~/css/site.css">
     <link rel="stylesheet" href="~/css/style.css">
@@ -17,11 +65,6 @@
 
 </head>
 <body>
-
-    <div id="cookieConsent">
-        <div id="closeCookieConsent">x</div>
-        Наш сайт использует cookie файлы, чтобы пользователям было удобнее. Находясь на сайте вы соглашаетесь с использованием cookie файлов. <a href="~/about_cookie" target="_blank">Узнать подробнее</a>. <a class="cookieConsentOK">That's Fine</a>
-    </div>
 
     <header>
 
@@ -40,30 +83,39 @@
 
             <div class="header-menu-wrap">
 
-                <div class="header-logo-wrap" style="height: 100px; width: 100px; background-color: green;">
-
-                </div>
+                <a href="/">
+                    <div class="header-logo-wrap">
+                        <img src="~/logo.png" />
+                    </div>
+                </a>
 
                 <div class="header-menu">
+                    <a href="@Url.Action("Index", "Home")">
+                        <div class="header-menu-button">
+                            Главная
+                        </div>
+                    </a>
 
-                    <div class="header-menu-button">
-                        <a href="@Url.Action("Index", "Home")"><span>Главная</span></a>
-                    </div>
+                    <a href="~/top100">
+                        <div class="header-menu-button">
+                            Топ-100
+                        </div>
+                    </a>
 
-                    <div class="header-menu-button">
-                        <a href="~/top100"><span>Топ-100</span></a>
-                    </div>
+                    <a href="~/randompost">
+                        <div class="header-menu-button">
+                            Случайное аниме
+                        </div>
+                    </a>
 
-                    <div class="header-menu-button">
-                        <a href="~/randompost"><span>Случайное аниме</span></a>
-                    </div>
-
-                    <div class="header-menu-button">
-                        <a href="~/adminfavorite"><span>Любимое админа</span></a>
-                    </div>
+                    <a href="~/adminfavorite">
+                        <div class="header-menu-button">
+                            Любимое админа
+                        </div>
+                    </a>
 
                     <div class="header-menu-button" id="search-btn">
-                        <span>Искать</span>
+                        Искать
                     </div>
 
                 </div>
@@ -176,7 +228,7 @@
     <footer class="footer">
         <div class="footer-center">
             <div class="footer-logo">
-                <img src="" style="background-color: pink; width: 150px; height: 80px;">
+                <img src="~/logo.png">
             </div>
 
             <div class="footer-menu">
@@ -190,6 +242,11 @@
     </footer>
 
     <script src="~/js/script.js" asp-append-version="true"></script>
+
+    <div id="cookieConsent">
+        <div id="closeCookieConsent">x</div>
+        Наш сайт использует cookie файлы, чтобы пользователям было удобнее. Находясь на сайте вы соглашаетесь с использованием cookie файлов. <a href="~/about_cookie" target="_blank">Узнать подробнее</a>. <a class="cookieConsentOK">That's Fine</a>
+    </div>
 
     <script type="text/javascript" src="~/js/cookie-popup.js"></script>
     @await RenderSectionAsync("Scripts", required: false)

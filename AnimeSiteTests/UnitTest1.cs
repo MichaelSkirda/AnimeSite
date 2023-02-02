@@ -1,18 +1,19 @@
 ﻿using NUnit.Framework;
-using HentaiSite.Database.Services;
-using HentaiSite.Database;
-using HentaiSite.Models;
+using AnimeSite.Database.Services;
+using AnimeSite.Database;
+using AnimeSite.Models;
 using Moq;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using AnimeSiteTests;
 
-namespace HentaiSiteTests
+namespace AnimeSiteTests
 {
     public class Tests
     {
 
-        private const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=hentaisitedb;Trusted_Connection=True;";
+        private const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=animesitedb;Trusted_Connection=True;";
 
         private EntitiesService entitiesService;
         private PostService postService;
@@ -96,7 +97,7 @@ namespace HentaiSiteTests
         [Test]
         public void GetPostByDirectorID1_PostDirectorEqualsDirectorWithID1()
         {
-            Post post = postService.GetPostsIQueryableByDirector(1).First();
+            Post post = postService.GetPostsIQueryableByDirector(1, AnimeSite.Enums.OrderBy.Name).First();
             postService.SetMetadataToPosts(post);
 
             Director expectedDirector = entitiesService.GetDirectorByID(1);
@@ -109,7 +110,7 @@ namespace HentaiSiteTests
         [Test]
         public void GetPostByStudioID1_PostStudioEqualsStudioWithID1()
         {
-            Post post = postService.GetPostsIQueryableByStudio(1).First();
+            Post post = postService.GetPostsIQueryableByStudio(1, AnimeSite.Enums.OrderBy.Name).First();
             postService.SetMetadataToPosts(post);
 
             Studio expectedStudio = entitiesService.GetStudioByID(1);
@@ -139,7 +140,7 @@ namespace HentaiSiteTests
         public void GetPostsByYear2016_AllPostYearEquals2016()
         {
 
-            var posts = postService.GetPostsByYear(2016);
+            var posts = postService.GetPostsByYear(2016, AnimeSite.Enums.OrderBy.Name);
             foreach(Post post in posts)
             {
                 int expectedYear = 2016;
@@ -151,7 +152,7 @@ namespace HentaiSiteTests
         [Test]
         public void Foo()
         {
-            var posts = postService.GetPostsIQueryable(orderBy: "", year: null, tagIDs: null, s: null);
+            var posts = postService.GetPostsIQueryable(AnimeSite.Enums.OrderBy.Name , year: null, tagIDs: null, s: null);
         }
 
     }

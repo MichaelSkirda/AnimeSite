@@ -400,10 +400,97 @@ namespace AnimeSite.Database.Services
                 return false;
             }
         }
-        
 
-        
+        internal PostRate GetPostRate(int postID, IPAddress ip)
+        {
+            return db.PostRates.FirstOrDefault(p => p.PostId == postID && p.IPAddressBytes == ip.GetAddressBytes());
+        }
 
+        internal void SaveChanges()
+        {
+            db.SaveChanges();
+        }
 
+        internal void UpdatePostRating(int postID)
+        {
+            Post post = db.Posts.First(p => p.ID == postID);
+            IEnumerable<PostRate> postRates = db.PostRates.Where(x => x.PostId == post.ID);
+            post.Rating = postRates.Where(x => x.IsPositive).Count() - postRates.Where(x => !x.IsPositive).Count();
+            SaveChanges();
+        }
+
+        internal void AddPostRate(PostRate rate)
+        {
+            db.PostRates.Add(rate);
+            db.SaveChanges();
+        }
+
+        internal void AddTagsToPost(Post post, string tagsStr)
+        {
+            foreach(string tagStr in tagsStr.TrySplit(';'))
+            {
+                Tag tag = db.Tags.FirstOrDefault(x => x.Name == tagStr);
+
+                if(tag == null)
+                {
+                    tag = new Tag() { Name = tagStr };
+                    db.Tags.Add(tag);
+                    db.SaveChanges();
+                }
+
+                TagEntity tagEntity = new TagEntity() { PostID = post.ID, TagID = tag.ID };
+                db.TagEntities.Add(tagEntity);
+                SaveChanges();
+            }
+        }
+
+        internal void AddStudiosToPost(Post post, string studiosStr)
+        {
+            foreach (string studioStr in studiosStr.TrySplit(';'))
+            {
+                Studio studio = db.Studios.FirstOrDefault(x => x.Name == studioStr);
+
+                if (studio == null)
+                {
+                    studio = new Studio() { Name = studioStr };
+                    db.Studios.Add(studio);
+                    db.SaveChanges();
+                }
+
+                StudioEntity studioEntity = new StudioEntity() { PostID = post.ID, StudioID = studio.ID };
+                db.StudioEntities.Add(studioEntity);
+                SaveChanges();
+            }
+        }
+
+        internal void AddDirectorsToPost(Post post, string directorsStr)
+        {
+            foreach (string directorStr in directorsStr.TrySplit(';'))
+            {
+                Director director = db.Directors.FirstOrDefault(x => x.Name == directorStr);
+
+                if (director == null)
+                {
+                    director = new Director() { Name = directorStr };
+                    db.Directors.Add(director);
+                    db.SaveChanges();
+                }
+
+                DirectorEntity directorEntity = new DirectorEntity() { PostID = post.ID, DirectorID = director.ID };
+                db.DirectorEntities.Add(directorEntity);
+                SaveChanges();
+            }
+        }
+    }
+
+    public static class StringExtensions
+    {
+        public static string[] TrySplit(this string str, char symbol)
+        {
+            if (str == null)
+                return new string[0];
+
+            return str.Split(symbol);
+        }
     }
 }
